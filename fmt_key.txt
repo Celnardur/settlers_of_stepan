@@ -1,0 +1,10 @@
+r = road
+s = settlement
+B = barron
+# = dice roll
+t = type of tile
+d = -
+u = |
+b = \
+f = /
+k = B
