@@ -30,12 +30,12 @@ def parse_token(t):
         return output_digit(n, ns)
     elif i == 't':
         return 'TTTT'
-    elif i == '/':
-        return '/'
-    elif i == '\\':
-        return '\\'
-    elif i == '|':
-        return '|'
+    elif i == 'd':
+        return '#'
+    elif i == 'b':
+        return ' '
+    elif i == '/' or i == '\\' or i == '|':
+        return i
     else:
         return t
 
