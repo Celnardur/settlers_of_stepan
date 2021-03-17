@@ -1,61 +1,14 @@
 #!/usr/bin/env python3
-
-def output_digit(n, ns):
-    if n < 10:
-        return ns + " "
-    else:
-        return ns
-
-def parse_token(t):
-    i = t[0]
-    if i == 'n':
-        return "\n"
-    elif len(t) < 2:
-        return t
-    ns = t[1:]
-    
-    if not ns.isdigit():
-        return t
-    
-    n = int(ns)
-    
-    if i == 'p':
-        output = ""
-        for i in range(n):
-            output += " "
-        return output
-    elif i == 's':
-        return output_digit(n, ns)
-    elif i == 'r':
-        return output_digit(n, ns)
-    elif i == 't':
-        return 'TTTT'
-    elif i == 'd':
-        return '#'
-    elif i == 'b':
-        return ' '
-    elif i == '/' or i == '\\' or i == '|':
-        return i
-    else:
-        return t
-
-    return ""
+import json
 
 
-in_str = ""
-with open("fmt_output.txt", "r") as fs:
-    in_str = fs.read()
+def print_board(state):
+    return
 
-tokens = in_str.split()
-output = ""
-for t in tokens:
-    output += parse_token(t)
+state = {}
+with open('default_state.json', 'r') as fs:
+    text = fs.read()
+    state = json.loads(text)
 
-print(output)
-
-
-
-
-
-
+print(state['hexes'])
 
