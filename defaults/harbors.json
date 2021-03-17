@@ -1,0 +1,48 @@
+[
+    {
+        "settlements": [0, 3],
+        "ratio": 3,
+        "resource": "?"
+    },
+    {
+        "settlements": [5, 1],
+        "ratio": 2,
+        "resource": "grain"
+    },
+    {
+        "settlements": [15, 10],
+        "ratio": 2,
+        "resource": "ore"
+    },
+    {
+        "settlements": [11, 16],
+        "ratio": 2,
+        "resource": "lumber"
+    },
+    {
+        "settlements": [32, 26],
+        "ratio": 3,
+        "resource": "?"
+    },
+    {
+        "settlements": [33, 38],
+        "ratio": 2,
+        "resource": "brick"
+    },
+    {
+        "settlements": [42, 46],
+        "ratio": 2,
+        "resource": "wool"
+    },
+    {
+        "settlements": [47, 51],
+        "ratio": 3,
+        "resource": "?"
+    },
+    {
+        "settlements": [49, 52],
+        "ratio": 3,
+        "resource": "?"
+    }
+
+]

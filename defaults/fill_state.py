@@ -53,10 +53,31 @@ for hex_id, tile in enumerate(hexes):
         add_once(settlements[settlement]['roads'], tile['roads'][i])
         add_once(settlements[settlement]['roads'], tile['roads'][left(i)])
 
+harbors = []
+with open('harbors.json', 'r') as fs:
+    text = fs.read()
+    harbors = json.loads(text)
+
+developments = []
+with open('developments.json', 'r') as fs:
+    text = fs.read()
+    developments = json.loads(text)
+
+
 state = {}
 state['hexes'] = hexes
 state['roads'] = roads
 state['settlements'] = settlements
+state['harbors'] = harbors
+state['developments'] = developments
+state['players'] = []
+state['robber'] = 9
+state['longest_road'] = -1
+state['largest_army'] = -1
+state['turn'] = 0
+
+#pp = pprint.PrettyPrinter(indent=4)
+#pp.pprint(state)
 print(json.dumps(state))
 
 
