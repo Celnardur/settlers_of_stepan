@@ -107,10 +107,11 @@ def print_board(state):
         print()
     return
 
-state = {}
-with open('state.json', 'r') as fs:
-    text = fs.read()
-    state = json.loads(text)
+if __name__ == '__main__':
+    state = {}
+    with open('state.json', 'r') as fs:
+        text = fs.read()
+        state = json.loads(text)
 
-print_board(state)
+    print_board(state)
 
