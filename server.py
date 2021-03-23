@@ -24,20 +24,23 @@ class server(BaseHTTPRequestHandler):
         else: 
             return json.loads(self.rfile.read(int(content_length)))
 
-    def file_response(self):
-        url = self.path.split("?")
-
-        path = os.path.join(base_path, url[0][1:])
-        print(self.path)
+    def file_response(self, path):
         response_code = 200
+
+        if not os.path.exists(path):
+            response_code = 404
+            path = os.path.join(base_path, '404.html')
+            if not os.path.exists(path):
+                self.send_response(404)
+                self.send_header('Content-Type', 'text/html')
+                self.end_headers()
+                self.wfile.write(b'404')
+                return
+
+
         if not os.path.isfile(path):
             path = os.path.join(path, 'index.html')
 
-        if not os.path.isfile(path):
-            response_code = 404
-            path = os.path.join(base_path, '404.html')
-
-        print(path)
         mime_type, _ = mimetypes.guess_type(path)
         self.send_response(response_code)
         self.send_header('Content-Type', mime_type)
@@ -49,9 +52,22 @@ class server(BaseHTTPRequestHandler):
                 buf = out_file.read(bufsize)
 
     def do_GET(self):
+        url = self.path.split("?")
+        path = os.path.join(base_path, url[0][1:])
+        self.file_response(path)
+
+    def do_PUT(self):
         payload = self.get_payload()
-        path_list = self.path.split('/')
-        self.file_response()
+        print(payload)
+        url = self.path.split("?")
+        if url[0] == '/api/test':
+            path = './www/test.json'
+        else:
+            path = os.path.join(base_path, url[0][1:])
+
+        self.file_response(path)
+
+
 
 def usage():
     print("Usage: ./server.py [options]")
