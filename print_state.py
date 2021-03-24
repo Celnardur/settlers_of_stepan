@@ -81,12 +81,14 @@ def print_hex(tile, index, layout, line, col, robber):
             layout[l][c] = get_char(word[0])
             
 def print_board(state):
+    # Make empty layout
     layout = []
     for i, line in enumerate(range(45)):
         layout.append([])
         for col in range(80):
             layout[i].append({'char': ' ', 'color': None})
 
+    # Draw Hexagons
     hid = 0
     for ud in range(5):
         for lr in range(9):
@@ -100,6 +102,17 @@ def print_board(state):
             elif ud % 2 == 1 and lr % 2 == 1:
                 print_hex(state['hexes'][hid], hid, layout, line, col, state['robber'])
                 hid += 1
+    
+    # Draw Harbors
+    add_str(layout, "3?--\n|\n|\n|", 0, 8)
+    add_str(layout, "--2G\n   |\n   |\n   |", 0, 21)
+    add_str(layout, "--2O\n  |\n  |\n  |", 8, 34)
+    add_str(layout, "2L--\n \\\n  \\\n   \\", 12, 0)
+    add_str(layout, "\\\n 3?\n/", 21, 42)
+    add_str(layout, "   /\n  /\n /\n2B--", 29, 0) 
+    add_str(layout, "  |\n  |\n  |\n--2W", 33, 34) 
+    add_str(layout, "|\n|\n|\n3?--", 41, 8)
+    add_str(layout, "  |\n  |\n  |\n--3?", 41, 22) 
 
     for line in layout:
         for char in line:
