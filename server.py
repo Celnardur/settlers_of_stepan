@@ -5,6 +5,8 @@ import json
 import os
 import mimetypes
 import sys
+import api
+from print_state import print_board
 
 bufsize = 4096
 base_path = "./www"
@@ -60,12 +62,12 @@ class server(BaseHTTPRequestHandler):
         payload = self.get_payload()
         print(payload)
         url = self.path.split("?")
-        if url[0] == '/api/test':
-            path = './www/test.json'
+        if url[0][:4] == '/api':
+            (code, body) = api.process(url[0][4:])
         else:
             path = os.path.join(base_path, url[0][1:])
+            self.file_response(path)
 
-        self.file_response(path)
 
 
 
@@ -103,7 +105,7 @@ if __name__ == "__main__":
             arg_n += 1
         arg_n += 1
 
-    if not os.path.isdir(base_path):
+    if not os.path.exists(base_path) or not os.path.isdir(base_path):
         print("Specified base path " + base_path + " does not exist")
         exit(1)
 
@@ -111,6 +113,7 @@ if __name__ == "__main__":
     print("server port: " + str(server_port))
     print("base path: " + base_path)
 
+    api.init()
     httpd = HTTPServer((host_name, server_port), server)
     httpd.serve_forever()
 
