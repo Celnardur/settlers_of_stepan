@@ -1,10 +1,12 @@
 def add_player(state, name, color, order):
+    # check for existing player with same name or color
     for player in state['players']:
         if player != None and player['name'] == name:
             return (400, "Player already exists with that name.", [])
         if player != None and player['color'] == color:
             return (400, "Player already exists with that color.", [])
 
+    # check parameters
     if order > 4 or order < 0:
         return (400, "Can't have more than 4 players", [])
     if name == "":
@@ -15,32 +17,36 @@ def add_player(state, name, color, order):
         if value < 0 or value > 255:
             return (400, "RGB color values must be between 0 and 255", [])
 
+    # adjust player list to accomodate new player
     while len(state['players']) <= order):
         state['players'].append(None)
 
     if state['players'][order] != None
         return (400, "Player already in that spot in the turn order", [])
 
+    # add empty player
     state['players'][order] = {
         "roads": [],
         "settlements": [],
         "developments": [],
+        "resources": [],
         "name": name,
         "color": color,
         "victory_points": 0,
     }
 
+    # notify other players that new player is added
     notify = []
     for player in state['players']:
         if player != None and player['name'] != name:
             n = {}
-            n['to'] = player['name']
             n['action'] = 'player_created'
             n['name'] = name
-            notify.append(n)
+            notify.append((player['name'], n))
 
     return (200, "Player added", notify)
 
+# notify other players that this player is ready
 def player_ready(state, name):
     if len(state['players']) < 3:
         return (400, "Not enough players to start game", [])
@@ -51,10 +57,9 @@ def player_ready(state, name):
             return (400, "Need all player slots to be filled to start the game", [])
         elif player['name'] != name:
             n = {}
-            n['to'] = player['name']
             n['action'] = 'player_ready'
             n['name'] = name
-            notify.append(n)
+            notify.append((player['name'], n))
 
     return (200, "Ready notifications created", notify)
 

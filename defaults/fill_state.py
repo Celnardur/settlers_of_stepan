@@ -74,7 +74,7 @@ state['players'] = []
 state['robber'] = 9
 state['longest_road'] = -1
 state['largest_army'] = -1
-state['turn'] = 0
+state['turn'] = [0, 0]
 
 #pp = pprint.PrettyPrinter(indent=4)
 #pp.pprint(state)

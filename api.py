@@ -4,7 +4,7 @@ from logic import player
 
 state = {}
 save_path = './state.json'
-notifications = []
+notifications = {}
 
 def set_state(path):
     global state
@@ -33,8 +33,14 @@ def process(path, args):
 
     (code, message, notify) = (404, "API endpoint does not exist", [])
     try: 
-        if path == '/test':
-            return (200, {"Hello": "World!"})
+        if path == '/get_notifications':
+            if not 'name' in args:
+                return (400, "Cannot get notifications for nameless player")
+            if not args['name'] in notifications:
+                return (400, "Player has no notification queue")
+            message = notifications[args['name']]
+            notifications[args['name']] = []
+            return (200, message)
 
         elif path == '/add_player':
             if not 'name' in args:
@@ -44,18 +50,22 @@ def process(path, args):
             if not 'order' in args:
                 return (400, "Player must provide a their position in the turn order")
             (code, message, notify) = player.add_player(state, args['name'], args['color'])
+            if code == 200:
+                notifications[args['name']] = []
 
-        if path == '/player_ready':
+        elif path == '/player_ready':
             if not 'name' in args:
                 return (400, "Player needs a name")
             (code, message, notify) = player.player_ready(state, args['name'])
 
-        if path == '/remove_player':
+        elif path == '/remove_player':
             if not 'name' in args:
                 return (400, "Player needs a name")
             (code, message, notify) = player.remove_player(state, args['name'])
+            if code == 200:
+                del notifications[args['name']]
 
-        if path == '/change_player_color':
+        elif path == '/change_player_color':
             if not 'name' in args:
                 return (400, "Player needs a name")
             if not 'color' in args:
@@ -65,8 +75,8 @@ def process(path, args):
     except:
         return (500, "Internal server error")
 
-    for n in notify:
-        notifications.append(n)
+    for name, action in notify:
+        notifications[name].append(action)
 
     return (code, message)
 
