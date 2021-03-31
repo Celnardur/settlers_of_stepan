@@ -7,7 +7,7 @@ def add_player(state, name, color, order):
             return (400, "Player already exists with that color.")
 
     # check parameters
-    if order > 4 or order < 0:
+    if order > 3 or order < 0:
         return (400, "Can't have more than 4 players")
     if name == "":
         return (400, "Can't have an empty name")
@@ -18,10 +18,10 @@ def add_player(state, name, color, order):
             return (400, "RGB color values must be between 0 and 255")
 
     # adjust player list to accomodate new player
-    while len(state['players']) <= order):
+    while len(state['players']) <= order:
         state['players'].append(None)
 
-    if state['players'][order] != None
+    if state['players'][order] != None:
         return (400, "Player already in that spot in the turn order")
 
     # add empty player
@@ -37,7 +37,7 @@ def add_player(state, name, color, order):
 
     return (200, "Player added")
 
-def add_player_notifications(state, name):
+def add_player_notifications(state, name, order):
     # notify other players that new player is added
     notify = []
     for player in state['players']:
@@ -45,6 +45,7 @@ def add_player_notifications(state, name):
             n = {}
             n['action'] = 'player_created'
             n['name'] = name
+            n['order'] = order
             notify.append((player['name'], n))
     return notify
 

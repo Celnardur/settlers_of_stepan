@@ -54,7 +54,7 @@ def process(path, args):
             return (400, "Player needs a color")
         if not 'order' in args:
             return (400, "Player must provide a their position in the turn order")
-        (code, message) = player.add_player(state, args['name'], args['color'])
+        (code, message) = player.add_player(state, args['name'], args['color'], args['order'])
         save_state(save_path)
 
     elif path == '/player_ready':
@@ -79,13 +79,13 @@ def process(path, args):
     return (code, message)
 
 # only gets called if process returns 200 code
-def get_notifcations(path, args):
+def get_notifications(path, args):
     global state
     global notifications
 
+    notify = []
     if path == '/add_player':
-        notify = player.add_player_notifications(state, args['name'])
-        notifications[args['name']] = []
+        notify = player.add_player_notifications(state, args['name'], args['order'])
 
     elif path == '/player_ready':
         notify = player.player_ready_notifications(state, args['name'])
@@ -94,8 +94,9 @@ def get_notifcations(path, args):
         if not 'name' in args:
             return (400, "Player needs a name")
         notify = player.remove_player_notifications(state, args['name'])
-        del notifications[args['name']]
 
     for name, action in notify:
+        if not name in notifications:
+            notifications[name] = []
         notifications[name].append(action)
 
