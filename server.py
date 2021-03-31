@@ -75,6 +75,10 @@ class server(BaseHTTPRequestHandler):
         url = self.path.split("?")
         if url[0][:4] == '/api':
             (code, body) = api.process(url[0][4:], payload)
+            if code == 200:
+                api.get_notifcations(url[0][4:], payload)
+                #output.process(url[0][4:], payload)
+                
             self.send_response(code)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
