@@ -80,7 +80,7 @@ def print_hex(tile, index, layout, line, col, robber):
         elif word[0] == '/' or word[0] == '\\' or word[0] == '|':
             layout[l][c] = get_char(word[0])
             
-def print_board(state):
+def get_state_string(state):
     # Make empty layout
     layout = []
     for i, line in enumerate(range(45)):
@@ -114,10 +114,15 @@ def print_board(state):
     add_str(layout, "|\n|\n|\n3?--", 41, 8)
     add_str(layout, "  |\n  |\n  |\n--3?", 41, 22) 
 
+    board = ""
     for line in layout:
         for char in line:
-            print(char['char'], end='')
-        print()
+            board += char['char']
+        board += "\n"
+    return board
+
+def print_state(state):
+    print(get_state_string(state))
     return
 
 if __name__ == '__main__':
@@ -126,5 +131,5 @@ if __name__ == '__main__':
         text = fs.read()
         state = json.loads(text)
 
-    print_board(state)
+    print_state(state)
 
