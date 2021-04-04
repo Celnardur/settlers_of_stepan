@@ -7,6 +7,9 @@ import sys
 import json
 
 def process_command(command):
+    if command == "":
+        return get_state_string(api.state)
+
     args = command.split()
     command = '/' + args[0]
 
@@ -19,17 +22,24 @@ def process_command(command):
         args_dict[arg] = value
         arg_n += 2
 
-    if command == '/print':
-        if len(args) > 1:
+    try:
+        if command == '/print':
+            if len(args) < 2:
+                return "Needs item to print"
+            if not args[1] in api.state:
+                return 'Cannot print ' + args[1]
+
             pp = pprint.PrettyPrinter(indent=4)
             return pp.pformat(api.state[args[1]])
-    else:
-        (code, message) = api.process(command, args_dict)
-        if code == 200:
-            api.get_notifications(command, args_dict)
-            return str(code) + ': ' + str(message) + '\n' + get_state_string(api.state)
         else:
-            return str(code) + ': ' + str(message) + '\n'
+            (code, message) = api.process(command, args_dict)
+            if code == 200:
+                api.get_notifications(command, args_dict)
+                return str(code) + ': ' + str(message) + '\n' + get_state_string(api.state)
+            else:
+                return str(code) + ': ' + str(message) + '\n'
+    except:
+        return "API Error"
 
 
 if __name__ == '__main__':
