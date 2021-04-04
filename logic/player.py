@@ -1,3 +1,5 @@
+import random
+
 def add_player(state, name, color, order):
     # check for existing player with same name or color
     for player in state['players']:
@@ -117,5 +119,9 @@ def change_player_color(state, name, color):
     state['players'][order]['color'] = color
     return (200, "Player Color changed")
     
+def randomize_players(state):
+    random.shuffle(state['players'])
+    return (200, "Players randomly shuffled")
+
     
 

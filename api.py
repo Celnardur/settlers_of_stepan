@@ -76,6 +76,10 @@ def process(path, args):
         (code, message) = player.change_player_color(state, args['name'], args['color'])
         save_state(save_path)
 
+    elif path == '/randomize_players':
+        (code, message) = player.randomize_players(state)
+        save_state(save_path)
+
     return (code, message)
 
 # only gets called if process returns 200 code
