@@ -7,17 +7,17 @@
     {
         "settlements": [5, 1],
         "ratio": 2,
-        "resource": "grain"
+        "resource": "Grain"
     },
     {
         "settlements": [15, 10],
         "ratio": 2,
-        "resource": "ore"
+        "resource": "Ore"
     },
     {
         "settlements": [11, 16],
         "ratio": 2,
-        "resource": "lumber"
+        "resource": "Lumber"
     },
     {
         "settlements": [32, 26],
@@ -27,12 +27,12 @@
     {
         "settlements": [33, 38],
         "ratio": 2,
-        "resource": "brick"
+        "resource": "Brick"
     },
     {
         "settlements": [42, 46],
         "ratio": 2,
-        "resource": "wool"
+        "resource": "Wool"
     },
     {
         "settlements": [47, 51],
