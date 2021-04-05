@@ -24,6 +24,29 @@ def add_str(layout, string, line, col, color = None):
             layout[l][c] = get_char(char, color)
             c+=1
 
+def get_color(s):
+    if s == 'Mountains' or s == 'Ore':
+        return [0, 0, 255]
+    if s == 'Pasture' or s == 'Wool':
+        return [255, 255, 255]
+    if s == 'Forest' or s == 'Lumber':
+        return [0, 255, 0]
+    if s == 'Fields' or s == 'Grain':
+        return [255, 255, 0]
+    if s == 'Hills' or s == 'Brick':
+        return [255, 0, 0]
+    if s == 'Desert':
+        return [255, 127, 0]
+    return None
+
+def get_player_color(name, players):
+    for player in players:
+        if player['name'] == name:
+            return player['color']
+
+    return None
+
+
 def get_abv(tile):
     tt = tile['tile_type']
     if tt == 'Mountains':
@@ -79,6 +102,36 @@ def print_hex(tile, index, layout, line, col, robber):
             add_num(layout, tile['roads'][int(word[1:])], l, c)
         elif word[0] == '/' or word[0] == '\\' or word[0] == '|':
             layout[l][c] = get_char(word[0])
+
+
+def print_player(layout, player, line, col):
+    l = line
+    add_str(layout, "Name: " + player['name'], line, col)
+    
+    l += 1
+    add_str(layout, "Color: " + str(player['color']), l, col, player['color'])
+
+    l += 1
+    add_str(layout, "Resource: ", l, col)
+    c = col + 10
+    for res, amt in player['resources'].items():
+        add_str(layout, res[0] + str(amt), l, c, get_color(res))
+        c += 3
+
+    l += 1
+    add_str(layout, "Dev: ", l, col)
+    for i, dev in enumerate(player['developments']):
+        add_str(layout, dev[0], l, col +5 + i*2)
+
+    l += 1
+    add_str(layout, "Army: " + str(player['army']), l, col)
+    
+    l += 1
+    add_str(layout, "Longest Road: " + str(player['longest_road']), l, col)
+
+    l += 1
+    add_str(layout, "VP: " + str(player['victory_points']), l, col)
+
             
 def get_state_string(state):
     # Make empty layout
@@ -114,10 +167,25 @@ def get_state_string(state):
     add_str(layout, "|\n|\n|\n3?--", 41, 8)
     add_str(layout, "  |\n  |\n  |\n--3?", 41, 22) 
 
+    # Show Players
+    l = 2
+    for player in state['players']:
+        if player != None:
+            print_player(layout, player, l, 50)
+        l += 10
+
+    # generate string
     board = ""
     for line in layout:
         for char in line:
-            board += char['char']
+            if char['color'] != None:
+                c = char['color']
+                board += '\x1b[38;2;'
+                board += str(c[0]) + ';' + str(c[1]) + ';' + str(c[2]) + 'm'
+                board += char['char']
+                board += '\x1b[0m'
+            else:
+                board += char['char']
         board += "\n"
     return board
 

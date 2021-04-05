@@ -31,9 +31,11 @@ def add_player(state, name, color, order):
         "roads": [],
         "settlements": [],
         "developments": [],
-        "resources": [],
+        "resources": {'Brick': 0, 'Lumber': 0, 'Ore': 0, 'Grain': 0, 'Wool': 0},
         "name": name,
         "color": color,
+        "army": 0,
+        "longest_road": 0,
         "victory_points": 0,
     }
 
