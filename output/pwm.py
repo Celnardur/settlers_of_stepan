@@ -1,13 +1,13 @@
 import struct
 import time
+from smbus2 import SMBus
 
 ## Important Registers
 MODE1 = 0x00
 MODE2 = 0x01
 
 class PCA9685:
-    def __init__(self, bus, addr = 0x40):
-        self.bus = bus
+    def __init__(self, addr = 0x40):
         self.addr = addr
 
     def begin(self):
@@ -17,7 +17,7 @@ class PCA9685:
     def setPin(self, pin, dutyCycle=0, delay=0):
         onCount = max(int(4096 * delay) - 1, 0)
         offCount = max((int(dutyCycle * 4096) + onCount - 1), 0) & 0x0FFF
-        print(onCount, offCount)
+        #print(onCount, offCount)
         self.write_pin(pin, True, onCount)
         self.write_pin(pin, False, offCount)
 
@@ -34,9 +34,11 @@ class PCA9685:
         self.writeByte(l, count & 0x00FF)
 
     def writeByte(self, reg, byte):
-        self.bus.write_byte_data(self.addr, reg, byte)
+        with SMBus(1) as bus:
+            self.bus.write_byte_data(self.addr, reg, byte)
 
     def readByte(self, reg):
-        return self.bus.read_byte_data(self.addr, reg)
+        with SMBus(1) as bus:
+            return self.bus.read_byte_data(self.addr, reg)
 
 
