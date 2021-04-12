@@ -98,6 +98,11 @@ def process(path, args):
         led_strip.set(state)
         (code, message) = (200, "Setting led strip")
 
+    elif path == '/test_gpio':
+        if not 'address' in args:
+            return (400, "Need an i2c address to test gpio")
+        (code, message) = gpio.test(args['address'])
+
 
     return (code, message)
 
