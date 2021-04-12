@@ -3,6 +3,7 @@ import os
 from logic import player
 from logic import build
 from logic import resources
+from output import led_strip
 
 state = {}
 save_path = './state.json'
@@ -87,6 +88,15 @@ def process(path, args):
             return (400, "Player needs a name")
         if not 'pos' in args:
             return (400, "Need a position for the settlement")
+        (code, message) = (500, "Not implemented")
+    
+    elif path == '/test_led_strip':
+        led_strip.test()
+        (code, message) = (200, "Testing led strip")
+
+    elif path == '/set_led_strip':
+        led_strip.set(state)
+        (code, message) = (200, "Setting led strip")
 
 
     return (code, message)
