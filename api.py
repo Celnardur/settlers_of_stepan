@@ -1,6 +1,8 @@
 import json
 import os
 from logic import player
+from logic import build
+from logic import resources
 
 state = {}
 save_path = './state.json'
@@ -79,6 +81,13 @@ def process(path, args):
     elif path == '/randomize_players':
         (code, message) = player.randomize_players(state)
         save_state(save_path)
+
+    elif path == '/build_settlement':
+        if not 'name' in args:
+            return (400, "Player needs a name")
+        if not 'pos' in args:
+            return (400, "Need a position for the settlement")
+
 
     return (code, message)
 

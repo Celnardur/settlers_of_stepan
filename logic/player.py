@@ -126,4 +126,18 @@ def randomize_players(state):
     return (200, "Players randomly shuffled")
 
     
+def take_resources(state, name, resources):
+    order = find_player(state, name)
+    if order == -1:
+        return (400, "Cannot take resources from nonexistent player")
+
+    player = state['players'][order]
+    for res, amt in resources.items():
+        if player['resources'][res] < amt:
+            return (400, "Player does not have enough resources")
+
+    for res, amt in resources.items():
+        state['players'][order]['resources'][res] -= amt
+
+    return (200, "Resources removed from player")
 

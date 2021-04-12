@@ -29,6 +29,7 @@ roads = []
 for i in range(72):
     roads.append({
         "settlements": [],
+        "adj_roads": [],
         "hexes": [],
         "owner": -1,
     })
@@ -37,6 +38,7 @@ settlements = []
 for i in range(54):
     settlements.append({
         'roads': [],
+        'adj_settlements': [],
         'hexes': [],
         'type': 'none',
         'owner': -1,
@@ -47,11 +49,15 @@ for hex_id, tile in enumerate(hexes):
         add_once(roads[road]['hexes'], hex_id)
         add_once(roads[road]['settlements'], tile['settlements'][i])
         add_once(roads[road]['settlements'], tile['settlements'][right(i)])
+        add_once(roads[road]['adj_roads'], tile['roads'][right(i)])
+        add_once(roads[road]['adj_roads'], tile['roads'][left(i)])
 
     for i, settlement in enumerate(tile['settlements']):
         add_once(settlements[settlement]['hexes'], hex_id)
         add_once(settlements[settlement]['roads'], tile['roads'][i])
         add_once(settlements[settlement]['roads'], tile['roads'][left(i)])
+        add_once(settlements[settlement]['adj_settlements'], tile['settlements'][right(i)])
+        add_once(settlements[settlement]['adj_settlements'], tile['settlements'][left(i)])
 
 harbors = []
 with open('harbors.json', 'r') as fs:
