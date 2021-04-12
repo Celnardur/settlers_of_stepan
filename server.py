@@ -13,7 +13,7 @@ base_path = "./www"
 class server(BaseHTTPRequestHandler):
     def get_payload(self):
         if not ('Content-Length' in self.headers):
-            return None
+            return (200, None)
 
         try:
             content_length = int(self.headers['Content-Length'])
@@ -21,7 +21,7 @@ class server(BaseHTTPRequestHandler):
             return (400, b"Malformed content_length")
 
         if content_length <= 0:
-            return None
+            return (200, None)
 
         try:
             return (200, json.loads(self.rfile.read(int(content_length))))
