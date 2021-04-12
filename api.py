@@ -4,6 +4,8 @@ from logic import player
 from logic import build
 from logic import resources
 from output import led_strip
+from output import gpio
+from output import seven_segment
 
 state = {}
 save_path = './state.json'
@@ -103,6 +105,11 @@ def process(path, args):
             return (400, "Need an i2c address to test gpio")
         (code, message) = gpio.test(args['address'])
 
+    elif path == '/test_7seg':
+        if not 'address' in args:
+            return (400, "Need an i2c address to test gpio")
+        seven_segment.test(args['address'])
+        (code, message) = (200, "Testing 7seg")
 
     return (code, message)
 

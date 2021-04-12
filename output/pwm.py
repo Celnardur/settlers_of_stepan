@@ -35,10 +35,10 @@ class PCA9685:
 
     def writeByte(self, reg, byte):
         with SMBus(1) as bus:
-            self.bus.write_byte_data(self.addr, reg, byte)
+            bus.write_byte_data(self.addr, reg, byte)
 
     def readByte(self, reg):
         with SMBus(1) as bus:
-            return self.bus.read_byte_data(self.addr, reg)
+            return bus.read_byte_data(self.addr, reg)
 
 

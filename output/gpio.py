@@ -5,7 +5,7 @@ def test(address):
     start = time.time()
     while True:
         with SMBus(1) as bus:
-            read = bus.read_byte_data(addr, 0)
+            read = bus.read_byte_data(address, 0)
         if read != 0:
             return (200, read)
         time.sleep(0.1)
