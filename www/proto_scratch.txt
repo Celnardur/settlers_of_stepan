@@ -1,0 +1,11 @@
+-"un-rotate" nav arrow?
+-Nav bar links spacing
+-nav bar dropdown background color dark grey
+-replace color dropdown with Color type input?
+-replace number box with dropdown for discard #?
+-ability to close dialogs
+
+
+CODE: consolidate CSS statements, structure web page sections, order big lists better,
+html property-wise CSS selectors instead of html class (like for input types), consistent naming, 
+...

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
+	<head>
+		<title>
+			Test SoC GUI (Debug Page)!
+		</title>
+		<link rel='stylesheet' type='text/css' href='./proto_debug.css'/>
+	</head>
+	<body>
+		<div id='nav'>
+			<h2>
+				Settlers of Stepán
+			</h2>
+			<img src='./nav_arrow.png' id='nav_arrow'>
+			<div id='nav_menu'>
+				<p>
+					<a href='./proto_game.html' class='nav_text'>Back to game</a>
+				</p>
+			</div>
+		</div>
+		<p>
+			System time: <b>2021-02-28 10:07:30</b>
+		</p>
+		<p>
+			<i>WLAN</i>
+			<br/>
+			SSID: settlers
+			<br/><br/>
+			Clients:
+			<br/>
+			<table>
+				<tr>
+					<th>
+						Client
+					</th>
+					<th>
+						Local IPv4
+					</th>
+					<th>
+						Player Name
+					</th>
+				</tr>
+				<tr>
+					<td>
+						Jacks-iPhone-XR
+					</td>
+					<td>
+						10.0.0.6
+					</td>
+					<td>
+						Jack
+					</td>
+				</tr>
+				<tr>
+					<td>
+						MacBookPro-C40AB21F
+					</td>
+					<td>
+						10.0.0.8
+					</td>
+					<td>
+						Kyle
+					</td>
+				</tr>
+				<tr>
+					<td>
+						THINKPAD-G450-RMS
+					</td>
+					<td>
+						10.0.0.5
+					</td>
+					<td>
+						Prof. Schafer
+					</td>
+				</tr>
+			</table>
+		</p>
+		<p>
+			<i>Game info:</i>
+			<br/>
+			Players: 3
+			<br/><br/>
+			<table>
+				<tr>
+					<th>
+						Player
+					</th>
+					<th>
+						Victory Pts.
+					</th>
+					<th>
+						Roads
+					</th>
+					<th>
+						Cities
+					</th>
+					<th>
+						Settlements
+					</th>
+				</tr>
+				<tr>
+					<td>
+						Jack
+					</td>
+					<td>
+						3
+					</td>
+					<td>
+						6
+					</td>
+					<td>
+						2
+					</td>
+					<td>
+						5
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Kyle
+					</td>
+					<td>
+						6
+					</td>
+					<td>
+						8
+					</td>
+					<td>
+						4
+					</td>
+					<td>
+						9
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Prof. Schafer
+					</td>
+					<td>
+						4
+					</td>
+					<td>
+						8
+					</td>
+					<td>
+						3
+					</td>
+					<td>
+						7
+					</td>
+				</tr>
+			</table>
+		</p>
+		<p>
+			<i>I2C Bus Info:</i> ...
+		</p>
+		<p>
+			<i>LED Serial Bus Info:</i> ...
+		</p>
+		<p>
+			<i>GPIO Pins Info:</i> ...
+		</p>
+		<p>
+			<i>Power</i>
+			<br/>
+			Pi operating voltage: <b>4.97 V</b>
+			<br/>
+			LED strip 1 voltage: <b>5.02 V</b>
+			<br/>
+			LED strip 2 voltage: <b>5.03 V</b>
+			<br/>
+			Hex voltage: <b>4.92 V</b>
+		</p>
+		<p>
+			...other stuff to follow
+		</p>
+		<!--
+		<p>
+			Debug info will go here
+		</p>
+		<ul>
+			<li>Timestamp</li>
+			<li>WLAN: SSID, clients w/ local IPs and corr. players, ?</li>
+			<li>State machine info: player count and IDs, no. of settlements, roads, etc., ?</li>
+			<li>I2C bus info: ?</li>
+			<li>Serial LED Control bus info: ?</li>
+			<li>GPIO pins info: ?</li>
+			<li>Power info:</li>
+			<li>...what hardware or software functions do we want here?</li>
+		</ul>
+		-->
+		<script src='./jquery.min.js'></script> <! library>
+		<script src='./proto_debug.js'></script> <! script>
+	</body>
+</html>

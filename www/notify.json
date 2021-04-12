@@ -1,0 +1,15 @@
+[
+{"to": "Kyle",
+"action": "error",
+"message": "You do not have enough resources to build a road here."},
+{"to": "Prof. Schafer",
+"action": "domestic",
+"from": "Sarah",
+"offer_type_1": "wood",
+"offer_qty_1": "3",
+"give_type_1": "brick",
+"give_qty_1": "2"},
+{"to": "Jack",
+"action": "rob_discard",
+"resource_count": "14"}
+]

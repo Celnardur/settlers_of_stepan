@@ -1,0 +1,207 @@
+* {
+	font-family: sans-serif;
+}
+
+html {
+	background-color: #d01bee;
+}
+
+#nav {
+	background-color: black;
+	padding: 10px;
+	margin-bottom: 20px;
+	margin-top: -10px;
+	margin-left: -10px;
+	margin-right: -10px;
+}
+
+h2 {
+	font-family: sans-serif;
+	color: #d01bee;
+	margin: 0px;
+	text-shadow: 1.5px 1.5px 3px white;
+	display: inline-block;
+}
+
+#name {
+	width: 80px;
+}
+
+#nav_arrow {
+	filter: invert(1);
+	height: 40px;
+	width: 40px;
+	margin: -5px;
+	display: inline-block;
+	float: right;
+}
+
+#error_pop {
+	background-color: red;
+	position: fixed;
+	width: 90%;
+	height: 40%;
+	top: 30%;
+	left: 5%;
+	z-index: 10;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	border-radius: 10px;
+}
+
+#rob_steal_pop, #rob_discard_pop {
+	background-color: #be0fdf;
+	position: fixed;
+	width: 90%;
+	height: 40%;
+	top: 30%;
+	left: 5%;
+	z-index: 10;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	border-radius: 10px;
+	padding: 5px;
+}
+
+#trade_pop {
+	background-color: #b2dd3a;
+	position: fixed;
+	width: 90%;
+	height: 40%;
+	top: 30%;
+	left: 5%;
+	z-index: 10;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	border-radius: 10px;
+}
+
+#dev_pop {
+	background-color: #3443e9;
+	position: fixed;
+	width: 60%;
+	height: 70%;
+	top: 15%;
+	left: 20%;
+	z-index: 10;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	border-radius: 10px;
+}
+
+#dev_card {
+	background-color: #fffbbc;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	border-radius: 10px;
+	position: absolute;
+	height: 84%;
+	width: 88%;
+	top: 1%;
+	left: 1%;
+	padding: 5px;
+}
+
+#domestic_pop {
+	background-color: #e1a721;
+	position: fixed;
+	width: 90%;
+	height: 40%;
+	top: 30%;
+	left: 5%;
+	z-index: 10;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	border-radius: 10px;
+	padding: 5px;
+}
+
+#maritime_pop {
+	background-color: #2180e1;
+	position: fixed;
+	width: 90%;
+	height: 40%;
+	top: 30%;
+	left: 5%;
+	z-index: 10;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	border-radius: 10px;
+	padding: 5px;
+}
+
+.butt {
+	background-color: black;
+	color: #fffadc;
+	padding: 7px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #8e8e8e;
+	border-radius: 9px;
+	font-family: Verdana, sans-serif;
+}
+
+.victory_content {
+	color: #dfc423;
+}
+
+#use, #prev_next {
+	position: absolute;
+	bottom: 5px;
+}
+
+#use {
+	right: 5px;
+}
+
+#prev_next {
+	left: 5px;
+}
+
+#x-close {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+}
+
+#error_message, #trade_message, #robber_message, #robber_steal_message {
+	text-align: center;
+}
+
+.number_sel {
+	width: 26px;
+}
+
+.rotate {
+	transform: rotate(-180deg);
+	transition: transform 0.15s;
+}
+
+.nav_text {
+	color: white;
+	font-family: sans-serif;
+	text-decoration: none;
+	border: 1px solid #454545;
+	border-radius: 6px;
+	padding: 7px;
+}
+
+table {
+	border: 2px solid black;
+	border-radius: 6px;
+}
+
+td, th {
+	border: 1px solid black;
+}
+
+td {
+	background-color: #747474;
+}

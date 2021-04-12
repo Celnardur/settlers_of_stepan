@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
+	<head>
+		<title>
+			Test SoC GUI (Game Page)!
+		</title>
+		<link rel='stylesheet' type='text/css' href='./proto_game.css'/>
+	</head>
+	<body>
+		<div id='nav'>
+			<h2 id='error_test'> <!-- Remove this ID later -->
+				Settlers of Stepán
+			</h2>
+			<img src='./nav_arrow.png' id='nav_arrow'>
+			<div id='nav_menu'>
+				<p>
+					<a href='./proto_debug.html' class='nav_text'>Debug</a>
+				</p>
+			</div>
+		</div>
+		<p>
+			It's <b><span style='color: red' id='turn_test'>Kyle's</span></b> turn
+		</p>
+		<p id='p1_text'>
+			It is the <b>RESOURCE ROLL</b> phase of your turn
+		</p>
+		<p id='p2_text'>
+			It is the <b>TRADE</b> phase of your turn
+		</p>
+		<p id='p3_text'>
+			It is the <b>BUILD</b> phase of your turn
+		</p>
+		<hr>
+		<div id='static_info'>
+			<p>
+				<span id='trade_test'>Victory</span> Points: <span id='robber_test'><b>7</b></span> <!--REMOVE TEST-->
+			</p>
+			<table>
+				<tr>
+					<th>Resource</th>
+					<th>Amount</th>
+				</tr>
+				<tr>
+					<td>Brick</td>
+					<td>4</td>
+				</tr>
+				<tr>
+					<td>Wool</td>
+					<td>13</td>
+				</tr>
+				<tr>
+					<td>Rock</td>
+					<td>2</td>
+				</tr>
+				<tr>
+					<td>Desert</td>
+					<td>7</td>
+				</tr>
+				<tr>
+					<td>Wood</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>Wheat</td>
+					<td>6</td>
+				</tr>
+			</table>
+			<p>
+				Longest Road: <b>Kyle (7)</b>
+			</p>
+			<p>
+				Largest Army: <b>Aaron</b>
+			</p>
+			<p>
+				Known Opponents' Victory Points
+				<br/>
+				...
+			</p>
+		</div>
+		<input type='button' class='butt' id='roll' value='Roll Dice'>
+		<span id='dice'>You rolled a <span id='steal_test' style='font-size: 28px;'><b>7</b></span>. Move the robber!</span> <!--REMOVE TEST-->
+		<span id='roll_br'><br/><br/></span>
+		<input type='button' class='butt' id='dev' value='View/Use Dev. Cards'>
+		<span id='dev_br'><br/><br/></span>
+		<input type='button' class='butt' id='build_road' value='Build Road...'>
+		<span id='road_br'><br/><br/></span>
+		<input type='button' class='butt' id='build_city' value='Build City...'>
+		<span id='city_br'><br/><br/></span>
+		<input type='button' class='butt' id='build_sett' value='Build Settlement...'>
+		<span id='sett_br'><br/><br/></span>
+		<input type='button' class='butt' id='buy_card' value='Buy Dev. Card...'>
+		<p id='buy_message'>You got a Victory Points card!</p>
+		<span id='buy_br'><br/><br/></span>
+		<input type='button' class='butt' id='domestic' value='Propose Trade'>
+		<span id='domestic_br'><br/><br/></span>
+		<input type='button' class='butt' id='maritime' value='Maritime Trade'>
+		<span id='maritime_br'><br/><br/></span>
+		<input type='button' class='butt' id='end' value='End Turn'>
+		<span id='end_br'><br/><br/></span>
+		<input type='button' class='butt' id='to_trade' value='Proceed to Trading'>
+		<span id='trade_br'><br/><br/></span>
+		<input type='button' class='butt' id='to_build' value='Proceed to Building'>
+		<div id='error_pop'>
+			<p id='error_message'>*Error message*</p>
+			<center><input type='button' class='butt' id='error_accept' value='OK'></center>
+		</div>
+		<div id='trade_pop'>
+			<p id='trade_message'>*Trade request and details*</p>
+			<center>
+				<input type='button' class='butt' id='trade_accept' value='Accept'>
+				<input type='button' class='butt' id='trade_decline' value='Decline'>
+			</center>
+		</div>
+		<div id='rob_discard_pop'>
+			<p id='robber_message'>The robber has been activated! Choose <b>5</b> resource cards to get rid of.</p>
+			Wood: <input type='number' class='number_sel' min='0' max='5' step='1'>
+			<br/>
+			Wool: <input type='number' class='number_sel' min='0' max='4' step='1'>
+			<br/>
+			Brick: <input type='number' class='number_sel' min='0' max='8' step='1'>
+			<br/>
+			<center><input type='button' class='butt' id='robber_discard' value='Discard'></center>
+		</div>
+		<div id='rob_steal_pop'>
+			<p id='robber_steal_message'>You must now choose from which player to steal one resource card.</p>
+			Player: <select>
+				<option>Kyle</option>
+				<option>Prof. Schafer</option>
+			</select>
+			<br/><br/>
+			<center><input type='button' class='butt' id='robber_steal' value='Steal!'></center>
+		</div>
+		<div id='dev_pop'>
+			<div id='dev_card'>
+				Card type: <b><span class='knight_content'>Knight</span><span class='progress_content'>Progress</span><span class='victory_content'>Victory Point</span></b>
+				<span class='progress_content'>
+					<br/><br/>
+					Variety: <b>Monopoly</b>
+					<br/><br/>
+					Resource:
+					<select>
+						<option>Wood</option>
+						<option>Brick</option>
+						<option>Wheat</option>
+					</select>
+				</span>
+			</div>
+			<img src='./x.png' width='10px' height='10px' id='x-close'>
+			<br/>
+			<div id='prev_next'>
+				<input type='button' class='butt' id='prev_card' value='◄'>
+				<input type='button' class='butt' id='next_card' value='►'>
+			</div>
+			<input type='button' class='butt' id='use' value='Use Card'>
+		</div>
+		<div id='domestic_pop'>
+			<p id='trade_message'>
+				Domestic Trade. What terms have you agreed on?
+			</p>
+			Trade with: <select>
+				<option>Kyle</option>
+				<option>Sarah</option>
+				<option>Prof. Schafer</option>
+			</select>
+			<br/><br/>
+			You give them: <select>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+			</select>
+			<select>
+				<option>Brick</option>
+				<option>Road</option>
+				<option>Wood</option>
+				<option>Wheat</option>
+				<option>Wool</option>
+			</select>
+			<br/><br/>
+			They give you: <select>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+			</select>
+			<select>
+				<option>Brick</option>
+				<option>Road</option>
+				<option>Wood</option>
+				<option>Wheat</option>
+				<option>Wool</option>
+			</select>
+			<br/><br/>
+			<center><input type='button' class='butt' id='domestic_submit' value='Trade!'></center>
+		</div>
+		<div id='maritime_pop'>
+			<p id='trade_message'>
+				Maritime Trade.<br/>You have chosen a <b>Generic Harbor (3:1)</b>.
+			</p>
+			You trade: <select>
+				<option>3</option>
+				<option>6</option>
+				<option>9</option>
+			</select>
+			<select>
+				<option>Brick</option>
+				<option>Road</option>
+				<option>Wood</option>
+				<option>Wheat</option>
+				<option>Wool</option>
+			</select>
+			<br/><br/>
+			For: <select>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+			</select>
+			<select>
+				<option>Brick</option>
+				<option>Road</option>
+				<option>Wood</option>
+				<option>Wheat</option>
+				<option>Wool</option>
+			</select>
+			<br/><br/>
+			<center><input type='button' class='butt' id='maritime_submit' value='Trade!'></center>
+		</div>
+		<script src='./jquery.min.js'></script> <! library>
+		<script src='./proto_game.js'></script> <! script>
+	</body>
+</html>
