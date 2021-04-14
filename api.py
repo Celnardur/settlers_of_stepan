@@ -90,8 +90,9 @@ def process(path, args):
             return (400, "Player needs a name")
         if not 'pos' in args:
             return (400, "Need a position for the settlement")
-        (code, message) = (500, "Not implemented")
-    
+        (code, message) = build.build_settlement(state, args['name'], args['pos'])
+        save_state(save_path)
+
     elif path == '/test_led_strip':
         led_strip.test()
         (code, message) = (200, "Testing led strip")

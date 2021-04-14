@@ -2,6 +2,8 @@ from logic import player
 import random
 
 def end_turn(state, name):
+    # TODO: add get resources at end of each round 2
+
     # advance turn counter
     order = player.find_player(state, name)
     if order == -1:
@@ -26,7 +28,7 @@ def end_turn(state, name):
 
     return (200, "Advanced Turn")
 
-def resource_from_tile(tile):
+def resource_from_tile(state, tile):
     tt = state['hexes'][tile]['tile_type']
     if tt == 'Mountains':
         return 'Ore'
@@ -39,4 +41,12 @@ def resource_from_tile(tile):
     if tt == 'Hills':
         return 'Brick'
     return None
+
+
+def force_turn(state):
+    if state['turn'][1] == len(state['players']) - 1:
+        state['turn'] = [state['turn'][0] + 1, 0]
+    else:
+        state['turn'][1] += 1
+
 
