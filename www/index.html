@@ -8,7 +8,7 @@
 		<link rel='stylesheet' type='text/css' href='./index.css'/>
 		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 	</head>
-	<body>
+	<body> <!ADD: /api/get_notifications & functionality>
 		<div id='nav'>
 			<h2>
 				Settlers of Stepán
@@ -41,7 +41,7 @@
 				</tr>
 				<tr>
 					<td>
-						Prof. Schafer <img src='./x.png' width='10px' height='10px' id='x-marker'>
+						Prof. Schafer <img src='./x.png' width='10px' height='10px' id='x-marker'><!ADD: /api/remove_player>
 					</td>
 				</tr>
 			</table>
@@ -49,22 +49,22 @@
 		<br/>
 		<div id='add_section'>
 			<input type='text' id='name' placeholder='Enter your name'>
-			<br/><br/>
+			<br/><br/><!ADD: /api/change_player_color & UI/functionality>
 			<select>
 				<option>Orange</option>
 				<option>Blue</option>
 				<option>White</option>
 				<option>Red</option>
 			</select>
-			<input type='button' class='butt' id='add' value='►'>
+			<input type='button' class='butt' id='add' value='►'><!ADD: /api/add_player>
 		</div>
-		<br/>
+		<br/><!ADD: /api/player_ready & UI/functionality>
 		<input type='button' class='butt' id='reset' value='Start New Game'>
 		<div id='confirm'>
 			<p>
 				Are you sure?
 			</p>
-			<input type='button' class='butt' id='reset_confirm' value='Yes'>
+			<input type='button' class='butt' id='reset_confirm' value='Yes'><!ADD: /api/new_game><!ADD: /api/randomize_players ??>
 			<input type='button' class='butt' id='reset_deny' value='No'>
 		</div>
 		<script src='./jquery.min.js'></script> <! library>
