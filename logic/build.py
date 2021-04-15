@@ -119,6 +119,7 @@ def force_settlement(state, name, pos):
     state['settlements'][pos]['type'] = 'settlement'
     state['players'][order]['settlements'].append(pos)
 
+
 def force_road(state, name, pos):
     order = player.find_player(state, name)
     state['roads'][pos]['owner'] = order

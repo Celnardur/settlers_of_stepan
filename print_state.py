@@ -4,13 +4,13 @@ import json
 def get_char(char, color = None):
     return {'char': char, 'color': color}
 
-def add_num(layout, num, line, col):
+def add_num(layout, num, line, col, color = None):
     n = str(num)
     if int(num) < 10:
-        layout[line][col] = get_char(n)
+        layout[line][col] = get_char(n, color)
     else:
-        layout[line][col] = get_char(n[0])
-        layout[line][col+1] = get_char(n[1])
+        layout[line][col] = get_char(n[0], color)
+        layout[line][col+1] = get_char(n[1], color)
 
 def add_str(layout, string, line, col, color = None):
     l, c = (line, col)
@@ -62,7 +62,7 @@ def get_abv(tile):
     if tt == 'Desert':
         return 'Dsrt'
 
-def print_hex(tile, index, layout, line, col, robber):
+def print_hex(state, tile, index, layout, line, col, robber):
     fmt = r"""
     c4    s0    n
     c3 /5 c2 \0 n
@@ -84,24 +84,45 @@ def print_hex(tile, index, layout, line, col, robber):
     l, c = (line, col)
     for word in fmt.split():
         if word == 'b' and robber == index:
-            layout[l][c] = get_char('B')
+            layout[l][c] = get_char('B', [0x80, 0, 0x80])
         elif word == 'i':
             add_num(layout, index, l, c)
         elif word == 't':
-            add_str(layout, get_abv(tile), l, c)
+            add_str(layout, get_abv(tile), l, c, get_color(tile['tile_type']))
         elif word == 'd':
             layout[l][c] = get_char(hex(tile['roll_number'])[2])
+
         elif word == 'n':
             l += 1
             c = col
         elif word[0] == 'c':
             c += int(word[1])
+            
         elif word[0] == 's':
-            add_num(layout, tile['settlements'][int(word[1:])], l, c)
+            settlement = tile['settlements'][int(word[1:])]
+            owner = state['settlements'][settlement]['owner']
+            if owner == -1:
+                add_num(layout, settlement, l, c)
+            else:
+                color = state['players'][owner]['color']
+                add_num(layout, settlement, l, c, color)
+
         elif word[0] == 'r':
-            add_num(layout, tile['roads'][int(word[1:])], l, c)
+            road = tile['roads'][int(word[1:])]
+            owner = state['roads'][road]['owner']
+            if owner == -1:
+                add_num(layout, road, l, c)
+            else:
+                color = state['players'][owner]['color']
+                add_num(layout, road, l, c, color)
         elif word[0] == '/' or word[0] == '\\' or word[0] == '|':
-            layout[l][c] = get_char(word[0])
+            road = tile['roads'][int(word[1:])]
+            owner = state['roads'][road]['owner']
+            if owner == -1:
+                layout[l][c] = get_char(word[0])
+            else:
+                color = state['players'][owner]['color']
+                layout[l][c] = get_char(word[0], color)
 
 
 def print_player(layout, player, line, col):
@@ -150,10 +171,10 @@ def get_state_string(state):
             if ud % 2 == 0 and lr % 2 == 0:
                 if (ud == 0 or ud == 4) and (lr == 0 or lr == 8):
                     continue
-                print_hex(state['hexes'][hid], hid, layout, line, col, state['robber'])
+                print_hex(state, state['hexes'][hid], hid, layout, line, col, state['robber'])
                 hid += 1
             elif ud % 2 == 1 and lr % 2 == 1:
-                print_hex(state['hexes'][hid], hid, layout, line, col, state['robber'])
+                print_hex(state, state['hexes'][hid], hid, layout, line, col, state['robber'])
                 hid += 1
     
     # Draw Harbors

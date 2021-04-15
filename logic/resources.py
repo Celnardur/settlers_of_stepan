@@ -49,4 +49,9 @@ def force_turn(state):
     else:
         state['turn'][1] += 1
 
+def infinte_resources(state):
+    for player in state['players']:
+        player['resources'] = {'Brick': 99, 'Grain': 99, 'Lumber': 99, 'Ore': 99, 'Wool': 99}
+
+
 

@@ -5,6 +5,8 @@ from print_state import get_state_string
 import pprint
 import sys
 import json
+from logic import build
+from logic import resources
 
 def scmd(args):
     script = []
@@ -14,7 +16,7 @@ def scmd(args):
         script.append('add_player name "James" color [0,0,255] order 1')
         script.append('add_player name "Kyle" color [255,0,255] order 2')
         script.append('add_player name "Jack" color [0,255,0] order 3')
-        script.append('print players')
+        script.append('print')
 
     ret = ''
     for command in script:
@@ -22,12 +24,48 @@ def scmd(args):
 
     return ret
 
+def cheat(args):
+    if args[0] == 'fs':
+        if len(args) < 3:
+            return 'Need more args'
+        build.force_settlement(api.state, args[1], int(args[2]))
+    elif args[0] == 'fr':
+        if len(args) < 3:
+            return 'Need more args'
+        build.force_road(api.state, args[1], int(args[2]))
+    elif args[0] == 'if':
+        resources.infinte_resources(api.state)
+    elif args[0] == 'ft':
+        resources.force_turn(api.state)
+
+    return process_command('print')
+
 def process_command(command):
     if command == "":
         return get_state_string(api.state)
 
     args = command.split()
     command = '/' + args[0]
+
+    if command == '/s':
+        return scmd(args[1:])
+    elif command == '/c':
+        return cheat(args[1:])
+    elif command == '/print':
+        if len(args) < 2:
+            return get_state_string(api.state)
+        if not args[1] in api.state:
+            return 'Cannot print ' + args[1]
+
+        pp = pprint.PrettyPrinter(indent=4)
+        if len(args) == 2:
+            return pp.pformat(api.state[args[1]])
+        if len(args) > 2:
+            return pp.pformat(api.state[args[1]][int(args[2])])
+
+    elif command == '/save':
+        api.save_state(api.save_path)
+        return ''
 
     args_dict = {}
     arg_n = 1
@@ -38,23 +76,12 @@ def process_command(command):
         args_dict[arg] = value
         arg_n += 2
 
-    if command == '/s':
-        return scmd(args[1:])
-    elif command == '/print':
-        if len(args) < 2:
-            return get_state_string(api.state)
-        if not args[1] in api.state:
-            return 'Cannot print ' + args[1]
-
-        pp = pprint.PrettyPrinter(indent=4)
-        return pp.pformat(api.state[args[1]])
+    (code, message) = api.process(command, args_dict)
+    if code == 200:
+        api.get_notifications(command, args_dict)
+        return str(code) + ': ' + str(message) + '\n' + get_state_string(api.state)
     else:
-        (code, message) = api.process(command, args_dict)
-        if code == 200:
-            api.get_notifications(command, args_dict)
-            return str(code) + ': ' + str(message) + '\n' + get_state_string(api.state)
-        else:
-            return str(code) + ': ' + str(message) + '\n'
+        return str(code) + ': ' + str(message) + '\n'
 
 
 if __name__ == '__main__':
