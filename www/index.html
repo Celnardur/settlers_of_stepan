@@ -18,10 +18,6 @@
 				<p>
 					<a href='./debug.html' class='nav_text'>Debug</a>
 				</p>
-				<br/>
-				<p>
-					<span id='server_test' class='nav_text'>SERVER TEST</span> <! TEMPORARY!>
-				</p>
 			</div>
 		</div>
 		<div id='players'>
@@ -30,18 +26,18 @@
 			</h4>
 			<table>
 				<tr>
-					<td>
+					<td class='pname'>
 						Sarah
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td class='pname'>
 						Kyle
 					</td>
 				</tr>
 				<tr>
-					<td>
-						Prof. Schafer <img src='./x.png' width='10px' height='10px' id='x-marker'><!ADD: /api/remove_player>
+					<td class='pname'>
+						Prof. Schafer<img src='./x.png' width='10px' height='10px' id='x-marker'>
 					</td>
 				</tr>
 			</table>
@@ -56,7 +52,7 @@
 				<option>White</option>
 				<option>Red</option>
 			</select>
-			<input type='button' class='butt' id='add' value='►'><!ADD: /api/add_player>
+			<input type='button' class='butt' id='add' value='►'>
 		</div>
 		<br/><!ADD: /api/player_ready & UI/functionality>
 		<input type='button' class='butt' id='reset' value='Start New Game'>
@@ -64,7 +60,7 @@
 			<p>
 				Are you sure?
 			</p>
-			<input type='button' class='butt' id='reset_confirm' value='Yes'><!ADD: /api/new_game><!ADD: /api/randomize_players ??>
+			<input type='button' class='butt' id='reset_confirm' value='Yes'>
 			<input type='button' class='butt' id='reset_deny' value='No'>
 		</div>
 		<script src='./jquery.min.js'></script> <! library>

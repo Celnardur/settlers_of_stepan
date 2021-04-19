@@ -51,17 +51,17 @@ $('#turn_test').on('click', () => { //TEMPORARY
 	$('#dev_br').show();
 });
 
-$('#error_test').on('click', () => { //TEMPORARY
-	$('#error_pop').show();
-});
+// $('#error_test').on('click', () => {
+	// $('#error_pop').show();
+// });
 
 $('#error_accept').on('click', () => {
 	$('#error_pop').hide();
 });
 
-$('#trade_test').on('click', () => { //TEMPORARY
-	$('#trade_pop').show();
-});
+// $('#trade_test').on('click', () => {
+	// $('#trade_pop').show();
+// });
 
 $('#trade_accept').on('click', () => {
 	$('#trade_pop').hide();
@@ -71,9 +71,9 @@ $('#trade_decline').on('click', () => {
 	$('#trade_pop').hide();
 });
 
-$('#robber_test').on('click', () => { //TEMPORARY
-	$('#rob_discard_pop').show();
-});
+// $('#robber_test').on('click', () => {
+	// $('#rob_discard_pop').show();
+// });
 
 $('#robber_discard').on('click', () => {
 	$('#rob_discard_pop').hide();
@@ -86,9 +86,9 @@ $('#roll').on('click', () => {
 	$('#trade_br').hide();
 });
 
-$('#steal_test').on('click', () => { //TEMPORARY
-	$('#rob_steal_pop').show();
-});
+// $('#steal_test').on('click', () => {
+	// $('#rob_steal_pop').show();
+// });
 
 $('#robber_steal').on('click', () => {
 	$('#rob_steal_pop').hide();
@@ -178,6 +178,10 @@ $('#to_build').on('click', () => {
 
 $('#buy_card').on('click', () => {
 	$('#buy_message').show();
+});
+
+$('#build_sett').on('click', () => {
+	build_settlement();
 });
 
 $('#end').on('click', () => {
