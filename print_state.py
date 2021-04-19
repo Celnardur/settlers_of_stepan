@@ -105,7 +105,10 @@ def print_hex(state, tile, index, layout, line, col, robber):
                 add_num(layout, settlement, l, c)
             else:
                 color = state['players'][owner]['color']
-                add_num(layout, settlement, l, c, color)
+                if state['settlements'][settlement]['type'] == 'city':
+                    add_str(layout, 'C', l, c, color)
+                else:
+                    add_num(layout, settlement, l, c, color)
 
         elif word[0] == 'r':
             road = tile['roads'][int(word[1:])]
