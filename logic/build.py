@@ -121,6 +121,39 @@ def build_road(state, name, pos):
     
     return (200, "Road built")
 
+def build_city(state, name, pos):
+    if pos < 0 or pos >= len(state['settlements']):
+        return (400, "City position does not exist")
+
+    if state['turn'][0] < 2:
+        return (400, "City cannot be built on rounds 1 and 2")
+
+    order = player.find_player(state, name)
+    if order == -1:
+        return (400, "Player with that name does not exist")
+
+    if order != state['turn'][1]:
+        return (400, "Player cannot build on this turn")
+
+    acting = state['players'][order]
+    if len(acting['cities']) >= 4:
+        return (400, "Can't build more than 4 cities")
+
+    if not pos in acting['settlements']:
+        return (400, "City must be placed on top of existing settlement")
+
+    (code, message) = player.take_resources(state, name, 
+            {'Grain': 2, 'Ore': 3})
+    if code != 200:
+        return (400, "Player does not have enough resources to build city")
+
+    state['settlements'][pos]['type'] = 'city'
+    state['players'][order]['settlements'].remove(pos)
+    state['players'][order]['cities'].append(pos)
+
+    # TODO: add vp logic
+
+    return (200, "City built")
 
 # force these things for testing
 def force_settlement(state, name, pos):

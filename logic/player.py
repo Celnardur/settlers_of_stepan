@@ -30,6 +30,7 @@ def add_player(state, name, color, order):
     state['players'][order] = {
         "roads": [],
         "settlements": [],
+        "cities": [],
         "developments": [],
         "resources": {'Brick': 0, 'Lumber': 0, 'Ore': 0, 'Grain': 0, 'Wool': 0},
         "name": name,

@@ -2,20 +2,28 @@ from logic import player
 import random
 
 def end_turn(state, name):
-    # TODO: add get resources at end of each round 2
-
-    # advance turn counter
+    # Check player
     order = player.find_player(state, name)
     if order == -1:
         return (400, "Player does not exist")
 
     if order != state['turn'][1]:
         return (400, "You cannot end the turn")
+    
+    # check to make sure appropiate number of settlements and roads are built
+    player = state['players'][order]
+    if state['turn'][0] == 0:
+        if len(player['settlements']) < 1 or len(player['roads']) < 1:
+            return (400, "Need to build 1 settlement and 1 road this turn")
+            
 
+    # advance turn counter
     if state['turn'][1] == len(state['players']) - 1:
         state['turn'] = [state['turn'][0] + 1, 0]
     else:
         state['turn'][1] += 1
+
+    # TODO: add get resources at end of each round 2
 
     # roll for resources if after round 2
     if state['turn'][0] < 2:
@@ -51,7 +59,11 @@ def force_turn(state):
 
 def infinte_resources(state):
     for player in state['players']:
-        player['resources'] = {'Brick': 99, 'Grain': 99, 'Lumber': 99, 'Ore': 99, 'Wool': 99}
+        player['resources'] = {'Brick': 50, 'Grain': 50, 'Lumber': 50, 'Ore': 50, 'Wool': 50}
+
+def strip_resources(state):
+    for player in state['players']:
+        player['resources'] = {'Brick': 0, 'Grain': 0, 'Lumber': 0, 'Ore': 0, 'Wool': 0}
 
 
 

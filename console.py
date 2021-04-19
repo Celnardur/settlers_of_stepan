@@ -45,6 +45,8 @@ def scmd(args):
         script.append('bs Jack 14')
         script.append('br Jack 64')
         script.append('c ft')
+
+        script.append('save')
         script.append('print')
 
 
@@ -65,6 +67,8 @@ def cheat(args):
         build.force_road(api.state, args[1], int(args[2]))
     elif args[0] == 'if':
         resources.infinte_resources(api.state)
+    elif args[0] == 'sr':
+        resources.strip_resources(api.state)
     elif args[0] == 'ft':
         resources.force_turn(api.state)
 
@@ -108,6 +112,12 @@ def process_command(command):
             return '400: need more args'
         command = '/build_road'
         args = ['/build_road', 'name', '"' + args[1] + '"', 'pos', args[2]]
+
+    elif command == '/bc':
+        if len(args) < 3:
+            return '400: need more args'
+        command = '/build_city'
+        args = ['/build_city', 'name', '"' + args[1] + '"', 'pos', args[2]]
 
 
     args_dict = {}
