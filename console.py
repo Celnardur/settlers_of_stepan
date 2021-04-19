@@ -13,10 +13,40 @@ def scmd(args):
     if args[0] == 'ap':
         script.append('new_game')
         script.append('add_player name "Aaron" color [255,0,0] order 0')
-        script.append('add_player name "James" color [0,0,255] order 1')
+        script.append('add_player name "James" color [75,75,255] order 1')
         script.append('add_player name "Kyle" color [255,0,255] order 2')
         script.append('add_player name "Jack" color [0,255,0] order 3')
         script.append('print')
+    elif args[0] == 'sg':
+        script.append('s ap')
+
+        script.append('bs Aaron 39')
+        script.append('br Aaron 38')
+        script.append('c ft')
+        script.append('bs James 28')
+        script.append('br James 55')
+        script.append('c ft')
+        script.append('bs Kyle 36')
+        script.append('br Kyle 28')
+        script.append('c ft')
+        script.append('bs Jack 25')
+        script.append('br Jack 23')
+        script.append('c ft')
+
+        script.append('bs Aaron 46')
+        script.append('br Aaron 42')
+        script.append('c ft')
+        script.append('bs James 8')
+        script.append('br James 12')
+        script.append('c ft')
+        script.append('bs Kyle 18')
+        script.append('br Kyle 20')
+        script.append('c ft')
+        script.append('bs Jack 14')
+        script.append('br Jack 64')
+        script.append('c ft')
+        script.append('print')
+
 
     ret = ''
     for command in script:
@@ -66,6 +96,19 @@ def process_command(command):
     elif command == '/save':
         api.save_state(api.save_path)
         return ''
+
+    elif command == '/bs':
+        if len(args) < 3:
+            return '400: need more args'
+        command = '/build_settlement'
+        args = ['/build_settlement', 'name', '"' + args[1] + '"', 'pos', args[2]]
+
+    elif command == '/br':
+        if len(args) < 3:
+            return '400: need more args'
+        command = '/build_road'
+        args = ['/build_road', 'name', '"' + args[1] + '"', 'pos', args[2]]
+
 
     args_dict = {}
     arg_n = 1
