@@ -72,7 +72,7 @@ def print_hex(state, tile, index, layout, line, col, robber):
     s5 c4 b c4 s1 n
     |4 c4 i c4 |1 n
     r4 c3 t c5 r1 n
-    |4 c4 d c4 |4 n
+    |4 c4 d c4 |1 n
     s4 c4   c4 s2 n
 
     c1 \3 c6 /2 n
