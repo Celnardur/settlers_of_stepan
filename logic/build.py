@@ -19,7 +19,7 @@ def build_settlement(state, name, pos):
         return (400, "Player cannot build on this turn")
 
     acting = state['players'][order]
-    if len(player['settlements']) >= 5:
+    if len(acting['settlements']) >= 5:
         return (400, "Can't build more than 5 settlements")
 
     # Can only build one settlement on each opening round
@@ -48,13 +48,13 @@ def build_settlement(state, name, pos):
 
     #TODO: add vp logic
 
-    return (400, "Not implemented")
+    return (200, "Settlement AddeSettlement Addedd")
 
 def build_road(state, name, pos):
-    if pos < 0 or pos >= len(state['road']):
+    if pos < 0 or pos >= len(state['roads']):
         return (400, "Road position does not exist")
 
-    proposed = state['road'][pos]
+    proposed = state['roads'][pos]
 
     if proposed['owner'] != -1:
         return (400, "Road already built in selected position")
@@ -63,8 +63,18 @@ def build_road(state, name, pos):
     if order == -1:
         return (400, "Player with that name does not exist")
 
+    if order != state['turn'][1]:
+        return (400, "Player cannot build on this turn")
+
     if len(state['players'][order]['roads']) >= 15:
         return (400, "You cannot build more than 15 roads")
+
+    # Can only build one road on each opening round
+    if state['turn'][0] == 0 and len(state['players'][order]['roads']) > 0:
+        return (400, "Cannot build more than one road on this turn")
+    if state['turn'][0] == 1 and len(state['players'][order]['roads']) > 1:
+        return (400, "Cannot build more than one road on this turn")
+
 
     # check for adjacent roads or settlments
     legal = False
