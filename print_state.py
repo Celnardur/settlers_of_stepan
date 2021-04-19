@@ -26,7 +26,7 @@ def add_str(layout, string, line, col, color = None):
 
 def get_color(s):
     if s == 'Mountains' or s == 'Ore':
-        return [0, 0, 255]
+        return [75, 75, 255]
     if s == 'Pasture' or s == 'Wool':
         return [255, 255, 255]
     if s == 'Forest' or s == 'Lumber':
