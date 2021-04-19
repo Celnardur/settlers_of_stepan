@@ -46,8 +46,6 @@ def build_settlement(state, name, pos):
     state['settlements'][pos]['type'] = 'settlement'
     state['players'][order]['settlements'].append(pos)
 
-    #TODO: add vp logic
-
     return (200, "Settlement AddeSettlement Addedd")
 
 def build_road(state, name, pos):
@@ -117,8 +115,6 @@ def build_road(state, name, pos):
     state['roads'][pos]['owner'] = order
     state['players'][order]['roads'].append(pos)
 
-    # TODO: add vp logic
-    
     return (200, "Road built")
 
 def build_city(state, name, pos):
@@ -151,9 +147,29 @@ def build_city(state, name, pos):
     state['players'][order]['settlements'].remove(pos)
     state['players'][order]['cities'].append(pos)
 
-    # TODO: add vp logic
-
     return (200, "City built")
+
+def draw_dev(state, name):
+    order = player.find_player(state, name)
+    if order == -1:
+        return (400, "Player with that name does not exist")
+
+    if order != state['turn'][1]:
+        return (400, "Player cannot draw on this turn")
+
+    if len(state['developments']) == 0:
+        return (400, "No developments left to draw")
+
+    (code, message) = player.take_resources(state, name, 
+            {'Grain': 1, 'Ore': 1, 'Wool': 1})
+    if code != 200:
+        return (400, "Player does not have enough resources to draw development")
+
+    dev = state['developments'].pop()
+    state['players'][order]['developments'].append(dev)
+
+    return (200, dev)
+
 
 # force these things for testing
 def force_settlement(state, name, pos):

@@ -1,5 +1,6 @@
 import json
 import os
+import random
 from logic import player
 from logic import build
 from logic import resources
@@ -111,6 +112,12 @@ def process(path, args):
         (code, message) = build.build_city(state, args['name'], args['pos'])
         save_state(save_path)
 
+    elif path == '/draw_dev':
+        if not 'name' in args:
+            return (400, "Player needs a name")
+        (code, message) = build.draw_dev(state, args['name'])
+        save_state(save_path)
+
     elif path == '/test_led_strip':
         led_strip.test()
         (code, message) = (200, "Testing led strip")
@@ -148,6 +155,8 @@ def get_notifications(path, args):
         if not 'name' in args:
             return (400, "Player needs a name")
         notify = player.remove_player_notifications(state, args['name'])
+
+    # handle vp logic here
 
     for name, action in notify:
         if not name in notifications:

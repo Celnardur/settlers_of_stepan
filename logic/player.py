@@ -38,6 +38,7 @@ def add_player(state, name, color, order):
         "army": 0,
         "longest_road": 0,
         "victory_points": 0,
+        "taxes_due": False, # for rolling a 7
     }
 
     return (200, "Player added")
