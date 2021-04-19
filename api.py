@@ -3,6 +3,7 @@ import os
 from logic import player
 from logic import build
 from logic import resources
+from logic import misc
 from output import led_strip
 from output import gpio
 from output import seven_segment
@@ -49,6 +50,7 @@ def process(path, args):
     
     elif path == '/new_game':
         set_state('./defaults/default_state.json')
+        random.shuffle(state['developments'])
         save_state(save_path)
         return (200, "New game created")
     
