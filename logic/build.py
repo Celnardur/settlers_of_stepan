@@ -149,6 +149,7 @@ def build_city(state, name, pos):
 
     return (200, "City built")
 
+
 def draw_dev(state, name):
     order = player.find_player(state, name)
     if order == -1:

@@ -191,8 +191,11 @@ def get_state_string(state):
     add_str(layout, "|\n|\n|\n3?--", 41, 8)
     add_str(layout, "  |\n  |\n  |\n--3?", 41, 22) 
 
+    # Show Turn
+    add_str(layout, str(state['turn']), 0, 50)
+
     # Show Players
-    l = 2
+    l = 3
     for player in state['players']:
         if player != None:
             print_player(layout, player, l, 50)

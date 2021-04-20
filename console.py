@@ -22,29 +22,29 @@ def scmd(args):
 
         script.append('bs Aaron 39')
         script.append('br Aaron 38')
-        script.append('c ft')
+        script.append('et')
         script.append('bs James 28')
         script.append('br James 55')
-        script.append('c ft')
+        script.append('et')
         script.append('bs Kyle 36')
         script.append('br Kyle 28')
-        script.append('c ft')
+        script.append('et')
         script.append('bs Jack 25')
         script.append('br Jack 23')
-        script.append('c ft')
+        script.append('et')
 
-        script.append('bs Aaron 46')
-        script.append('br Aaron 42')
-        script.append('c ft')
-        script.append('bs James 8')
-        script.append('br James 12')
-        script.append('c ft')
-        script.append('bs Kyle 18')
-        script.append('br Kyle 20')
-        script.append('c ft')
         script.append('bs Jack 14')
         script.append('br Jack 64')
-        script.append('c ft')
+        script.append('et')
+        script.append('bs Kyle 18')
+        script.append('br Kyle 20')
+        script.append('et')
+        script.append('bs James 8')
+        script.append('br James 12')
+        script.append('et')
+        script.append('bs Aaron 46')
+        script.append('br Aaron 42')
+        script.append('et')
 
         script.append('save')
         script.append('print')
@@ -118,6 +118,12 @@ def process_command(command):
             return '400: need more args'
         command = '/build_city'
         args = ['/build_city', 'name', '"' + args[1] + '"', 'pos', args[2]]
+
+    elif command == '/et':
+        command = '/end_turn'
+        order = api.state['turn'][1]
+        name = api.state['players'][order]['name']
+        args = ['/end_turn', 'name', '"' + name + '"']
 
 
     args_dict = {}

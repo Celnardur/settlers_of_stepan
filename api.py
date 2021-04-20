@@ -118,6 +118,12 @@ def process(path, args):
         (code, message) = build.draw_dev(state, args['name'])
         save_state(save_path)
 
+    elif path == '/end_turn':
+        if not 'name' in args:
+            return (400, "Player needs a name")
+        (code, message) = resources.end_turn(state, args['name'])
+        save_state(save_path)
+
     elif path == '/test_led_strip':
         led_strip.test()
         (code, message) = (200, "Testing led strip")
