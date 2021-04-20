@@ -1,7 +1,7 @@
 from logic import player
 import random
 
-def end_turn(state, name):
+def end_turn(state, notifications, name):
     # Check player
     order = player.find_player(state, name)
     if order == -1:
@@ -9,6 +9,9 @@ def end_turn(state, name):
 
     if order != state['turn'][1]:
         return (400, "You cannot end the turn")
+
+    # check taxes and robber
+
     
     # check to make sure appropiate number of settlements and roads are built
     actor = state['players'][order]
@@ -43,6 +46,13 @@ def end_turn(state, name):
         else:
             state['turn'][1] -= 1
         
+        # add notification for resources
+        name = state['players'][order]['name']
+        if not name in notifications:
+            notifications[name] = []
+        res = state['players'][order]['resources']
+        notifications[name].append({'action': 'end_round_2', 'resources': res})
+        
         return (200, "Advanced Turn")
 
     # advance turn counter
@@ -56,6 +66,18 @@ def end_turn(state, name):
         return (200, "Advanced Turn")
     
     roll = random.randrange(1, 7) + random.randrange(1, 7)
+    print(roll)
+
+    # create notifications
+    notify = {}
+    for order, actor in enumerate(state['players']):
+        notify[order] = {
+            'action': 'end_turn', 
+            'roll': roll, 
+            'resources': {'Brick': 0, 'Lumber': 0, 'Ore': 0, 'Grain': 0, 'Wool': 0},
+            'move_robber': False,
+            'pay_taxes': False,
+        }
 
     # find tiles that have the right roll number
     matches = []
@@ -70,12 +92,27 @@ def end_turn(state, name):
             settlement = state['settlements'][intersection]
             if settlement['type'] == 'settlement':
                 state['players'][settlement['owner']]['resources'][res] += 1
+                notify[settlement['owner']]['resources'][res] += 1
             if settlement['type'] == 'city':
                 state['players'][settlement['owner']]['resources'][res] += 2
+                notify[settlement['owner']]['resources'][res] += 2
 
-    # TODO: add logic for taxes and robber
+    # logic for rolling a 7
     if roll == 7: # hope and pray
-        pass
+        state['move_robber'] = True
+        notify[state['turn'][1]]['move_robber'] = True
+        for order, actor in enumerate(state['players']):
+            res_total = sum(actor['resources'].values())
+            if res_total > 7:
+                actor['taxes_due'] = True
+                notify[order]['pay_taxes'] = True
+
+    # add notifications
+    for order, action in notify.items():
+        name = state['players'][order]['name']
+        if not name in notifications:
+            notifications[name] = []
+        notifications[name].append(action)
 
     return (200, "Advanced Turn")
 

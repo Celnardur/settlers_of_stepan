@@ -121,7 +121,7 @@ def process(path, args):
     elif path == '/end_turn':
         if not 'name' in args:
             return (400, "Player needs a name")
-        (code, message) = resources.end_turn(state, args['name'])
+        (code, message) = resources.end_turn(state, notifications, args['name'])
         save_state(save_path)
 
     elif path == '/test_led_strip':
