@@ -10,9 +10,6 @@ def end_turn(state, notifications, name):
     if order != state['turn'][1]:
         return (400, "You cannot end the turn")
 
-    # check taxes and robber
-
-    
     # check to make sure appropiate number of settlements and roads are built
     actor = state['players'][order]
     if state['turn'][0] == 0:
@@ -99,7 +96,7 @@ def end_turn(state, notifications, name):
 
     # logic for rolling a 7
     if roll == 7: # hope and pray
-        state['move_robber'] = True
+        state['move_robber'] = state['turn'][1]
         notify[state['turn'][1]]['move_robber'] = True
         for order, actor in enumerate(state['players']):
             res_total = sum(actor['resources'].values())
@@ -115,6 +112,71 @@ def end_turn(state, notifications, name):
         notifications[name].append(action)
 
     return (200, "Advanced Turn")
+
+def move_robber(state, notifications, mover, to, victim):
+    if to < 0 or to >= len(state['hexes']):
+        return (400, "Tile position does not exist")
+
+    if state['robber'] == to:
+        return (400, "Must move robber to different position")
+
+    mover = player.find_player(state, mover)
+    if mover == -1:
+        return (400, 'Nonexistent player given as mover')
+
+    if mover != state['turn'][1]:
+        return (400, "Must move robber on your turn")
+
+    if state['players'][mover]['taxes_due']:
+        return (400, "Must pay taxes before moving the robber")
+
+    if mover != state['move_robber']:
+        return (400, "Mover is not allowed to move the robber")
+
+    # robber can be moved to hex with no player adjacent
+    # eaither the victim must be adjacent or no player adjacent
+    # find adjacent players
+    adj = []
+    for intersection in state['hexes'][to]['settlements']:
+        if state['settlements'][intersection]['owner'] != -1:
+            adj.append(state['settlements'][intersection]['owner'])
+
+    if victim == None and len(adj) > 0:
+        return (400, "Must chose victim if robber is moved there")
+
+    stolen = None
+    if victim != None:
+        victim = player.find_player(state, victim)
+        if victim == -1:
+            return (400, 'Nonexistent player given as victim')
+
+        if not victim in adj:
+            return (400, "Must chose victim with adjacent settlement")
+
+        if state['players'][victim]['taxes_due']:
+            return (400, "Victim must pay taxes before he can be stolen from")
+
+        steal_from = []
+        for res, amt in state['players'][victim]['resources'].items():
+            for i in range(amt):
+                steal_from.append(res)
+        
+        if len(steal_from) > 0:
+            stolen = random.choice(steal_from)
+            state['players'][victim]['resources'][stolen] -= 1
+            state['players'][mover]['resources'][stolen] += 1
+        
+            thief = state['players'][mover]['name']
+            notify = {'action': 'steal', 'thief': thief, 'resource': stolen}
+            victim_name = state['players'][victim]['name']
+            if victim_name not in notifications:
+                notifications[victim_name] = []
+            notifications[victim_name].append(notify)
+
+    state['robber'] = to
+    state['move_robber'] = -1
+    return (200, stolen)
+
 
 def resource_from_tile(state, tile):
     tt = state['hexes'][tile]['tile_type']

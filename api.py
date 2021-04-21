@@ -44,7 +44,7 @@ def process(path, args):
         if not 'name' in args:
             return (400, "Cannot get notifications for nameless player")
         if not args['name'] in notifications:
-            return (400, "Player has no notification queue")
+            return (200, [])
         message = notifications[args['name']]
         notifications[args['name']] = []
         return (200, message)
@@ -122,6 +122,20 @@ def process(path, args):
         if not 'name' in args:
             return (400, "Player needs a name")
         (code, message) = resources.end_turn(state, notifications, args['name'])
+        save_state(save_path)
+
+    elif path == '/move_robber':
+        if not 'mover' in args:
+            return (400, "Player who move robber must be given")
+        if not 'to' in args:
+            return (400, "Pos to move robber to must be given")
+        if not 'victim' in args:
+            args['victim'] = None
+
+        mover = args['mover']
+        to = args['to']
+        victim = args['victim']
+        (code, message) = resources.move_robber(state, notifications, mover, to, victim)
         save_state(save_path)
 
     elif path == '/test_led_strip':

@@ -82,7 +82,7 @@ state['longest_road'] = -1
 state['largest_army'] = -1
 state['turn'] = [0, 0]
 state['card_played'] = False
-state['move_robber'] = False
+state['move_robber'] = -1
 
 #pp = pprint.PrettyPrinter(indent=4)
 #pp.pprint(state)
