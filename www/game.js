@@ -177,11 +177,20 @@ $('#to_build').on('click', () => {
 });
 
 $('#buy_card').on('click', () => {
+	draw_dev();
 	$('#buy_message').show();
 });
 
 $('#build_sett').on('click', () => {
 	build_settlement();
+});
+
+$('#build_road').on('click', () => {
+	build_road();
+});
+
+$('#build_city').on('click', () => {
+	build_city();
 });
 
 $('#end').on('click', () => {
@@ -201,4 +210,5 @@ $('#end').on('click', () => {
 	$('#dev_br').hide();
 	$('#buy_message').hide();
 	window.scrollTo(0,0);
+	end_turn();
 });

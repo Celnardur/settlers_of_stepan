@@ -77,3 +77,33 @@ var build_settlement = function() {
 		url: "/api/build_settlement",
 	})
 }
+
+var build_road = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/build_road",
+	})
+}
+
+var build_city = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/build_city",
+	})
+}
+
+var draw_dev = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/draw_dev",
+	})
+}
+
+var end_turn = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/end_turn",
+	})
+}
+
+//move_robber--not activated by GUI!
