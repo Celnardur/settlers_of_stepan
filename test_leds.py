@@ -1,4 +1,6 @@
 from output.pwm import PCA9685
+import sys
+from time import sleep
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
@@ -9,6 +11,12 @@ if __name__ == '__main__':
     addr = int(sys.argv[1], 0)
     pwm = PCA9685(addr)
     pwm.begin()
-    for i in range(7):
-        pwm.setPin(i, 1)
+
+    while True:
+        for i in range(7):
+            pwm.setPin(i, 1)
+        sleep(1)
+        for i in range(7):
+            pwm.setPin(i, 0)
+        sleep(1)
 
