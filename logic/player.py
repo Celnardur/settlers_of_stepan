@@ -135,6 +135,8 @@ def take_resources(state, name, resources):
 
     player = state['players'][order]
     for res, amt in resources.items():
+        if res not in player['resources']:
+            return (400, res + " is not a valid resource")
         if player['resources'][res] < amt:
             return (400, "Player does not have enough resources")
 

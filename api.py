@@ -138,6 +138,14 @@ def process(path, args):
         (code, message) = resources.move_robber(state, notifications, mover, to, victim)
         save_state(save_path)
 
+    elif path == '/pay_taxes':
+        if not 'name' in args:
+            return (400, "Player needs a name")
+        if not 'taxes' in args:
+            return (400, "Player needs a name")
+        (code, message) = resources.pay_taxes(state, args['name'], args['taxes'])
+        save_state(save_path)
+
     elif path == '/test_led_strip':
         led_strip.test()
         (code, message) = (200, "Testing led strip")

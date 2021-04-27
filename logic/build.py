@@ -11,6 +11,9 @@ def build_settlement(state, name, pos):
         if state['settlements'][settlement]['owner'] != -1:
             return (400, "Settlement cannot be built adjacent to another settlement")
 
+    if state['move_robber'] != -1:
+        return (400, "The robber must be moved before you can build")
+
     order = player.find_player(state, name)
     if order == -1:
         return (400, "Player with that name does not exist")
@@ -21,6 +24,9 @@ def build_settlement(state, name, pos):
     acting = state['players'][order]
     if len(acting['settlements']) >= 5:
         return (400, "Can't build more than 5 settlements")
+
+    if acting['taxes_due']:
+        return (400, "Must pay taxes before you can build")
 
     # Can only build one settlement on each opening round
     if state['turn'][0] == 0 and len(acting['settlements']) > 0:
@@ -57,12 +63,18 @@ def build_road(state, name, pos):
     if proposed['owner'] != -1:
         return (400, "Road already built in selected position")
 
+    if state['move_robber'] != -1:
+        return (400, "The robber must be moved before you can build")
+
     order = player.find_player(state, name)
     if order == -1:
         return (400, "Player with that name does not exist")
 
     if order != state['turn'][1]:
         return (400, "Player cannot build on this turn")
+
+    if state['players'][order]['taxes_due']:
+        return (400, "Must pay taxes before you can build")
 
     if len(state['players'][order]['roads']) >= 15:
         return (400, "You cannot build more than 15 roads")
@@ -124,6 +136,9 @@ def build_city(state, name, pos):
     if state['turn'][0] < 2:
         return (400, "City cannot be built on rounds 1 and 2")
 
+    if state['move_robber'] != -1:
+        return (400, "The robber must be moved before you can build")
+
     order = player.find_player(state, name)
     if order == -1:
         return (400, "Player with that name does not exist")
@@ -132,6 +147,9 @@ def build_city(state, name, pos):
         return (400, "Player cannot build on this turn")
 
     acting = state['players'][order]
+    if acting['taxes_due']:
+        return (400, "Must pay taxes before you can build")
+
     if len(acting['cities']) >= 4:
         return (400, "Can't build more than 4 cities")
 
@@ -151,12 +169,18 @@ def build_city(state, name, pos):
 
 
 def draw_dev(state, name):
+    if state['move_robber'] != -1:
+        return (400, "The robber must be moved before you can build")
+
     order = player.find_player(state, name)
     if order == -1:
         return (400, "Player with that name does not exist")
 
     if order != state['turn'][1]:
         return (400, "Player cannot draw on this turn")
+
+    if state['players'][order]['taxes_due']:
+        return (400, "Must pay taxes before you can build")
 
     if len(state['developments']) == 0:
         return (400, "No developments left to draw")

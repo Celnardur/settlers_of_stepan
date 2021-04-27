@@ -1,5 +1,6 @@
 from logic import player
 import random
+import math
 
 def end_turn(state, notifications, name):
     # Check player
@@ -9,6 +10,14 @@ def end_turn(state, notifications, name):
 
     if order != state['turn'][1]:
         return (400, "You cannot end the turn")
+
+    # Check robber and taxes
+    if state['move_robber'] != -1:
+        return (400, "The robber must be moved before the turn can end")
+
+    for actor in state['players']:
+        if actor['taxes_due']:
+            return (400, "All players must pay taxes before the turn can end")
 
     # check to make sure appropiate number of settlements and roads are built
     actor = state['players'][order]
@@ -176,6 +185,35 @@ def move_robber(state, notifications, mover, to, victim):
     state['robber'] = to
     state['move_robber'] = -1
     return (200, stolen)
+
+def pay_taxes(state, name, taxes):
+    order = player.find_player(state, name)
+    if order == -1:
+        return (400, "Player does not exist")
+
+    actor = state['players'][order]
+    if not actor['taxes_due']:
+        return (400, "You don't need to pay taxes")
+
+    current_sum = sum(actor['resources'].values())
+    taxes_sum = 0
+    for res, amt in taxes.items():
+        if amt < 0:
+            return (400, "Can't pay negitive resources in taxes")
+        taxes_sum += amt
+    
+    taxes_due = math.floor(current_sum/2) 
+    if taxes_due > taxes_sum:
+        return (400, "That's not enough resources")
+    if taxes_due < taxes_sum:
+        return (400, "Select less resources, pay less taxes")
+
+    (code, message) = player.take_resources(state, name, taxes)
+    if code != 200:
+        return (400, "You cant pay those resources")
+
+    actor['taxes_due'] = False
+    return (200, "Taxes paid")
 
 
 def resource_from_tile(state, tile):
