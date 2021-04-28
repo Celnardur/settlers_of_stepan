@@ -40,6 +40,7 @@ for i in range(54):
         'roads': [],
         'adj_settlements': [],
         'hexes': [],
+        'harbor': -1,
         'type': 'none',
         'owner': -1,
     })
@@ -63,6 +64,11 @@ harbors = []
 with open('harbors.json', 'r') as fs:
     text = fs.read()
     harbors = json.loads(text)
+
+for i, harbor in enumerate(harbors):
+    for spot in harbor['settlements']:
+        settlements[spot]['harbor'] = i
+
 
 developments = []
 with open('developments.json', 'r') as fs:

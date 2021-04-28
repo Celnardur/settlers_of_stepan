@@ -104,14 +104,14 @@ def end_turn(state, notifications, name):
                 notify[settlement['owner']]['resources'][res] += 2
 
     # logic for rolling a 7
-    if roll == 7: # hope and pray
-        state['move_robber'] = state['turn'][1]
-        notify[state['turn'][1]]['move_robber'] = True
-        for order, actor in enumerate(state['players']):
-            res_total = sum(actor['resources'].values())
-            if res_total > 7:
-                actor['taxes_due'] = True
-                notify[order]['pay_taxes'] = True
+    #if roll == 7: # hope and pray
+    #    state['move_robber'] = state['turn'][1]
+    #    notify[state['turn'][1]]['move_robber'] = True
+    #    for order, actor in enumerate(state['players']):
+    #        res_total = sum(actor['resources'].values())
+    #        if res_total > 7:
+    #            actor['taxes_due'] = True
+    #            notify[order]['pay_taxes'] = True
 
     # add notifications
     for order, action in notify.items():

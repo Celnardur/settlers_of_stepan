@@ -4,7 +4,7 @@ import random
 from logic import player
 from logic import build
 from logic import resources
-from logic import misc
+from logic import trade
 from output import led_strip
 from output import gpio
 from output import seven_segment
@@ -144,6 +144,16 @@ def process(path, args):
         if not 'taxes' in args:
             return (400, "Player needs a name")
         (code, message) = resources.pay_taxes(state, args['name'], args['taxes'])
+        save_state(save_path)
+
+    elif path == '/maritime_trade':
+        if not 'name' in args:
+            return (400, "Player needs a name")
+        if not 'give' in args:
+            return (400, "Need resources to trade")
+        if not 'get' in args:
+            return (400, "Need resources to trade")
+        (code, message) = trade.maritime_trade(state, args['name'], args['give'], args['get'])
         save_state(save_path)
 
     elif path == '/test_led_strip':
