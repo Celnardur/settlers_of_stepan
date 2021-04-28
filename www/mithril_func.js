@@ -107,3 +107,17 @@ var end_turn = function() {
 }
 
 //move_robber--not activated by GUI!
+
+var pay_taxes = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/pay_taxes",
+	})
+}
+
+var maritime_trade = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/maritime_trade",
+	})
+}

@@ -73,6 +73,7 @@ $('#trade_decline').on('click', () => {
 
 // $('#robber_test').on('click', () => {
 	// $('#rob_discard_pop').show();
+	// pay_taxes();
 // });
 
 $('#robber_discard').on('click', () => {
@@ -152,6 +153,7 @@ $('#domestic_submit').on('click', () => {
 });
 
 $('#maritime_submit').on('click', () => {
+	maritime_trade();
 	$('#maritime_pop').hide();
 });
 
