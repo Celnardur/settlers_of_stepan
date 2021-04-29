@@ -59,7 +59,7 @@ var remove_player = function() {
 	m.request({
 		method: "PUT",
 		url: "/api/remove_player",
-		body: {name: $(this).closest('pname').text},
+		body: {name: player},
 	})
 }
 
@@ -67,7 +67,7 @@ var add_player = function() {
 	m.request({
 		method: "PUT",
 		url: "/api/add_player",
-		body: {name: $('#name').text},
+		body: {name: player, color: color_RGB, order: 0},
 	})
 }
 

@@ -1,4 +1,6 @@
 //index.js
+var player;
+var color_RGB;
 $(document).ready( () => {
 	$('#nav_menu').hide();
 	$('#reset').hide();
@@ -12,6 +14,19 @@ $('#nav_arrow').on('click', () => {
 });
 
 $('#add').on('click', () => {
+	player = $('#name').val();
+	if ($('#color_sel').val() == "Orange") {
+		color_RGB = [255,85,0];
+	}
+	else if ($('#color_sel').val() == "Blue") {
+		color_RGB = [0,0,255];
+	}
+	else if ($('#color_sel').val() == "White") {
+		color_RGB = [255,255,255];
+	}
+	else if ($('#color_sel').val() == "Red") {
+		color_RGB = [255,0,0];
+	}
 	add_player();
 	$('#add_section').hide();
 	$('#reset').show();
