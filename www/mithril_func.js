@@ -1,4 +1,6 @@
 //mithril_func.js
+var player = '';
+var order;
 var test;
 var test_server = function() {
     m.request({
@@ -12,10 +14,18 @@ var test_server = function() {
     })
 }
 
+var get_notifications = function() {
+    m.request({
+		method: "PUT",
+		url: "/api/get_notifications",
+		body: {name: player},
+    })
+}
+
 var test_led_strip = function() {
     m.request({
-	method: "PUT",
-	url: "/api/test_led_strip",
+		method: "PUT",
+		url: "/api/test_led_strip",
     })
 }
 
@@ -63,11 +73,27 @@ var remove_player = function() {
 	})
 }
 
+var player_ready = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/player_ready",
+		body: {name: player},
+	})
+}
+
 var add_player = function() {
 	m.request({
 		method: "PUT",
 		url: "/api/add_player",
-		body: {name: player, color: color_RGB, order: 0},
+		body: {name: player, color: color_RGB, order: ($('#order').val() - 1)},
+	})
+}
+
+var change_player_color = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/change_player_color",
+		body: {name: player, color: color_RGB},
 	})
 }
 

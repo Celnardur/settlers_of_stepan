@@ -1,5 +1,12 @@
 //game.js
+var player = '';
+var order;
 $(document).ready( () => {
+	var torch = new URLSearchParams(window.location.search);
+	player = torch.get("pname");
+	order = torch.get("porder");
+	console.log(player);
+	console.log(order);
 	$('#nav_menu').hide();
 	$('#error_pop').hide();
 	$('#trade_pop').hide();
@@ -34,6 +41,15 @@ $(document).ready( () => {
 	$('#maritime_br').hide();
 	$('#end_br').hide();
 	$('#trade_br').hide();
+	if (order == 1) {
+		$('#p1_text').show();
+		$('#static_info').hide();
+		$('#roll').show();
+		$('#dev').show();
+		$('#turn_test').text('YOUR');
+		$('#roll_br').show();
+		$('#dev_br').show();
+	}
 });
 
 $('#nav_arrow').on('click', () => {
@@ -41,15 +57,9 @@ $('#nav_arrow').on('click', () => {
 	$('#nav_menu').slideToggle(150);
 });
 
-$('#turn_test').on('click', () => { //TEMPORARY
-	$('#p1_text').show();
-	$('#static_info').hide();
-	$('#roll').show();
-	$('#dev').show();
-	$('#turn_test').text('YOUR');
-	$('#roll_br').show();
-	$('#dev_br').show();
-});
+// $('#turn_test').on('click', () => { //TEMPORARY
+	
+// });
 
 // $('#error_test').on('click', () => {
 	// $('#error_pop').show();

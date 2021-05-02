@@ -21,41 +21,45 @@
 			</div>
 		</div>
 		<div id='players'>
-			<h4>
-				Current Players
-			</h4>
-			<table>
-				<tr>
-					<td class='pname'>
-						Sarah
-					</td>
-				</tr>
-				<tr>
-					<td class='pname'>
-						Kyle
-					</td>
-				</tr>
-				<tr>
-					<td class='pname'>
-						Prof. Schafer<img src='./x.png' width='10px' height='10px' id='x-marker'>
-					</td>
-				</tr>
-			</table>
+			Player name: <span id='list_name'></span><img src='./x.png' width='10px' height='10px' id='x-marker'>
+			<br/>
+			Player color: <span id='color_block'>■</span>  <span id='color_change'>(change)</span>
+		</div>
+		<div id='color_panel'>
+			<select id='change_sel'>
+				<option>Orange</option>
+				<option>Blue</option>
+				<option>White</option>
+				<option>Red</option>
+			</select>
+			<input type='button' class='butt' id='color_submit' value='Change'>
 		</div>
 		<br/>
 		<div id='add_section'>
 			<input type='text' id='name' placeholder='Enter your name'>
-			<br/><br/><!ADD: /api/change_player_color & UI/functionality>
+			<br/><br/>
+			Color:<br/>
 			<select id='color_sel'>
 				<option>Orange</option>
 				<option>Blue</option>
 				<option>White</option>
 				<option>Red</option>
 			</select>
-			<input type='button' class='butt' id='add' value='►'>
+			<br/><br/>
+			Turn order:<br/>
+			<select id='order'>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+			</select>
+			<br/><br/>
+			<input type='button' class='butt' id='add' value='Add player!'>
 		</div>
-		<br/><!ADD: /api/player_ready & UI/functionality>
-		<input type='button' class='butt' id='reset' value='Start New Game'>
+		<br/><br/>
+		<input type='button' class='butt' id='ready' value='Ready to Play!'>
+		<br/><br/><br/><br/>
+		<input type='button' class='butt' id='reset' value='Reset Game'>
 		<div id='confirm'>
 			<p>
 				Are you sure?

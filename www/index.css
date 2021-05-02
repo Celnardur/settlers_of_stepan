@@ -44,6 +44,14 @@ h4 {
 	float: right;
 }
 
+#color_block {
+	font-size: 24px;
+}
+
+#color_change {
+	font-size: 9px;
+}
+
 .butt {
 	background-color: black;
 	color: #fffadc;
