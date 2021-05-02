@@ -1,6 +1,7 @@
 //mithril_func.js
 var player = '';
 var order;
+var state;
 var test;
 var test_server = function() {
     m.request({
@@ -146,4 +147,14 @@ var maritime_trade = function() {
 		method: "PUT",
 		url: "/api/maritime_trade",
 	})
+}
+
+var get_state = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/get_state",
+	})
+	.then(function(data) {
+		state = data;
+    })
 }

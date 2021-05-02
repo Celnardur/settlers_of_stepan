@@ -1,12 +1,21 @@
 //game.js
 var player = '';
 var order;
+var turn_player = '';
+var static_refresh = function() {
+	$('#brick_amt').text(state["players"][order]["resources"]["Brick"]);
+	$('#wool_amt').text(state["players"][order]["resources"]["Wool"]);
+	$('#ore_amt').text(state["players"][order]["resources"]["Ore"]);
+	$('#lumber_amt').text(state["players"][order]["resources"]["Lumber"]);
+	$('#grain_amt').text(state["players"][order]["resources"]["Grain"]);
+}
 $(document).ready( () => {
 	var torch = new URLSearchParams(window.location.search);
 	player = torch.get("pname");
 	order = torch.get("porder");
 	console.log(player);
-	console.log(order);
+	console.log(order); // REMOVE
+	get_state();
 	$('#nav_menu').hide();
 	$('#error_pop').hide();
 	$('#trade_pop').hide();
@@ -41,15 +50,20 @@ $(document).ready( () => {
 	$('#maritime_br').hide();
 	$('#end_br').hide();
 	$('#trade_br').hide();
-	if (order == 1) {
+	var turn_order = state["turn"][1];
+	if (order == turn_order) {
 		$('#p1_text').show();
 		$('#static_info').hide();
 		$('#roll').show();
 		$('#dev').show();
-		$('#turn_test').text('YOUR');
+		$('#turn_player').text('YOUR');
 		$('#roll_br').show();
 		$('#dev_br').show();
 	}
+	else {
+		$('#turn_player').text(state["players"][turn_order]["name"]);
+	}
+	static_refresh();
 });
 
 $('#nav_arrow').on('click', () => {
@@ -207,7 +221,7 @@ $('#build_city').on('click', () => {
 
 $('#end').on('click', () => {
 	$('#p3_text').hide();
-	$('#turn_test').text('Sarah\'s');
+	$('#turn_player').text('Sarah\'s');
 	$('#build_road').hide();
 	$('#road_br').hide();
 	$('#build_city').hide();
