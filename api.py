@@ -49,6 +49,18 @@ def process(path, args):
         notifications[args['name']] = []
         return (200, message)
     
+    elif path == '/get_state':
+        (code, message) = (200, state)
+
+    elif path == '/get_player':
+        if not 'name' in args:
+            return (400, "Player needs a name")
+        actor = player.find_player(state, args['name'])
+        if actor == -1:
+            (code, message) = (400, "That player does not exist")
+        else:
+            (code, message) = (200, state['players'][actor])
+
     elif path == '/new_game':
         set_state('./defaults/default_state.json')
         random.shuffle(state['developments'])
