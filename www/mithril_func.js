@@ -86,7 +86,7 @@ var add_player = function() {
 	m.request({
 		method: "PUT",
 		url: "/api/add_player",
-		body: {name: player, color: color_RGB, order: ($('#order').val() - 1)},
+		body: {name: player, color: color_RGB, order: order},
 	})
 }
 

@@ -30,7 +30,7 @@ $('#add').on('click', () => {
 	else if ($('#color_sel').val() == "Red") {
 		color_RGB = [255,0,0];
 	}
-	order = $('#order').val();
+	order = ($('#order').val() - 1);
 	add_player();
 	$('#add_section').hide();
 	$('#reset').show();
