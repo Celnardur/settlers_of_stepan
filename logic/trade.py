@@ -103,7 +103,7 @@ def propose_trade(state, notifications, name, trade):
         notifications[approver] = []
     notifications[approver].append({
         'action': 'trade_request',
-        'from': acting['name']
+        'from': acting['name'],
         'to': approver,
         'trade': trade,
     })
