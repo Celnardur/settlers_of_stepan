@@ -66,11 +66,52 @@ def maritime_trade(state, name, give, get):
 
     return (200, "Trade Executed")
 
-def propose_trade(state, notifications, trade):
+def propose_trade(state, notifications, name, trade):
+    if state['move_robber'] != -1:
+        return (400, "The robber must be moved before you can trade")
+
+    order = player.find_player(state, name)
+    if order == -1:
+        return (400, "Player with that name does not exist")
+
+    if order != state['turn'][1]:
+        return (400, "Player cannot trade on this turn")
+
+    acting = state['players'][order]
+    if acting['taxes_due']:
+        return (400, "Must pay taxes before you can trade")
+
+    if len(trade.keys()) > 2:
+        return (400, "Can only have two parties to a trade")
+
+    approver = ''
+    for key in trade.keys():
+        if key != acting['name']:
+            approver = key
+
+    order = player.find_player(state, approver)
+    if order == -1:
+        return (400, "You can't trade with a nonexistent player")
+
+    item = {
+        'approval_needed': name,
+        'trade': trade,
+    }
+    state['trades'].append(item)
+
+    if approver not in notifications:
+        notifications[approver] = []
+    notifications[approver].append({
+        'action': 'trade_request',
+        'from': acting['name']
+        'to': approver,
+        'trade': trade,
+    })
+    return (200, "Trade request sent, awaiting approval")
+
+def accept_trade(state, notifications, name, trade):
     return (400, "Not implemented")
 
-def accept_trade(state, notifications, trade):
+def reject_trade(state, notifications, name, trade):
     return (400, "Not implemented")
 
-def reject_trade(state, notifications, trade):
-    return (400, "Not implemented")
