@@ -4,6 +4,9 @@ def maritime_trade(state, name, give, get):
     if state['move_robber'] != -1:
         return (400, "The robber must be moved before you can trade")
 
+    if state['turn'][0] < 2:
+        return (400, "Cannot trade before round 2")
+
     order = player.find_player(state, name)
     if order == -1:
         return (400, "Player with that name does not exist")
@@ -66,9 +69,26 @@ def maritime_trade(state, name, give, get):
 
     return (200, "Trade Executed")
 
+""" 
+trades have the following json format
+ex. 
+{
+    "proposer": {
+        "name": "Aaron",
+        "give": {"Ore": 2, "Wool": 2}
+    },
+    "approver": {
+        "name": "Jack",
+        "give": {"Brick": 2}
+    }
+}
+"""
 def propose_trade(state, notifications, name, trade):
     if state['move_robber'] != -1:
         return (400, "The robber must be moved before you can trade")
+
+    if state['turn'][0] < 2:
+        return (400, "Cannot trade before round 2")
 
     order = player.find_player(state, name)
     if order == -1:
@@ -77,41 +97,40 @@ def propose_trade(state, notifications, name, trade):
     if order != state['turn'][1]:
         return (400, "Player cannot trade on this turn")
 
-    acting = state['players'][order]
-    if acting['taxes_due']:
+    proposer = state['players'][order]
+    if proposer['taxes_due']:
         return (400, "Must pay taxes before you can trade")
 
-    if len(trade.keys()) > 2:
-        return (400, "Can only have two parties to a trade")
+    if proposer['name'] != trade['proposer']['name']:
+        return (400, "Cannot propose a trade for another player")
 
-    approver = ''
-    for key in trade.keys():
-        if key != acting['name']:
-            approver = key
-
+    approver = trade['approver']['name']
     order = player.find_player(state, approver)
     if order == -1:
         return (400, "You can't trade with a nonexistent player")
 
-    item = {
-        'approval_needed': approver,
-        'trade': trade,
-    }
-    state['trades'].append(item)
+    for give in [trade['proposer']['give'], trade['approver']['give']]:
+        for res, amt in give.items():
+            if amt < 0:
+                return (400, "Cannot trade negitive amounts")
+
+    state['trades'].append(trade)
 
     if approver not in notifications:
         notifications[approver] = []
     notifications[approver].append({
         'action': 'trade_request',
-        'from': acting['name'],
-        'to': approver,
         'trade': trade,
     })
     return (200, "Trade request sent, awaiting approval")
 
+
 def accept_trade(state, notifications, name, trade):
     if state['move_robber'] != -1:
         return (400, "The robber must be moved before you can trade")
+
+    if state['turn'][0] < 2:
+        return (400, "Cannot trade before round 2")
     
     order = player.find_player(state, name)
     if order == -1:
@@ -121,56 +140,75 @@ def accept_trade(state, notifications, name, trade):
     if approver['taxes_due']:
         return (400, "Must pay taxes before you can trade")
 
-    proposer = ''
-    for key in trade.keys():
-        if key != approver['name']:
-            proposer = state['players'][player.find_player(state, key)]
+    if approver['name'] != trade['approver']['name']:
+        return (400, "You cannot approve this trade")
+
+    order = player.find_player(state, trade['proposer']['name'])
+    if order == -1:
+        return (400, "Proposer with that name does not exist")
+    
+    proposer = state['players'][order]
 
     # check that trade is actually proposed
-    item = {
-        'approval_needed': name,
-        'trade': trade,
-    }
-    if item not in state['trades']:
+    if trade not in state['trades']:
         return (400, "Cannot accept that trade, It doesn't exist")
     
     # check to see if players have enough resources to make trade
-    for trader, give in trade:
-        order = player.find_player(trader)
-        actor = state['players'][order]
-        for res, amt in give.items():
+    for party in trade.values():
+        actor = state['players'][player.find_player(state, party['name'])]
+        for res, amt in party['give'].items():
             if res not in actor['resources']:
                 return (400, res + " is not a valid resource")
             if actor['resources'][res] < amt:
                 return (400, actor['name'] + " does not have enough resources")
 
     # take resources from each player
-    for trader, give in trade:
-        player.take_resources(state, trader, give)
+    for party in trade.values():
+        player.take_resources(state, party['name'], party['give'])
 
     # give resources to each player
-    for trader, give in trade:
-        for res, amt in give.items():
-            if trader != approver['name']:
-                approver['resources'][res] += amt
-            else:
-                proposer['resources'][res] += amt
+    for res, amt in trade['proposer']['give'].items():
+        approver['resources'][res] += amt
+    for res, amt in trade['approver']['give'].items():
+        proposer['resources'][res] += amt
 
     # remove trade from list
-    state['trades'].remove(item)
+    state['trades'].remove(trade)
 
     # notify proposer of trade completion
     if proposer['name'] not in notifications:
         notifications[proposer['name']] = []
     notifications[proposer['name']].append({
         'action': 'trade_accept',
-        'from': acting['name'],
-        'to': approver,
         'trade': trade,
     })
 
     return (200, "Trade executed")
 
+
 def reject_trade(state, notifications, name, trade):
+    if state['move_robber'] != -1:
+        return (400, "The robber must be moved before you can trade")
+
+    order = player.find_player(state, name)
+    if order == -1:
+        return (400, "Player with that name does not exist")
+
+    # check that trade is actually proposed
+    if trade not in state['trades']:
+        return (400, "Cannot reject that trade, It doesn't exist")
+
+    # remove trade
+    state['trades'].remove(item)
+
+    # notify proposer that trade is removed
+    proposer = trade['proposer']['name']
+    if proposer not in notifications:
+        notifications[proposer] = []
+    notifications[proposer].append({
+        'action': 'trade_accept',
+        'trade': trade,
+    })
+
     return (400, "Not implemented")
 

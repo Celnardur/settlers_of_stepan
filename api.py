@@ -168,6 +168,30 @@ def process(path, args):
         (code, message) = trade.maritime_trade(state, args['name'], args['give'], args['get'])
         save_state(save_path)
 
+    elif path == '/propose_trade':
+        if not 'name' in args:
+            return (400, "Player needs a name")
+        if not 'trade' in args:
+            return (400, "Must propose a trade")
+        (code, message) = trade.propose_trade(state, notifications, args['name'], args['trade'])
+        save_state(save_path)
+
+    elif path == '/accept_trade':
+        if not 'name' in args:
+            return (400, "Player needs a name")
+        if not 'trade' in args:
+            return (400, "Must propose a trade")
+        (code, message) = trade.accept_trade(state, notifications, args['name'], args['trade'])
+        save_state(save_path)
+
+    elif path == '/reject_trade':
+        if not 'name' in args:
+            return (400, "Player needs a name")
+        if not 'trade' in args:
+            return (400, "Must propose a trade")
+        (code, message) = trade.reject_trade(state, notifications, args['name'], args['trade'])
+        save_state(save_path)
+
     elif path == '/test_led_strip':
         led_strip.test()
         (code, message) = (200, "Testing led strip")
