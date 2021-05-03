@@ -101,6 +101,10 @@ def process_command(command):
         api.save_state(api.save_path)
         return ''
 
+    elif command == '/load':
+        api.set_state(api.save_path)
+        return process_command('print')
+
     elif command == '/bs':
         if len(args) < 3:
             return '400: need more args'
