@@ -137,6 +137,20 @@ h2 {
 	padding: 5px;
 }
 
+#notif_pop {
+	background-color: #d01bee;
+	position: fixed;
+	width: 90%;
+	height: 40%;
+	top: 30%;
+	left: 5%;
+	z-index: 10;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	border-radius: 10px;
+}
+
 .butt {
 	background-color: black;
 	color: #fffadc;
@@ -171,7 +185,7 @@ h2 {
 	right: 4px;
 }
 
-#error_message, #trade_message, #robber_message, #robber_steal_message {
+#error_message, #trade_message, #robber_message, #robber_steal_message, #notif_message {
 	text-align: center;
 }
 

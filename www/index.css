@@ -52,6 +52,38 @@ h4 {
 	font-size: 9px;
 }
 
+#error_pop {
+	background-color: red;
+	position: fixed;
+	width: 90%;
+	height: 40%;
+	top: 30%;
+	left: 5%;
+	z-index: 10;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	border-radius: 10px;
+}
+
+#notif_pop {
+	background-color: #d01bee;
+	position: fixed;
+	width: 90%;
+	height: 40%;
+	top: 30%;
+	left: 5%;
+	z-index: 10;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	border-radius: 10px;
+}
+
+#error_message, #notif_message {
+	text-align: center;
+}
+
 .butt {
 	background-color: black;
 	color: #fffadc;

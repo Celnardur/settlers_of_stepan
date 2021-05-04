@@ -14,12 +14,21 @@ var test_server = function() {
     })
 }
 
-var get_notifications = function() {
+var notif;
+var get_notifications = function(player, pass) {
     m.request({
 		method: "PUT",
 		url: "/api/get_notifications",
 		body: {name: player},
     })
+	.then(function(data) {
+		notif = data;
+		if (notif.length != 0) {
+			console.log("Got some mail!");
+			console.log(notif);
+			pass();
+		}
+	})
 }
 
 var test_led_strip = function() {

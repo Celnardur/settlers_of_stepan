@@ -2,15 +2,13 @@
 //DECLARATIONS & FUNCTIONS
 var player = '';
 var order;
-var turn_player = '';
-var turn_order;
 var longest_rd_ck = function() {
 	var long_player = 'Nobody';
 	var length = 0;
 	for (p in state["players"]) {
-		if (p["longest_road"] > length) {
-			length = p["longest_road"];
-			long_player = p["name"];
+		if (state["players"][p]["longest_road"] > length) {
+			length = state["players"][p]["longest_road"];
+			long_player = state["players"][p]["name"];
 		}
 	}
 	var str = long_player + ' (' + length + ')';
@@ -20,9 +18,9 @@ var largest_army_ck = function() {
 	var large_army = 'Nobody';
 	var size = 0;
 	for (p in state["players"]) {
-		if (p["army"] > size) {
-			size = p["army"];
-			large_army = p["name"];
+		if (state["players"][p]["army"] > size) {
+			size = state["players"][p]["army"];
+			large_army = state["players"][p]["name"];
 		}
 	}
 	var str = large_army + ' (' + size + ')';
@@ -38,7 +36,27 @@ var static_refresh = function() {
 	longest_rd_ck();
 	largest_army_ck();
 }
-
+var notif_pop = function() {
+	$('#notif_pop').show();
+	$('#notif_message').text(JSON.stringify(notif));
+}
+var get_turn = function() {
+	var turn_order = state["turn"][1];
+	var round = state["turn"][0];
+	console.log("round " + round + " turn " + turn_order);
+	if (order == turn_order) {
+		$('#p1_text').show();
+		$('#static_info').hide();
+		$('#roll').show();
+		$('#dev').show();
+		$('#turn_player').text('YOUR');
+		$('#roll_br').show();
+		$('#dev_br').show();
+	}
+	else {
+		get_state(() => {$('#turn_player').text(state["players"][turn_order]["name"] + '\'s');});
+	}
+}
 //DOCUMENT
 $(document).ready( () => {
 	var torch = new URLSearchParams(window.location.search);
@@ -46,6 +64,7 @@ $(document).ready( () => {
 	order = torch.get("porder");
 	$('#nav_menu').hide();
 	$('#error_pop').hide();
+	$('#notif_pop').hide();
 	$('#trade_pop').hide();
 	$('#rob_discard_pop').hide();
 	$('#rob_steal_pop').hide();
@@ -78,20 +97,10 @@ $(document).ready( () => {
 	$('#maritime_br').hide();
 	$('#end_br').hide();
 	$('#trade_br').hide();
-	get_state(() => {turn_order = state.turn[1];});
-	if (order == turn_order) {
-		$('#p1_text').show();
-		$('#static_info').hide();
-		$('#roll').show();
-		$('#dev').show();
-		$('#turn_player').text('YOUR');
-		$('#roll_br').show();
-		$('#dev_br').show();
-	}
-	else {
-		get_state(() => {$('#turn_player').text(state["players"][turn_order]["name"]);});
-	}
+	get_state(get_turn);
 	get_state(static_refresh);
+	get_notifications(player,notif_pop);
+	console.log(player);
 });
 
 $('#nav_arrow').on('click', () => {
