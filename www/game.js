@@ -2,6 +2,7 @@
 var player = '';
 var order;
 var turn_player = '';
+var turn_order;
 var static_refresh = function() {
 	$('#brick_amt').text(state["players"][order]["resources"]["Brick"]);
 	$('#wool_amt').text(state["players"][order]["resources"]["Wool"]);
@@ -13,7 +14,6 @@ $(document).ready( () => {
 	var torch = new URLSearchParams(window.location.search);
 	player = torch.get("pname");
 	order = torch.get("porder");
-	get_state();
 	$('#nav_menu').hide();
 	$('#error_pop').hide();
 	$('#trade_pop').hide();
@@ -48,8 +48,7 @@ $(document).ready( () => {
 	$('#maritime_br').hide();
 	$('#end_br').hide();
 	$('#trade_br').hide();
-	console.log(state);
-	var turn_order = state.turn[1];
+	get_state(() => {turn_order = state.turn[1];});
 	if (order == turn_order) {
 		$('#p1_text').show();
 		$('#static_info').hide();

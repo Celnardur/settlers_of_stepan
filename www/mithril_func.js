@@ -149,13 +149,13 @@ var maritime_trade = function() {
 }
 
 var state;
-var get_state = function() {
+var get_state = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/get_state",
 	})
 	.then(function(data) {
 		state = data;
-		console.log(state["turn"])
+		pass();
     })
 }
