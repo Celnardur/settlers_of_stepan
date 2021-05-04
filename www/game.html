@@ -75,7 +75,6 @@
 				...
 			</p>
 		</div>
-		<input type='button' class='butt' id='roll' value='Roll Dice'>
 		<span id='dice'>You rolled a <span style='font-size: 28px;'><b>7</b></span>. Move the robber!</span>
 		<span id='roll_br'><br/><br/></span>
 		<input type='button' class='butt' id='dev' value='View/Use Dev. Cards'>
@@ -87,7 +86,7 @@
 		<input type='button' class='butt' id='build_sett' value='Build Settlement...'>
 		<span id='sett_br'><br/><br/></span>
 		<input type='button' class='butt' id='buy_card' value='Buy Dev. Card...'>
-		<p id='buy_message'>You got a Victory Points card!</p>
+		<p id='buy_message'></p>
 		<span id='buy_br'><br/><br/></span>
 		<input type='button' class='butt' id='domestic' value='Propose Trade'>
 		<span id='domestic_br'><br/><br/></span>
@@ -137,14 +136,16 @@
 				Card type: <b><span class='knight_content'>Knight</span><span class='progress_content'>Progress</span><span class='victory_content'>Victory Point</span></b>
 				<span class='progress_content'>
 					<br/><br/>
-					Variety: <b>Monopoly</b>
+					Variety: <b class='monopoly_content'>Monopoly</b><b class='plenty_content'>Year of Plenty</b><b class='road_content'>Road Building</b>
 					<br/><br/>
+					<div class='monopoly_content'>
 					Resource:
 					<select>
 						<option>Wood</option>
 						<option>Brick</option>
 						<option>Wheat</option>
 					</select>
+					</div>
 				</span>
 			</div>
 			<img src='./x.png' width='10px' height='10px' id='x-close'>
@@ -152,6 +153,7 @@
 			<div id='prev_next'>
 				<input type='button' class='butt' id='prev_card' value='◄'>
 				<input type='button' class='butt' id='next_card' value='►'>
+				Card <span id="card_num">X</span>
 			</div>
 			<input type='button' class='butt' id='use' value='Use Card'>
 		</div>

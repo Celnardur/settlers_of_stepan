@@ -1,7 +1,10 @@
 //game.js
+//****************
 //DECLARATIONS & FUNCTIONS
 var player = '';
 var order;
+var num;
+var length;
 var longest_rd_ck = function() {
 	var long_player = 'Nobody';
 	var length = 0;
@@ -47,7 +50,6 @@ var get_turn = function() {
 	if (order == turn_order) {
 		$('#p1_text').show();
 		$('#static_info').hide();
-		$('#roll').show();
 		$('#dev').show();
 		$('#turn_player').text('YOUR');
 		$('#roll_br').show();
@@ -56,7 +58,101 @@ var get_turn = function() {
 	else {
 		get_state(() => {$('#turn_player').text(state["players"][turn_order]["name"] + '\'s');});
 	}
+	if (round < 2) {
+		$('#dice').hide();
+		$('#roll_br').hide();
+		$('#to_trade').hide();
+		$('#trade_br').hide();
+		$('#p1_text').hide();
+		$('#domestic').hide();
+		$('#domestic_br').hide();
+		$('#maritime').hide();
+		$('#maritime_br').hide();
+		$('#to_build').hide();
+		$('#p2_text').hide();
+		$('#p3_text').show();
+		$('#end').show();
+		$('#end_br').show();
+		$('#build_road').show();
+		$('#road_br').show();
+		$('#build_city').show();
+		$('#city_br').show();
+		$('#build_sett').show();
+		$('#sett_br').show();
+		$('#buy_card').show();
+		$('#buy_br').show();
+		window.scrollTo(0,0);
+	}
 }
+var get_dev = function() {
+	console.log("num = " + num);
+	length = state["players"][order]["developments"].length
+	console.log(length + " cards present");
+	var card = state["players"][order]["developments"][num]; //change num
+	$('#card_num').text((num + 1));
+	console.log(num + " card is: " + card);
+	if (card == "vp") {
+		$(".progress_content").hide();
+		$(".victory_content").show();
+		$(".knight_content").hide();
+		$(".monopoly_content").hide();
+		$(".plenty_content").hide();
+		$(".road_content").hide();
+	}
+	else if (card == "knight") {
+		$(".progress_content").hide();
+		$(".victory_content").hide();
+		$(".knight_content").show();
+		$(".monopoly_content").hide();
+		$(".plenty_content").hide();
+		$(".road_content").hide();
+	}
+	else if (card == "monopoly") {
+		$(".progress_content").show();
+		$(".victory_content").hide();
+		$(".knight_content").hide();
+		$(".monopoly_content").show();
+		$(".plenty_content").hide();
+		$(".road_content").hide();
+	}
+	else if (card == "plenty") {
+		$(".progress_content").show();
+		$(".victory_content").hide();
+		$(".knight_content").hide();
+		$(".monopoly_content").hide();
+		$(".plenty_content").show();
+		$(".road_content").hide();
+	}
+	else if (card == "road") {
+		$(".progress_content").show();
+		$(".victory_content").hide();
+		$(".knight_content").hide();
+		$(".monopoly_content").hide();
+		$(".plenty_content").hide();
+		$(".road_content").show();
+	}
+}
+var get_drawn = function() {
+	length = state["players"][order]["dev_queue"].length;
+	var card = state["players"][order]["dev_queue"][length];
+	if (card == 'vp') {
+		var name = "Victory Point";
+	}
+	else if (card == 'knight') {
+		var name = "Knight";
+	}
+	else if (card == 'monopoly') {
+		var name = "Monopoly";
+	}
+	else if (card == 'plenty') {
+		var name = "Year of Plenty";
+	}
+	else if (card == 'road') {
+		var name = "Road Building";
+	}
+	$('#buy_message').text('You drew a ' + name + 'card!');
+}
+//*****************************
 //DOCUMENT
 $(document).ready( () => {
 	var torch = new URLSearchParams(window.location.search);
@@ -71,7 +167,6 @@ $(document).ready( () => {
 	$('#dev_pop').hide();
 	$('#domestic_pop').hide();
 	$('#maritime_pop').hide();
-	$('#roll').hide();
 	$('#dev').hide();
 	$('#build_road').hide();
 	$('#build_city').hide();
@@ -100,7 +195,10 @@ $(document).ready( () => {
 	get_state(get_turn);
 	get_state(static_refresh);
 	get_notifications(player,notif_pop);
-	console.log(player);
+	console.log(player + ', ' + order);
+	$('#dice').show();
+	$('#to_trade').show();
+	$('#trade_br').hide();
 });
 
 $('#nav_arrow').on('click', () => {
@@ -141,13 +239,6 @@ $('#robber_discard').on('click', () => {
 	$('#rob_discard_pop').hide();
 });
 
-$('#roll').on('click', () => {
-	$('#dice').show();
-	$('#roll').hide();
-	$('#to_trade').show();
-	$('#trade_br').hide();
-});
-
 // $('#steal_test').on('click', () => {
 	// $('#rob_steal_pop').show();
 // });
@@ -157,32 +248,37 @@ $('#robber_steal').on('click', () => {
 });
 
 $('#dev').on('click', () => {
+	num = 0;
 	$('#dev_pop').show();
-	$('.knight_content').show(); //TEMPORARY
-	$('.progress_content').hide();
-	$('.victory_content').hide();
+	get_state(get_dev);
 });
 
 $('#x-close').on('click', () => {
 	$('#dev_pop').hide();
 });
-
+// add buttons based on card type
 $('#prev_card').on('click', () => {
-	$('.knight_content').hide();
-	$('.progress_content').hide();
-	$('.victory_content').show();
+	if (num > 0) {
+		num = num - 1;
+	}
+	else {
+		num = length - 1;
+	}
+	get_state(get_dev);
 });
 
-$('#next_card').on('click', () => { //TEMPORARY
-	$('.knight_content').hide();
-	$('.progress_content').show();
-	$('.victory_content').hide();
+$('#next_card').on('click', () => {
+	if (num < length - 1) {
+		num = num + 1;
+	}
+	else {
+		num = 0;
+	}
+	get_state(get_dev);
 });
 
-$('#use').on('click', () => { //TEMPORARY
-	$('.knight_content').show();
-	$('.progress_content').hide();
-	$('.victory_content').hide();
+$('#use').on('click', () => {
+	//
 });
 
 $('#to_trade').on('click', () => {
@@ -241,6 +337,7 @@ $('#to_build').on('click', () => {
 
 $('#buy_card').on('click', () => {
 	draw_dev();
+	get_state(get_drawn);
 	$('#buy_message').show();
 });
 
