@@ -1,15 +1,45 @@
 //game.js
+//DECLARATIONS & FUNCTIONS
 var player = '';
 var order;
 var turn_player = '';
 var turn_order;
+var longest_rd_ck = function() {
+	var long_player = 'Nobody';
+	var length = 0;
+	for (p in state["players"]) {
+		if (p["longest_road"] > length) {
+			length = p["longest_road"];
+			long_player = p["name"];
+		}
+	}
+	var str = long_player + ' (' + length + ')';
+	$('#longest_p').text(str);
+}
+var largest_army_ck = function() {
+	var large_army = 'Nobody';
+	var size = 0;
+	for (p in state["players"]) {
+		if (p["army"] > size) {
+			size = p["army"];
+			large_army = p["name"];
+		}
+	}
+	var str = large_army + ' (' + size + ')';
+	$('#largest_p').text(str);
+}
 var static_refresh = function() {
 	$('#brick_amt').text(state["players"][order]["resources"]["Brick"]);
 	$('#wool_amt').text(state["players"][order]["resources"]["Wool"]);
 	$('#ore_amt').text(state["players"][order]["resources"]["Ore"]);
 	$('#lumber_amt').text(state["players"][order]["resources"]["Lumber"]);
 	$('#grain_amt').text(state["players"][order]["resources"]["Grain"]);
+	$('#point_total').text(state["players"][order]["victory_points"]);
+	longest_rd_ck();
+	largest_army_ck();
 }
+
+//DOCUMENT
 $(document).ready( () => {
 	var torch = new URLSearchParams(window.location.search);
 	player = torch.get("pname");
@@ -59,9 +89,9 @@ $(document).ready( () => {
 		$('#dev_br').show();
 	}
 	else {
-		$('#turn_player').text(state["players"][turn_order]["name"]);
+		get_state(() => {$('#turn_player').text(state["players"][turn_order]["name"]);});
 	}
-	static_refresh();
+	get_state(static_refresh);
 });
 
 $('#nav_arrow').on('click', () => {
