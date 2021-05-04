@@ -6,6 +6,9 @@ def play_knight(state, notifications, name, to, victim):
     if state['move_robber'] != -1:
         return (400, "The robber must be moved before you can Play a knight")
 
+    if state['card_played']:
+        return (400, "Cannot play two dev cards per turn")
+
     order = player.find_player(state, name)
     if order == -1:
         return (400, "Player with that name does not exist")
@@ -25,11 +28,17 @@ def play_knight(state, notifications, name, to, victim):
     (code, message) = resources.move_robber(state, notifications, name, to, victim)
     if code != 200:
         return (400, message)
-    return (200, "Knight Played")
+
+    actor['developments'].remove('knight')
+    state['card_played'] = True
+    return (200, message)
 
 def play_build_road(state, name, one, two):
     if state['move_robber'] != -1:
         return (400, "The robber must be moved before you can Play a Card")
+
+    if state['card_played']:
+        return (400, "Cannot play two dev cards per turn")
 
     order = player.find_player(state, name)
     if order == -1:
@@ -61,11 +70,16 @@ def play_build_road(state, name, one, two):
         actor['resources']['Lumber'] -= 1
         return (400, message)
 
+    actor['developments'].remove('road')
+    state['card_played'] = True
     return (200, "Roads built")
 
 def play_year_of_plenty(state, name, one, two):
     if state['move_robber'] != -1:
         return (400, "The robber must be moved before you can Play a Card")
+
+    if state['card_played']:
+        return (400, "Cannot play two dev cards per turn")
 
     order = player.find_player(state, name)
     if order == -1:
@@ -87,11 +101,16 @@ def play_year_of_plenty(state, name, one, two):
 
     actor['resources'][one] += 1
     actor['resources'][two] += 1
+    actor['developments'].remove('plenty')
+    state['card_played'] = True
     return (200, "Resources have been given")
 
 def play_monopoly(state, notifications, name, resource):
     if state['move_robber'] != -1:
         return (400, "The robber must be moved before you can Play a Card")
+
+    if state['card_played']:
+        return (400, "Cannot play two dev cards per turn")
 
     order = player.find_player(state, name)
     if order == -1:
@@ -105,8 +124,8 @@ def play_monopoly(state, notifications, name, resource):
 
     actor = state['players'][order]
     
-    if 'plenty' not in actor['developments']:
-        return (400, "Player doesn't have a Year of Plenty card")
+    if 'monopoly' not in actor['developments']:
+        return (400, "Player doesn't have a Monoopoly card")
 
     for person in state['players']:
         if person['taxes_due']:
@@ -128,6 +147,8 @@ def play_monopoly(state, notifications, name, resource):
             })
 
 
+    actor['developments'].remove('monopoly')
+    state['card_played'] = True
     return (200, actor['resources'][resource])
 
 

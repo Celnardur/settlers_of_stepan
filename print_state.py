@@ -143,9 +143,15 @@ def print_player(layout, player, line, col):
         c += 3
 
     l += 1
+    devs = {'k':0,'v':0,'r':0,'p':0,'m':0}
+    for dev in player['developments']:
+        devs[dev[0]] += 1
+
     add_str(layout, "Dev: ", l, col)
-    for i, dev in enumerate(player['developments']):
-        add_str(layout, dev[0], l, col +5 + i*2)
+    c = col + 5
+    for key, value in devs.items():
+        add_str(layout, key + str(value), l, c)
+        c += 3
 
     l += 1
     add_str(layout, "Army: " + str(player['army']), l, col)

@@ -33,6 +33,7 @@ def init(path='./state.json'):
     else:
         set_state('./defaults/default_state.json')
         save_state(save_path)
+    random.seed()
 
 def process(path, args):
     global state
@@ -191,6 +192,48 @@ def process(path, args):
         if not 'trade' in args:
             return (400, "Must propose a trade")
         (code, message) = trade.reject_trade(state, notifications, args['name'], args['trade'])
+        save_state(save_path)
+
+    elif path == '/play_knight':
+        if not 'name' in args:
+            return (400, "Player needs a name")
+        if not 'to' in args:
+            return (400, "Need a position to move robber to")
+        if not 'victim' in args:
+            return (400, "Need a victim to steal resource from")
+        name = args['name']
+        to = args['to']
+        victim = args['victim']
+        (code, message) = development.play_knight(state, notifications, name, to, victim)
+        save_state(save_path)
+
+    elif path == '/play_build_road':
+        if not 'name' in args:
+            return (400, "Player needs a name")
+        if not 'one' in args or not 'two' in args:
+            return (400, "Need two positions to build roads")
+        (code, message) = development.play_build_road(state, args['name'], args['one'], args['two'])
+        save_state(save_path)
+
+    elif path == '/play_year_of_plenty':
+        if not 'name' in args:
+            return (400, "Player needs a name")
+        if not 'one' in args or not 'two' in args:
+            return (400, "Need two resources for year of plenty")
+        name = args['name']
+        one = args['one']
+        two = args['two']
+        (code, message) = development.play_year_of_plenty(state, name, one, two)
+        save_state(save_path)
+
+    elif path == '/play_monopoly':
+        if not 'name' in args:
+            return (400, "Player needs a name")
+        if not 'resource' in args:
+            return (400, "Need a resources to have a monopoly")
+        name = args['name']
+        resource = args['resource']
+        (code, message) = development.play_monopoly(state, notifications, name, resource)
         save_state(save_path)
 
     elif path == '/test_led_strip':
