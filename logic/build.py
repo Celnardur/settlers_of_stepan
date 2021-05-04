@@ -191,7 +191,7 @@ def draw_dev(state, name):
         return (400, "Player does not have enough resources to draw development")
 
     dev = state['developments'].pop()
-    state['players'][order]['developments'].append(dev)
+    state['players'][order]['dev_queue'].append(dev)
 
     return (200, dev)
 

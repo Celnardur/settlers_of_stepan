@@ -71,6 +71,8 @@ def cheat(args):
         resources.strip_resources(api.state)
     elif args[0] == 'ft':
         resources.force_turn(api.state)
+    elif args[0] == 'dd':
+        api.state['players'][int(args[1])]['developments'].append(args[2])
 
     return process_command('print')
 

@@ -61,6 +61,10 @@ def end_turn(state, notifications, name):
         
         return (200, "Advanced Turn")
 
+    # move dev_queue into development
+    for dev in state['players'][state['turn'][1]]['dev_queue']:
+        state['players'][state['turn'][1]]['developments'].append(dev)
+
     # advance turn counter
     if state['turn'][1] == len(state['players']) - 1:
         state['turn'] = [state['turn'][0] + 1, 0]

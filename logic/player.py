@@ -32,6 +32,7 @@ def add_player(state, name, color, order):
         "settlements": [],
         "cities": [],
         "developments": [],
+        "dev_queue": [], # development cards you just drew and can't play
         "resources": {'Brick': 0, 'Lumber': 0, 'Ore': 0, 'Grain': 0, 'Wool': 0},
         "name": name,
         "color": color,
