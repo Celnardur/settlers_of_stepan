@@ -5,6 +5,7 @@ from logic import player
 from logic import build
 from logic import resources
 from logic import trade
+from logic import development
 from output import led_strip
 from output import gpio
 from output import seven_segment
