@@ -96,7 +96,7 @@ $('#reset_deny').on('click', () => {
 });
 
 $('#ready').on('click', () => {
-	player_ready();
+	//player_ready(); FIX THIS
 	var torch = new URLSearchParams();
 	torch.append("pname",player);
 	torch.append("porder",order);

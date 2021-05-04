@@ -13,8 +13,6 @@ $(document).ready( () => {
 	var torch = new URLSearchParams(window.location.search);
 	player = torch.get("pname");
 	order = torch.get("porder");
-	console.log(player);
-	console.log(order); // REMOVE
 	get_state();
 	$('#nav_menu').hide();
 	$('#error_pop').hide();
@@ -50,7 +48,8 @@ $(document).ready( () => {
 	$('#maritime_br').hide();
 	$('#end_br').hide();
 	$('#trade_br').hide();
-	var turn_order = state["turn"][1];
+	console.log(state);
+	var turn_order = state.turn[1];
 	if (order == turn_order) {
 		$('#p1_text').show();
 		$('#static_info').hide();

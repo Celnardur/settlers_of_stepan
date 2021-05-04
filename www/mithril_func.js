@@ -1,7 +1,6 @@
 //mithril_func.js
 var player = '';
 var order;
-var state;
 var test;
 var test_server = function() {
     m.request({
@@ -133,7 +132,7 @@ var end_turn = function() {
 	})
 }
 
-//move_robber--not activated by GUI!
+// /api/move_robber--not activated by GUI!
 
 var pay_taxes = function() {
 	m.request({
@@ -149,6 +148,7 @@ var maritime_trade = function() {
 	})
 }
 
+var state;
 var get_state = function() {
 	m.request({
 		method: "PUT",
@@ -156,5 +156,6 @@ var get_state = function() {
 	})
 	.then(function(data) {
 		state = data;
+		console.log(state["turn"])
     })
 }
