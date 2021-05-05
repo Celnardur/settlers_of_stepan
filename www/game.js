@@ -458,6 +458,7 @@ $('#end').on('click', () => {
 	window.scrollTo(0,0);
 	get_state(static_refresh);
 	get_state(get_others);
+	get_state(get_turn);
 	get_state(() => {$('#turn_player').text(state["players"][turn_order]["name"] + '\'s');});
 	get_notifications(player,notif_pop);
 	console.log(player + ', ' + order);

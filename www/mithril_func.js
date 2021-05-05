@@ -113,6 +113,7 @@ var build_settlement = function() {
 	m.request({
 		method: "PUT",
 		url: "/api/build_settlement",
+		body: {name: player},
 	})
 }
 
@@ -120,6 +121,7 @@ var build_road = function() {
 	m.request({
 		method: "PUT",
 		url: "/api/build_road",
+		body: {name: player},
 	})
 }
 
@@ -127,6 +129,7 @@ var build_city = function() {
 	m.request({
 		method: "PUT",
 		url: "/api/build_city",
+		body: {name: player},
 	})
 }
 
@@ -141,6 +144,7 @@ var end_turn = function() {
 	m.request({
 		method: "PUT",
 		url: "/api/end_turn",
+		body: {name: player},
 	})
 }
 
