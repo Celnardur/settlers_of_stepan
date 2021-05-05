@@ -168,3 +168,35 @@ var get_state = function(pass) {
 		pass();
     })
 }
+
+var play_knight = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/play_knight",
+		body: {victim: knight_victim, name: player},
+	})
+}
+
+var play_monopoly = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/play_monopoly",
+		body: {resource: monopoly_res, name: player},
+	})
+}
+
+var play_year_of_plenty = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/play_year_of_plenty",
+		body: {name: player, one: plenty_one, two: plenty_two},
+	})
+}
+
+var play_build_road = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/play_build_road",
+		body: {name: player},
+	})
+}

@@ -5,6 +5,12 @@ var player = '';
 var order;
 var num;
 var length;
+var card;
+var others;
+var knight_victim;
+var monopoly_res;
+var plenty_one;
+var plenty_two;
 var longest_rd_ck = function() {
 	var long_player = 'Nobody';
 	var length = 0;
@@ -85,12 +91,9 @@ var get_turn = function() {
 	}
 }
 var get_dev = function() {
-	console.log("num = " + num);
 	length = state["players"][order]["developments"].length
-	console.log(length + " cards present");
-	var card = state["players"][order]["developments"][num]; //change num
+	card = state["players"][order]["developments"][num]; //change num
 	$('#card_num').text((num + 1));
-	console.log(num + " card is: " + card);
 	if (card == "vp") {
 		$(".progress_content").hide();
 		$(".victory_content").show();
@@ -98,6 +101,8 @@ var get_dev = function() {
 		$(".monopoly_content").hide();
 		$(".plenty_content").hide();
 		$(".road_content").hide();
+		$("#use").hide();
+		$("#knight_sel").remove();
 	}
 	else if (card == "knight") {
 		$(".progress_content").hide();
@@ -106,6 +111,14 @@ var get_dev = function() {
 		$(".monopoly_content").hide();
 		$(".plenty_content").hide();
 		$(".road_content").hide();
+		$("#use").show();
+		var knight_sel_text = '';
+		for (p in others) {
+			var opt = '<option>' + others[p] + '</option>';
+			knight_sel_text = knight_sel_text.concat(opt);
+		}
+		var knight_sel = '<br/><select id=\'knight_sel\'>' + knight_sel_text + '</select>';
+		$("#pre_knight_sel").after(knight_sel);
 	}
 	else if (card == "monopoly") {
 		$(".progress_content").show();
@@ -114,6 +127,8 @@ var get_dev = function() {
 		$(".monopoly_content").show();
 		$(".plenty_content").hide();
 		$(".road_content").hide();
+		$("#use").show();
+		$("#knight_sel").remove();
 	}
 	else if (card == "plenty") {
 		$(".progress_content").show();
@@ -122,6 +137,8 @@ var get_dev = function() {
 		$(".monopoly_content").hide();
 		$(".plenty_content").show();
 		$(".road_content").hide();
+		$("#use").show();
+		$("#knight_sel").remove();
 	}
 	else if (card == "road") {
 		$(".progress_content").show();
@@ -130,11 +147,13 @@ var get_dev = function() {
 		$(".monopoly_content").hide();
 		$(".plenty_content").hide();
 		$(".road_content").show();
+		$("#use").show();
+		$("#knight_sel").remove();
 	}
 }
 var get_drawn = function() {
 	length = state["players"][order]["dev_queue"].length;
-	var card = state["players"][order]["dev_queue"][length];
+	card = state["players"][order]["dev_queue"][length];
 	if (card == 'vp') {
 		var name = "Victory Point";
 	}
@@ -151,6 +170,33 @@ var get_drawn = function() {
 		var name = "Road Building";
 	}
 	$('#buy_message').text('You drew a ' + name + 'card!');
+}
+var use_card = function() {
+	if (card == 'knight') {
+		knight_victim = $('#knight_sel').val();
+		play_knight();
+	}
+	else if (card == 'monopoly') {
+		monopoly_res = $('#monopoly_sel').val();
+		play_monopoly();
+	}
+	else if (card == 'plenty') {
+		plenty_one = $('#plenty_1').val();
+		plenty_two = $('#plenty_2').val();
+		play_year_of_plenty();
+	}
+	else if (card == 'road') {
+		play_build_road();
+	}
+	$('#dev_pop').hide();
+}
+var get_others = function() {
+	others = [];
+	for (p in state["players"]) {
+		if (state["players"][p]["name"] != player) {
+			others.push(state["players"][p]["name"]);
+		}
+	}
 }
 //*****************************
 //DOCUMENT
@@ -194,6 +240,7 @@ $(document).ready( () => {
 	$('#trade_br').hide();
 	get_state(get_turn);
 	get_state(static_refresh);
+	get_state(get_others);
 	get_notifications(player,notif_pop);
 	console.log(player + ', ' + order);
 	$('#dice').show();
@@ -278,7 +325,7 @@ $('#next_card').on('click', () => {
 });
 
 $('#use').on('click', () => {
-	//
+	get_state(use_card);
 });
 
 $('#to_trade').on('click', () => {

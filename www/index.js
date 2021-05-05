@@ -2,6 +2,7 @@
 //DON'T SHOW/HIDE/DO THINGS IF THERE'S AN ERROR, OR FORCE GOING BACK IN THE ERROR POP-UP
 var color_RGB;
 $(document).ready( () => {
+	$('#error_pop').hide();
 	$('#notif_pop').hide();
 	$('#nav_menu').hide();
 	$('#players').hide();
@@ -9,6 +10,10 @@ $(document).ready( () => {
 	$('#ready').hide();
 	$('#color_panel').hide();
 	//$('#reset').hide(); TURN THIS BACK ON
+});
+
+$('#notif_accept').on('click', () => {
+	$('#notif_pop').hide();
 });
 
 $('#nav_arrow').on('click', () => {
