@@ -7,6 +7,8 @@ import sys
 import json
 from logic import build
 from logic import resources
+from output import process
+from output import gpio
 
 def scmd(args):
     script = []
@@ -73,7 +75,12 @@ def cheat(args):
         resources.force_turn(api.state)
     elif args[0] == 'dd':
         api.state['players'][int(args[1])]['developments'].append(args[2])
+    elif args[0] == 'to':
+        process.process(api.state)
+    elif args[0] == 'gr':
+        print(gpio.wait_road(api.state))
 
+        
     return process_command('print')
 
 def process_command(command):

@@ -6,6 +6,7 @@ import os
 import mimetypes
 import sys
 import api
+from output import process
 
 bufsize = 4096
 base_path = "./www"
@@ -78,7 +79,6 @@ class server(BaseHTTPRequestHandler):
                 (code, body) = api.process(url[0][4:], payload)
                 if code == 200:
                     api.get_notifications(url[0][4:], payload)
-                    #output.process(url[0][4:], payload)
             except:
                 self.code_response(500, b'Internal Server Error')
                 return

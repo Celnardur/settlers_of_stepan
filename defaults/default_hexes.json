@@ -4,133 +4,133 @@
         "settlements": [0, 4, 8, 12, 7, 3],
         "tile_type": "Mountains",
         "roll_number": 10,
-        "address": 8
+        "address": 1
     },
     {
         "roads": [4, 63, 10, 11, 62, 3],
         "settlements": [1, 5, 9, 13, 8, 4],
         "tile_type": "Pasture",
         "roll_number": 2,
-        "address": 9
+        "address": 2
     },
     {
         "roads": [6, 7, 8, 9, 63, 5],
         "settlements": [2, 6, 10, 14, 9, 5],
         "tile_type": "Forest",
         "roll_number": 9,
-        "address": 10 
+        "address": 3 
     },
     {
         "roads": [13, 54, 17, 16, 15, 14],
         "settlements": [7, 12, 17, 22, 16, 11],
         "tile_type": "Fields",
         "roll_number": 12,
-        "address": 11
+        "address": 4
     },
     {
         "roads": [11, 61, 19, 18, 54, 12],
         "settlements": [8, 13, 18, 23, 17, 12],
         "tile_type": "Hills",
         "roll_number": 6,
-        "address": 12 
+        "address": 5 
     },
     {
         "roads": [9, 64, 21, 20, 61, 10],
         "settlements": [9, 14, 19, 24, 18, 13],
         "tile_type": "Pasture",
         "roll_number": 4,
-        "address": 13 
+        "address": 6 
     },
     {
         "roads": [71, 70, 23, 22, 64, 8],
         "settlements": [10, 15, 20, 25, 19, 14],
         "tile_type": "Hills",
         "roll_number": 10,
-        "address": 14
+        "address": 7
     },
     {
         "roads": [16, 55, 34, 51, 52, 53],
         "settlements": [16, 22, 28, 33, 27, 21],
         "tile_type": "Fields",
         "roll_number": 9,
-        "address": 15
+        "address": 8
     },
     {
         "roads": [18, 60, 32, 33, 55, 17],
         "settlements": [17, 23, 29, 34, 28, 22],
         "tile_type": "Forest",
         "roll_number": 11,
-        "address": 16
+        "address": 9
     },
     {
         "roads": [20, 65, 30, 31, 60, 19],
         "settlements": [18, 24, 30, 35, 29, 23],
         "tile_type": "Desert",
         "roll_number": -1,
-        "address": 17
+        "address": 10 
     },
     {
         "roads": [22, 69, 28, 29, 65, 21],
         "settlements": [19, 25, 31, 36, 30, 24],
         "tile_type": "Forest",
         "roll_number": 3,
-        "address": 18
+        "address": 11
     },
     {
         "roads": [24, 25, 26, 27, 69, 23],
         "settlements": [20, 26, 32, 37, 31, 25],
         "tile_type": "Mountains",
         "roll_number": 8,
-        "address": 19
+        "address": 12
     },
     {
         "roads": [33, 56, 37, 36, 35, 34],
         "settlements": [28, 34, 39, 43, 38, 33],
         "tile_type": "Forest",
         "roll_number": 8,
-        "address": 20
+        "address": 13
     },
     {
         "roads": [31, 59, 39, 38, 56, 32],
         "settlements": [29, 35, 40, 44, 39, 34],
         "tile_type": "Mountains",
         "roll_number": 3,
-        "address": 21
+        "address": 14
     },
     {
         "roads": [29, 66, 41, 40, 59, 30],
         "settlements": [30, 36, 41, 45, 40, 35],
         "tile_type": "Fields",
         "roll_number": 4,
-        "address": 22
+        "address": 15
     },
     {
         "roads": [27, 68, 67, 42, 66, 28],
         "settlements": [31, 37, 42, 46, 41, 36],
         "tile_type": "Pasture",
         "roll_number": 5,
-        "address": 23
+        "address": 16
     },
     {
         "roads": [38, 57, 48, 49, 50, 37],
         "settlements": [39, 44, 48, 51, 47, 43],
         "tile_type": "Hills",
         "roll_number": 5,
-        "address": 24
+        "address": 17
     },
     {
         "roads": [40, 58, 46, 47, 57, 39],
         "settlements": [40, 45, 49, 52, 48, 44],
         "tile_type": "Fields",
         "roll_number": 6,
-        "address": 25
+        "address": 18
     },
     {
         "roads": [42, 43, 44, 45, 58, 41],
         "settlements": [41, 46, 50, 53, 49, 45],
         "tile_type": "Pasture",
         "roll_number": 11,
-        "address": 26
+        "address": 19
     }
 ]
 
