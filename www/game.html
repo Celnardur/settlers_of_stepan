@@ -173,7 +173,7 @@
 					</div>
 				</span>
 			</div>
-			<img src='./x.png' width='10px' height='10px' id='x-close'>
+			<img src='./x.png' width='10px' height='10px' class='x-close'>
 			<br/>
 			<div id='prev_next'>
 				<input type='button' class='butt' id='prev_card' value='◄'>
@@ -186,75 +186,53 @@
 			<p id='trade_message'>
 				Domestic Trade. What terms have you agreed on?
 			</p>
-			Trade with: <select>
-				<option>Kyle</option>
-				<option>Sarah</option>
-				<option>Prof. Schafer</option>
-			</select>
+			<span id="pre_domestic_sel">Trade with:</span>
 			<br/><br/>
-			You give them: <select>
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-			</select>
-			<select>
+			You give them: <input type='number' min="1" max="100" id='give_qty'>
+			<select id='dom_res_give'>
 				<option>Brick</option>
-				<option>Road</option>
-				<option>Wood</option>
-				<option>Wheat</option>
+				<option>Ore</option>
+				<option>Lumber</option>
+				<option>Grain</option>
 				<option>Wool</option>
-			</select>
+			</select id='dom_res_rec'>
 			<br/><br/>
-			They give you: <select>
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-			</select>
+			They give you: <input type='number' min="1" max="100" id='rec_qty'>
 			<select>
 				<option>Brick</option>
-				<option>Road</option>
-				<option>Wood</option>
-				<option>Wheat</option>
+				<option>Ore</option>
+				<option>Lumber</option>
+				<option>Grain</option>
 				<option>Wool</option>
 			</select>
 			<br/><br/>
 			<center><input type='button' class='butt' id='domestic_submit' value='Trade!'></center>
+			<img src='./x.png' width='10px' height='10px' class='x-close'>
 		</div>
 		<div id='maritime_pop'>
 			<p id='trade_message'>
 				Maritime Trade.<br/>You have chosen a <b>Generic Harbor (3:1)</b>.
 			</p>
-			You trade: <select>
-				<option>3</option>
-				<option>6</option>
-				<option>9</option>
-			</select>
-			<select>
+			You trade: <input type='number' min='1' max='100' id='mari_give_qty'>
+			<select id='mari_give_res'>
 				<option>Brick</option>
-				<option>Road</option>
-				<option>Wood</option>
-				<option>Wheat</option>
+				<option>Ore</option>
+				<option>Lumber</option>
+				<option>Grain</option>
 				<option>Wool</option>
 			</select>
 			<br/><br/>
-			For: <select>
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-			</select>
-			<select>
+			For: <input type='number' min='1' max='100' id='mari_rec_qty'>
+			<select id='mari_rec_res'>
 				<option>Brick</option>
-				<option>Road</option>
-				<option>Wood</option>
-				<option>Wheat</option>
+				<option>Ore</option>
+				<option>Lumber</option>
+				<option>Grain</option>
 				<option>Wool</option>
 			</select>
 			<br/><br/>
 			<center><input type='button' class='butt' id='maritime_submit' value='Trade!'></center>
+			<img src='./x.png' width='10px' height='10px' class='x-close'>
 		</div>
 		<script src='./jquery.min.js'></script> <! library>
 		<script src='./mithril.js'></script> <! AJAX/JSON library>

@@ -11,12 +11,21 @@ var knight_victim;
 var monopoly_res;
 var plenty_one;
 var plenty_two;
+var give_qty;
+var rec_qty;
+var dom_to;
+var give_res;
+var rec_res;
+var mari_give_qty;
+var mari_rec_qty;
+var mari_give_res;
+var mari_rec_res;
 var longest_rd_ck = function() {
 	var long_player = 'Nobody';
 	var length = 0;
 	for (p in state["players"]) {
-		if (state["players"][p]["longest_road"] > length) {
-			length = state["players"][p]["longest_road"];
+		if (state["players"][p]["roads"].length > length) {
+			length = state["players"][p]["roads"].length;
 			long_player = state["players"][p]["name"];
 		}
 	}
@@ -55,43 +64,52 @@ var get_turn = function() {
 	console.log("round " + round + " turn " + turn_order);
 	if (order == turn_order) {
 		$('#p1_text').show();
-		$('#static_info').hide();
 		$('#dev').show();
 		$('#turn_player').text('YOUR');
 		$('#roll_br').show();
 		$('#dev_br').show();
+		$('#to_trade').show();
+		if (round < 2) {
+			$('#dice').hide();
+			$('#roll_br').hide();
+			$('#to_trade').hide();
+			$('#trade_br').hide();
+			$('#p1_text').hide();
+			$('#domestic').hide();
+			$('#domestic_br').hide();
+			$('#maritime').hide();
+			$('#maritime_br').hide();
+			$('#to_build').hide();
+			$('#p2_text').hide();
+			$('#p3_text').show();
+			$('#end').show();
+			$('#end_br').show();
+			$('#build_road').show();
+			$('#road_br').show();
+			$('#build_city').show();
+			$('#city_br').show();
+			$('#build_sett').show();
+			$('#sett_br').show();
+			$('#buy_card').show();
+			$('#buy_br').show();
+			window.scrollTo(0,0);
+		}
 	}
 	else {
 		get_state(() => {$('#turn_player').text(state["players"][turn_order]["name"] + '\'s');});
 	}
-	if (round < 2) {
-		$('#dice').hide();
-		$('#roll_br').hide();
-		$('#to_trade').hide();
-		$('#trade_br').hide();
-		$('#p1_text').hide();
-		$('#domestic').hide();
-		$('#domestic_br').hide();
-		$('#maritime').hide();
-		$('#maritime_br').hide();
-		$('#to_build').hide();
-		$('#p2_text').hide();
-		$('#p3_text').show();
-		$('#end').show();
-		$('#end_br').show();
-		$('#build_road').show();
-		$('#road_br').show();
-		$('#build_city').show();
-		$('#city_br').show();
-		$('#build_sett').show();
-		$('#sett_br').show();
-		$('#buy_card').show();
-		$('#buy_br').show();
-		window.scrollTo(0,0);
-	}
+	get_notifications(player,notif_pop);
 }
 var get_dev = function() {
 	length = state["players"][order]["developments"].length
+	if (length == 0) {
+		$('#dev_pop').hide();
+		$('#notif_pop').show();
+		$('#notif_message').text("You have no development cards.");
+	}
+	else {
+		$('#dev_pop').show();
+	}
 	card = state["players"][order]["developments"][num]; //change num
 	$('#card_num').text((num + 1));
 	if (card == "vp") {
@@ -213,7 +231,6 @@ $(document).ready( () => {
 	$('#dev_pop').hide();
 	$('#domestic_pop').hide();
 	$('#maritime_pop').hide();
-	$('#dev').hide();
 	$('#build_road').hide();
 	$('#build_city').hide();
 	$('#build_sett').hide();
@@ -243,14 +260,15 @@ $(document).ready( () => {
 	get_state(get_others);
 	get_notifications(player,notif_pop);
 	console.log(player + ', ' + order);
-	$('#dice').show();
-	$('#to_trade').show();
-	$('#trade_br').hide();
 });
 
 $('#nav_arrow').on('click', () => {
 	$('#nav_arrow').toggleClass('rotate');
 	$('#nav_menu').slideToggle(150);
+});
+
+$('#notif_accept').on('click', () => {
+	$('#notif_pop').hide();
 });
 
 // $('#turn_test').on('click', () => { //TEMPORARY
@@ -296,12 +314,16 @@ $('#robber_steal').on('click', () => {
 
 $('#dev').on('click', () => {
 	num = 0;
-	$('#dev_pop').show();
 	get_state(get_dev);
 });
 
-$('#x-close').on('click', () => {
+$('.x-close').on('click', () => {
 	$('#dev_pop').hide();
+	$('#domestic_pop').hide();
+	$('#maritime_pop').hide();
+	$('#error_pop').hide();
+	$('#notif_pop').hide();
+	$('#domestic_sel').remove();
 });
 // add buttons based on card type
 $('#prev_card').on('click', () => {
@@ -345,6 +367,13 @@ $('#to_trade').on('click', () => {
 });
 
 $('#domestic').on('click', () => {
+	var domestic_sel_text = '';
+	for (p in others) {
+		var opt = '<option>' + others[p] + '</option>';
+		domestic_sel_text = domestic_sel_text.concat(opt);
+	}
+	var domestic_sel = '<br/><select id=\'domestic_sel\'>' + domestic_sel_text + '</select>';
+	$("#pre_domestic_sel").after(domestic_sel);
 	$('#domestic_pop').show();
 });
 
@@ -353,10 +382,21 @@ $('#maritime').on('click', () => {
 });
 
 $('#domestic_submit').on('click', () => {
+	dom_to = $('#domestic_sel').val();
+	give_qty = $('#give_qty').val();
+	rec_qty = $('#rec_qty').val();
+	give_res = $('#dom_res_give').val();
+	rec_res = $('#dom_res_rec').val();
+	propose_trade();
 	$('#domestic_pop').hide();
 });
 
 $('#maritime_submit').on('click', () => {
+	mari_give_qty = $('#mari_give_qty').val();
+	mari_give_res = $('#mari_give_res').val();
+	mari_rec_qty = $('#mari_rec_qty').val();
+	mari_rec_res = $('#mari_rec_res').val();
+	console.log(mari_give_qty + mari_give_res + ' for ' + mari_rec_qty + mari_rec_res);
 	maritime_trade();
 	$('#maritime_pop').hide();
 });
@@ -383,7 +423,7 @@ $('#to_build').on('click', () => {
 });
 
 $('#buy_card').on('click', () => {
-	draw_dev();
+	get_state(draw_dev);
 	get_state(get_drawn);
 	$('#buy_message').show();
 });
@@ -401,8 +441,8 @@ $('#build_city').on('click', () => {
 });
 
 $('#end').on('click', () => {
+	end_turn();
 	$('#p3_text').hide();
-	$('#turn_player').text('Sarah\'s');
 	$('#build_road').hide();
 	$('#road_br').hide();
 	$('#build_city').hide();
@@ -413,9 +453,12 @@ $('#end').on('click', () => {
 	$('#buy_br').hide();
 	$('#end').hide();
 	$('#end_br').hide();
-	$('#dev').hide();
 	$('#dev_br').hide();
 	$('#buy_message').hide();
 	window.scrollTo(0,0);
-	end_turn();
+	get_state(static_refresh);
+	get_state(get_others);
+	get_state(() => {$('#turn_player').text(state["players"][turn_order]["name"] + '\'s');});
+	get_notifications(player,notif_pop);
+	console.log(player + ', ' + order);
 });

@@ -1,6 +1,11 @@
 //index.js
 //DON'T SHOW/HIDE/DO THINGS IF THERE'S AN ERROR, OR FORCE GOING BACK IN THE ERROR POP-UP
 var color_RGB;
+var notif_pop = function() {
+	$('#notif_pop').show();
+	$('#notif_message').text(JSON.stringify(notif));
+}
+//*********************
 $(document).ready( () => {
 	$('#error_pop').hide();
 	$('#notif_pop').hide();
@@ -45,6 +50,7 @@ $('#add').on('click', () => {
 	$('#list_name').text(player);
 	rgbString = 'rgb(' + color_RGB[0] + ',' + color_RGB[1] + ',' + color_RGB[2] + ')';
 	$('#color_block').css('color',rgbString);
+	get_notifications(player,notif_pop);
 });
 
 $('#x-marker').on('click', () => {
@@ -94,6 +100,7 @@ $('#reset_confirm').on('click', () => {
 	$('#add_section').show();
 	$('#reset').show();
 	$('#ready').hide();
+	get_notifications(player,notif_pop);
 });
 
 $('#reset_deny').on('click', () => {
@@ -107,4 +114,5 @@ $('#ready').on('click', () => {
 	torch.append("pname",player);
 	torch.append("porder",order);
 	$(location).attr('href','./game.html?' + torch.toString());
+	get_notifications(player,notif_pop);
 });

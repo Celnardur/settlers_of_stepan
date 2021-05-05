@@ -28,6 +28,9 @@ var get_notifications = function(player, pass) {
 			console.log(notif);
 			pass();
 		}
+		else {
+			console.log("No mail.");
+		}
 	})
 }
 
@@ -154,6 +157,7 @@ var maritime_trade = function() {
 	m.request({
 		method: "PUT",
 		url: "/api/maritime_trade",
+		body: {name: player, give: {mari_give_res: mari_give_qty}, get: {mari_rec_res: mari_rec_qty}}
 	})
 }
 
@@ -198,5 +202,13 @@ var play_build_road = function() {
 		method: "PUT",
 		url: "/api/play_build_road",
 		body: {name: player},
+	})
+}
+
+var propose_trade = function() {
+	m.request({
+		method: "PUT",
+		url: "/api/propose_trade",
+		body: {name: player, trade: {proposer: {name: player, give: {give_res: give_qty}}, approver: {name: dom_to, give: {rec_res: rec_qty}}}},
 	})
 }
