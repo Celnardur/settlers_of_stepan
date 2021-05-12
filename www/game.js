@@ -255,6 +255,7 @@ $(document).ready( () => {
 	$('#maritime_br').hide();
 	$('#end_br').hide();
 	$('#trade_br').hide();
+	$('#confirm').hide();
 	get_state(get_turn);
 	get_state(static_refresh);
 	get_state(get_others);
@@ -418,6 +419,27 @@ $('#build_road').on('click', () => {
 
 $('#build_city').on('click', () => {
 	build_city();
+});
+
+$('#reset').on('click', () => {
+	$('#confirm').show();
+	$('#reset').hide();
+	$('#players').hide();
+});
+
+$('#reset_confirm').on('click', () => {
+	new_game( () => {
+		$('#confirm').hide();
+		$('#add_section').show();
+		$('#reset').show();
+		$('#ready').hide();
+	});
+	get_notifications(player,notif_pop);
+});
+
+$('#reset_deny').on('click', () => {
+	$('#confirm').hide();
+	$('#reset').show();
 });
 
 $('#end').on('click', () => {

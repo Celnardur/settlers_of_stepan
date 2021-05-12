@@ -13,7 +13,6 @@ $(document).ready( () => {
 	$('#confirm').hide();
 	$('#ready').hide();
 	$('#color_panel').hide();
-	//$('#reset').hide(); TURN THIS BACK ON
 });
 
 $('#notif_accept').on('click', () => {
