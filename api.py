@@ -105,24 +105,33 @@ def process(path, args):
     elif path == '/build_settlement':
         if not 'name' in args:
             return (400, "Player needs a name")
-        if not 'pos' in args:
-            return (400, "Need a position for the settlement")
+        if not 'pos' in args or args['pos'] == None:
+            (code, inter) = wait_intersection(state)
+            if code != 200:
+                return (code, inter)
+            args['pos'] = inter
         (code, message) = build.build_settlement(state, args['name'], args['pos'])
         save_state(save_path)
 
     elif path == '/build_road':
         if not 'name' in args:
             return (400, "Player needs a name")
-        if not 'pos' in args:
-            return (400, "Need a position for the road")
+        if not 'pos' in args or args['pos'] == None:
+            (code, road) = wait_road(state)
+            if code != 200:
+                return (code, road)
+            args['pos'] = road
         (code, message) = build.build_road(state, args['name'], args['pos'])
         save_state(save_path)
 
     elif path == '/build_city':
         if not 'name' in args:
             return (400, "Player needs a name")
-        if not 'pos' in args:
-            return (400, "Need a position for the road")
+        if not 'pos' in args or args['pos'] == None:
+            (code, inter) = wait_intersection(state)
+            if code != 200:
+                return (code, inter)
+            args['pos'] = inter
         (code, message) = build.build_city(state, args['name'], args['pos'])
         save_state(save_path)
 
@@ -141,8 +150,11 @@ def process(path, args):
     elif path == '/move_robber':
         if not 'mover' in args:
             return (400, "Player who move robber must be given")
-        if not 'to' in args:
-            return (400, "Pos to move robber to must be given")
+        if not 'to' in args or args['to'] == None:
+            (code, to) = wait_tile(state)
+            if code != 200:
+                return (code, to)
+            args['to'] = to
         if not 'victim' in args:
             args['victim'] = None
 
@@ -197,8 +209,11 @@ def process(path, args):
     elif path == '/play_knight':
         if not 'name' in args:
             return (400, "Player needs a name")
-        if not 'to' in args:
-            return (400, "Need a position to move robber to")
+        if not 'to' in args or args['to'] == None:
+            (code, to) = wait_tile(state)
+            if code != 200:
+                return (code, to)
+            args['to'] = to
         if not 'victim' in args:
             return (400, "Need a victim to steal resource from")
         name = args['name']

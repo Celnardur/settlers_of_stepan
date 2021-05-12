@@ -7,8 +7,10 @@ import sys
 import json
 from logic import build
 from logic import resources
+from logic import vp
 from output import process
 from output import gpio
+from output import led_strip
 
 def scmd(args):
     script = []
@@ -77,8 +79,17 @@ def cheat(args):
         api.state['players'][int(args[1])]['developments'].append(args[2])
     elif args[0] == 'to':
         process.process(api.state)
+    elif args[0] == 'sa':
+        led_strip.startupAnimation()
     elif args[0] == 'gr':
         print(gpio.wait_road(api.state))
+    elif args[0] == 'gi':
+        print(gpio.wait_intersection(api.state))
+    elif args[0] == 'gt':
+        print(gpio.wait_tile(api.state))
+    
+    elif args[0] == 'flrf':
+        print(vp.find_longest_road_from(api.state, int(args[1]), int(args[2]), int(args[3])))
 
         
     return process_command('print')
