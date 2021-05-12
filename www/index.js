@@ -1,5 +1,4 @@
 //index.js
-//DON'T SHOW/HIDE/DO THINGS IF THERE'S AN ERROR, OR FORCE GOING BACK IN THE ERROR POP-UP
 var color_RGB;
 var notif_pop = function() {
 	$('#notif_pop').show();
@@ -95,7 +94,6 @@ $('#reset').on('click', () => {
 
 $('#reset_confirm').on('click', () => {
 	new_game();
-	//randomize_players();
 	$('#confirm').hide();
 	$('#add_section').show();
 	$('#reset').show();

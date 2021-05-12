@@ -110,7 +110,7 @@ var get_dev = function() {
 	else {
 		$('#dev_pop').show();
 	}
-	card = state["players"][order]["developments"][num]; //change num
+	card = state["players"][order]["developments"][num];
 	$('#card_num').text((num + 1));
 	if (card == "vp") {
 		$(".progress_content").hide();
@@ -271,21 +271,9 @@ $('#notif_accept').on('click', () => {
 	$('#notif_pop').hide();
 });
 
-// $('#turn_test').on('click', () => { //TEMPORARY
-	
-// });
-
-// $('#error_test').on('click', () => {
-	// $('#error_pop').show();
-// });
-
 $('#error_accept').on('click', () => {
 	$('#error_pop').hide();
 });
-
-// $('#trade_test').on('click', () => {
-	// $('#trade_pop').show();
-// });
 
 $('#trade_accept').on('click', () => {
 	$('#trade_pop').hide();
@@ -295,18 +283,9 @@ $('#trade_decline').on('click', () => {
 	$('#trade_pop').hide();
 });
 
-// $('#robber_test').on('click', () => {
-	// $('#rob_discard_pop').show();
-	// pay_taxes();
-// });
-
 $('#robber_discard').on('click', () => {
 	$('#rob_discard_pop').hide();
 });
-
-// $('#steal_test').on('click', () => {
-	// $('#rob_steal_pop').show();
-// });
 
 $('#robber_steal').on('click', () => {
 	$('#rob_steal_pop').hide();
@@ -325,7 +304,7 @@ $('.x-close').on('click', () => {
 	$('#notif_pop').hide();
 	$('#domestic_sel').remove();
 });
-// add buttons based on card type
+
 $('#prev_card').on('click', () => {
 	if (num > 0) {
 		num = num - 1;

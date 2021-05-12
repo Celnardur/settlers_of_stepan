@@ -1,6 +1,19 @@
 //debug.js
+//FUNCTIONS & DECLARATIONS
+var players;
+var get_things = function() {
+	players = state["players"];
+	//what else?
+	
+	for (p in players) {
+		//
+	}
+}
+
+// DOCUMENT
 $(document).ready( () => {
 	$('#nav_menu').hide();
+	get_state(get_things);
 });
 
 $('#nav_arrow').on('click', () => {
@@ -14,7 +27,6 @@ $('#strip_test').on('click', () => {
 
 $('#button_test').on('click', () => {
 	test_button_input();
-//	$('#button_byte').text(butt_byte);
 });
 
 $('#seven_test').on('click', () => {
