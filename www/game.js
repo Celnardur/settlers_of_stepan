@@ -270,31 +270,45 @@ $('#nav_arrow').on('click', () => {
 
 $('#notif_accept').on('click', () => {
 	$('#notif_pop').hide();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#error_accept').on('click', () => {
 	$('#error_pop').hide();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#trade_accept').on('click', () => {
 	$('#trade_pop').hide();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#trade_decline').on('click', () => {
 	$('#trade_pop').hide();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#robber_discard').on('click', () => {
 	$('#rob_discard_pop').hide();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#robber_steal').on('click', () => {
 	$('#rob_steal_pop').hide();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#dev').on('click', () => {
 	num = 0;
 	get_state(get_dev);
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('.x-close').on('click', () => {
@@ -304,6 +318,8 @@ $('.x-close').on('click', () => {
 	$('#error_pop').hide();
 	$('#notif_pop').hide();
 	$('#domestic_sel').remove();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#prev_card').on('click', () => {
@@ -314,6 +330,8 @@ $('#prev_card').on('click', () => {
 		num = length - 1;
 	}
 	get_state(get_dev);
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#next_card').on('click', () => {
@@ -324,10 +342,14 @@ $('#next_card').on('click', () => {
 		num = 0;
 	}
 	get_state(get_dev);
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#use').on('click', () => {
 	get_state(use_card);
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#to_trade').on('click', () => {
@@ -343,6 +365,8 @@ $('#to_trade').on('click', () => {
 	$('#to_build').show();
 	$('#p1_text').hide();
 	$('#p2_text').show();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 	window.scrollTo(0,0);
 });
 
@@ -355,10 +379,14 @@ $('#domestic').on('click', () => {
 	var domestic_sel = '<br/><select id=\'domestic_sel\'>' + domestic_sel_text + '</select>';
 	$("#pre_domestic_sel").after(domestic_sel);
 	$('#domestic_pop').show();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#maritime').on('click', () => {
 	$('#maritime_pop').show();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#domestic_submit').on('click', () => {
@@ -368,6 +396,8 @@ $('#domestic_submit').on('click', () => {
 	give_res = $('#dom_res_give').val();
 	rec_res = $('#dom_res_rec').val();
 	propose_trade();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 	$('#domestic_pop').hide();
 });
 
@@ -378,6 +408,8 @@ $('#maritime_submit').on('click', () => {
 	mari_rec_res = $('#mari_rec_res').val();
 	console.log(mari_give_qty + mari_give_res + ' for ' + mari_rec_qty + mari_rec_res);
 	maritime_trade();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 	$('#maritime_pop').hide();
 });
 
@@ -399,6 +431,8 @@ $('#to_build').on('click', () => {
 	$('#sett_br').show();
 	$('#buy_card').show();
 	$('#buy_br').show();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 	window.scrollTo(0,0);
 });
 
@@ -407,24 +441,34 @@ $('#buy_card').on('click', () => {
 	get_state(get_drawn( () => {
 		$('#buy_message').show();
 	}));
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#build_sett').on('click', () => {
 	build_settlement();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#build_road').on('click', () => {
 	build_road();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#build_city').on('click', () => {
 	build_city();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#reset').on('click', () => {
 	$('#confirm').show();
 	$('#reset').hide();
 	$('#players').hide();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#reset_confirm').on('click', () => {
@@ -434,12 +478,15 @@ $('#reset_confirm').on('click', () => {
 		$('#reset').show();
 		$('#ready').hide();
 	});
+	get_state(static_refresh);
 	get_notifications(player,notif_pop);
 });
 
 $('#reset_deny').on('click', () => {
 	$('#confirm').hide();
 	$('#reset').show();
+	get_state(static_refresh);
+	get_notifications(player,notif_pop);
 });
 
 $('#end').on('click', () => {
