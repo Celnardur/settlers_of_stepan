@@ -2,6 +2,7 @@
 var player = '';
 var order;
 var test;
+var err;
 var test_server = function() {
     m.request({
         method: "PUT",
@@ -21,15 +22,22 @@ var get_notifications = function(player, pass) {
 		url: "/api/get_notifications",
 		body: {name: player},
     })
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
 	.then(function(data) {
-		notif = data;
-		if (notif.length != 0) {
-			console.log("Got some mail!");
-			console.log(notif);
-			pass();
-		}
-		else {
-			console.log("No mail.");
+		if (!err) {
+			notif = data;
+			if (notif.length != 0) {
+				console.log("Got some mail!");
+				console.log(notif);
+				pass();
+			}
+			else {
+				console.log("No mail.");
+			}
 		}
 	})
 }
@@ -63,105 +71,235 @@ var test_seven_segment = function() {
 	})
 }
 
-var new_game = function() {
+var new_game = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/new_game",
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var randomize_players = function() {
+var randomize_players = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/randomize_players",
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var remove_player = function() {
+var remove_player = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/remove_player",
 		body: {name: player},
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var player_ready = function() {
+var player_ready = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/player_ready",
 		body: {name: player},
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var add_player = function() {
+var add_player = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/add_player",
 		body: {name: player, color: color_RGB, order: order},
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var change_player_color = function() {
+var change_player_color = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/change_player_color",
 		body: {name: player, color: color_RGB},
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var build_settlement = function() {
+var build_settlement = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/build_settlement",
 		body: {name: player},
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var build_road = function() {
+var build_road = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/build_road",
 		body: {name: player},
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var build_city = function() {
+var build_city = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/build_city",
 		body: {name: player},
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var draw_dev = function() {
+var draw_dev = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/draw_dev",
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var end_turn = function() {
+var end_turn = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/end_turn",
 		body: {name: player},
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
 // /api/move_robber--not activated by GUI!
 
-var pay_taxes = function() {
+var pay_taxes = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/pay_taxes",
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var maritime_trade = function() {
+var maritime_trade = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/maritime_trade",
 		body: {name: player, give: {mari_give_res: mari_give_qty}, get: {mari_rec_res: mari_rec_qty}}
+	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
 	})
 }
 
@@ -171,48 +309,105 @@ var get_state = function(pass) {
 		method: "PUT",
 		url: "/api/get_state",
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
 	.then(function(data) {
-		state = data;
-		pass();
+		if (!err) {
+			state = data;
+			pass();
+		}
     })
 }
 
-var play_knight = function() {
+var play_knight = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/play_knight",
 		body: {victim: knight_victim, name: player},
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var play_monopoly = function() {
+var play_monopoly = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/play_monopoly",
 		body: {resource: monopoly_res, name: player},
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var play_year_of_plenty = function() {
+var play_year_of_plenty = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/play_year_of_plenty",
 		body: {name: player, one: plenty_one, two: plenty_two},
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var play_build_road = function() {
+var play_build_road = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/play_build_road",
 		body: {name: player},
 	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
+	})
 }
 
-var propose_trade = function() {
+var propose_trade = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/propose_trade",
 		body: {name: player, trade: {proposer: {name: player, give: {give_res: give_qty}}, approver: {name: dom_to, give: {rec_res: rec_qty}}}},
+	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+	})
+	.then( () => {
+		if (!err) {
+			pass();
+		}
 	})
 }

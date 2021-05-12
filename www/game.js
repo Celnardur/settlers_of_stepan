@@ -403,8 +403,9 @@ $('#to_build').on('click', () => {
 
 $('#buy_card').on('click', () => {
 	get_state(draw_dev);
-	get_state(get_drawn);
-	$('#buy_message').show();
+	get_state(get_drawn( () => {
+		$('#buy_message').show();
+	}));
 });
 
 $('#build_sett').on('click', () => {
@@ -420,21 +421,22 @@ $('#build_city').on('click', () => {
 });
 
 $('#end').on('click', () => {
-	end_turn();
-	$('#p3_text').hide();
-	$('#build_road').hide();
-	$('#road_br').hide();
-	$('#build_city').hide();
-	$('#city_br').hide();
-	$('#build_sett').hide();
-	$('#sett_br').hide();
-	$('#buy_card').hide();
-	$('#buy_br').hide();
-	$('#end').hide();
-	$('#end_br').hide();
-	$('#dev_br').hide();
-	$('#buy_message').hide();
-	window.scrollTo(0,0);
+	end_turn( () => {
+		$('#p3_text').hide();
+		$('#build_road').hide();
+		$('#road_br').hide();
+		$('#build_city').hide();
+		$('#city_br').hide();
+		$('#build_sett').hide();
+		$('#sett_br').hide();
+		$('#buy_card').hide();
+		$('#buy_br').hide();
+		$('#end').hide();
+		$('#end_br').hide();
+		$('#dev_br').hide();
+		$('#buy_message').hide();
+		window.scrollTo(0,0);
+	});
 	get_state(static_refresh);
 	get_state(get_others);
 	get_state(get_turn);

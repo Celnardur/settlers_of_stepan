@@ -20,6 +20,10 @@ $('#notif_accept').on('click', () => {
 	$('#notif_pop').hide();
 });
 
+$('#error_accept').on('click', () => {
+	$('#error_pop').hide();
+});
+
 $('#nav_arrow').on('click', () => {
 	$('#nav_arrow').toggleClass('rotate');
 	$('#nav_menu').slideToggle(150);
@@ -41,22 +45,24 @@ $('#add').on('click', () => {
 		color_RGB = [255,0,0];
 	}
 	order = ($('#order').val() - 1);
-	add_player();
-	$('#add_section').hide();
-	$('#reset').show();
-	$('#players').show();
-	$('#ready').show();
-	$('#list_name').text(player);
-	rgbString = 'rgb(' + color_RGB[0] + ',' + color_RGB[1] + ',' + color_RGB[2] + ')';
-	$('#color_block').css('color',rgbString);
+	add_player( () => {
+		$('#add_section').hide();
+		$('#reset').show();
+		$('#players').show();
+		$('#ready').show();
+		$('#list_name').text(player);
+		rgbString = 'rgb(' + color_RGB[0] + ',' + color_RGB[1] + ',' + color_RGB[2] + ')';
+		$('#color_block').css('color',rgbString);
+	});
 	get_notifications(player,notif_pop);
 });
 
 $('#x-marker').on('click', () => {
-	remove_player();
-	$('#add_section').show();
-	$('#players').hide();
-	$('#ready').hide();
+	remove_player( () => {
+		$('#add_section').show();
+		$('#players').hide();
+		$('#ready').hide();
+	});
 });
 
 $('#color_change').on('click', () => {
@@ -78,12 +84,13 @@ $('#color_submit').on('click', () => {
 	else if ($('#change_sel').val() == "Red") {
 		color_RGB = [255,0,0];
 	}
-	change_player_color();
-	rgbString = 'rgb(' + color_RGB[0] + ',' + color_RGB[1] + ',' + color_RGB[2] + ')';
-	$('#color_block').css('color',rgbString);
-	$('#players').show();
-	$('#color_panel').hide();
-	$('#ready').show();
+	change_player_color( () => {
+		rgbString = 'rgb(' + color_RGB[0] + ',' + color_RGB[1] + ',' + color_RGB[2] + ')';
+		$('#color_block').css('color',rgbString);
+		$('#players').show();
+		$('#color_panel').hide();
+		$('#ready').show();
+	});
 });
 
 $('#reset').on('click', () => {
@@ -93,11 +100,12 @@ $('#reset').on('click', () => {
 });
 
 $('#reset_confirm').on('click', () => {
-	new_game();
-	$('#confirm').hide();
-	$('#add_section').show();
-	$('#reset').show();
-	$('#ready').hide();
+	new_game( () => {
+		$('#confirm').hide();
+		$('#add_section').show();
+		$('#reset').show();
+		$('#ready').hide();
+	});
 	get_notifications(player,notif_pop);
 });
 
