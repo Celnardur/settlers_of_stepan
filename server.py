@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from http.server import BaseHTTPRequestHandler, HTTPServer, SimpleHTTPRequestHandler
-from threading import Thread
 import json
 import os
 import mimetypes
@@ -83,12 +82,6 @@ class server(BaseHTTPRequestHandler):
             except:
                 self.code_response(500, b'Internal Server Error')
                 return
-
-            try:
-                thread = Thread(target = process.process, args = (api.state, ))
-                thread.start()
-            except:
-                pass
                 
             self.send_response(code)
             self.send_header('Content-Type', 'application/json')

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from threading import Thread
 import pprint
 import sys
 import json
@@ -80,8 +79,11 @@ def cheat(args):
     elif args[0] == 'dd':
         api.state['players'][int(args[1])]['developments'].append(args[2])
     elif args[0] == 'to':
-        thread = Thread(target = process.process, args = (api.state, ))
-        thread.start()
+        process.process(api.state)
+    elif args[0] == 'uls':
+        process.update_led_strip(api.state)
+    elif args[0] == 'uh':
+        process.update_hexes(api.state)
     elif args[0] == 'sa':
         led_strip.startupAnimation()
     elif args[0] == 'gr':

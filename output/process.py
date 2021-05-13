@@ -2,6 +2,21 @@ from output import led_strip
 from output import gpio
 from output.pwm import PCA9685
 
+def update_led_strip(state):
+    try:
+        led_strip.set(state)
+    except:
+        pass
+
+def update_hexes(state):
+    for i, tile in enumerate(state['hexes']):
+        try:
+            set_tile_type(tile['address'], tile['tile_type'])
+            set_num(tile['address'], tile['roll_number'])
+            set_robber(tile['address'], i, state['robber'])
+        except:
+            pass
+
 def process(state):
     try:
         led_strip.set(state)
