@@ -41,6 +41,7 @@ var get_notifications = function(player, pass) {
 				console.log("No mail.");
 			}
 		}
+		err = null;
 	})
 }
 
@@ -88,6 +89,7 @@ var new_game = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -106,6 +108,7 @@ var randomize_players = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -125,6 +128,7 @@ var remove_player = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -144,6 +148,7 @@ var player_ready = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -164,6 +169,7 @@ var add_player = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 		console.log('after then, err = ' + err);
 	})
 }
@@ -184,6 +190,7 @@ var change_player_color = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -203,6 +210,7 @@ var build_settlement = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -222,6 +230,7 @@ var build_road = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -241,6 +250,7 @@ var build_city = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -259,6 +269,7 @@ var draw_dev = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -278,6 +289,7 @@ var end_turn = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -298,6 +310,7 @@ var pay_taxes = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -317,6 +330,7 @@ var maritime_trade = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -337,6 +351,7 @@ var get_state = function(pass) {
 			state = data;
 			pass();
 		}
+		err = null;
     })
 }
 
@@ -356,6 +371,7 @@ var play_knight = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -375,6 +391,7 @@ var play_monopoly = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -394,6 +411,7 @@ var play_year_of_plenty = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -413,6 +431,7 @@ var play_build_road = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
 
@@ -432,5 +451,6 @@ var propose_trade = function(pass) {
 		if (err == null) {
 			pass();
 		}
+		err = null;
 	})
 }
