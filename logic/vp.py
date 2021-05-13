@@ -1,4 +1,11 @@
 def calculate_vp(state, notifications):
+    # check to make sure game actually started
+    if len(state['players']) < 3:
+        return
+    for actor in state['players']:
+        if actor is None:
+            return
+
     # update player vp
     winner = -1
     for order, actor in enumerate(state['players']):
