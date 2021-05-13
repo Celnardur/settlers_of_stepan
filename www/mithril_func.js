@@ -4,7 +4,7 @@ var order;
 var test;
 var err = null;
 var e = null;
-var rob = function();
+var rob();
 var test_server = function() {
     m.request({
         method: "PUT",
