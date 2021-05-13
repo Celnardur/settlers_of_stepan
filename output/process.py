@@ -56,7 +56,7 @@ def set_num(address, value):
     elif value == 5:
         pins = [9,10,13,14,15]
     elif value == 6:
-        pins = [8,9,11,13,14,15]
+        pins = [8,9,10,11,13,14,15]
     elif value == 8:
         pins = [8,9,10,12,13,14,15]
     elif value == 9:
@@ -64,7 +64,7 @@ def set_num(address, value):
     elif value == 10:
         pins = [8,10,12,13,14,15]
     elif value == 11:
-        pins = [8,9,10,11,14]
+        pins = [8,9,10,11,14,15]
     elif value == 12:
         pins = [8,9,13,14]
 

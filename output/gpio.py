@@ -58,8 +58,11 @@ def get_roads(state):
 def get_buttons(address):
     address = 0x20 | address
     io = 0
-    with SMBus(1) as bus:
-        io = bus.read_byte_data(address, 0)
+    try:
+        with SMBus(1) as bus:
+            io = bus.read_byte_data(address, 0)
+    except:
+        pass
 
     buttons = []
     if io & 0x01 != 0:

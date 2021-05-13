@@ -107,7 +107,7 @@ def process(path, args):
         if not 'name' in args:
             return (400, "Player needs a name")
         if not 'pos' in args or args['pos'] == None:
-            (code, inter) = wait_intersection(state)
+            (code, inter) = gpio.wait_intersection(state)
             if code != 200:
                 return (code, inter)
             args['pos'] = inter
@@ -118,7 +118,7 @@ def process(path, args):
         if not 'name' in args:
             return (400, "Player needs a name")
         if not 'pos' in args or args['pos'] == None:
-            (code, road) = wait_road(state)
+            (code, road) = gpio.wait_road(state)
             if code != 200:
                 return (code, road)
             args['pos'] = road
@@ -129,7 +129,7 @@ def process(path, args):
         if not 'name' in args:
             return (400, "Player needs a name")
         if not 'pos' in args or args['pos'] == None:
-            (code, inter) = wait_intersection(state)
+            (code, inter) = gpio.wait_intersection(state)
             if code != 200:
                 return (code, inter)
             args['pos'] = inter
@@ -152,7 +152,7 @@ def process(path, args):
         if not 'mover' in args:
             return (400, "Player who move robber must be given")
         if not 'to' in args or args['to'] == None:
-            (code, to) = wait_tile(state)
+            (code, to) = gpio.wait_tile(state)
             if code != 200:
                 return (code, to)
             args['to'] = to
@@ -211,7 +211,7 @@ def process(path, args):
         if not 'name' in args:
             return (400, "Player needs a name")
         if not 'to' in args or args['to'] == None:
-            (code, to) = wait_tile(state)
+            (code, to) = gpio.wait_tile(state)
             if code != 200:
                 return (code, to)
             args['to'] = to
