@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
-import api
-from print_state import get_state_string 
+from threading import Thread
 import pprint
 import sys
 import json
+
+import api
+from print_state import get_state_string 
 from logic import build
 from logic import resources
 from logic import vp
@@ -78,7 +80,8 @@ def cheat(args):
     elif args[0] == 'dd':
         api.state['players'][int(args[1])]['developments'].append(args[2])
     elif args[0] == 'to':
-        process.process(api.state)
+        thread = Thread(target = process.process, args = (api.state, ))
+        thread.start()
     elif args[0] == 'sa':
         led_strip.startupAnimation()
     elif args[0] == 'gr':

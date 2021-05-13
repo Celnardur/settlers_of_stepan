@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from http.server import BaseHTTPRequestHandler, HTTPServer, SimpleHTTPRequestHandler
+from threading import Thread
 import json
 import os
 import mimetypes
@@ -84,7 +85,8 @@ class server(BaseHTTPRequestHandler):
                 return
 
             try:
-                process.process(api.state)
+                thread = Thread(target = process.process, args = (api.state, ))
+                thread.start()
             except:
                 pass
                 
