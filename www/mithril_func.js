@@ -158,11 +158,13 @@ var add_player = function(pass) {
 		$('#error_message').text(e.message);
 		err = e;
 		e = null;
+		console.log('after reset, e = ',e);
 	})
 	.then( () => {
 		if (err == null) {
 			pass();
 		}
+		console.log('after then, err = ' + err);
 	})
 }
 
