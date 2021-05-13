@@ -46,6 +46,7 @@ $('#add').on('click', () => {
 	order = ($('#order').val() - 1);
 	add_player( () => {
 		$('#add_section').hide();
+		$('#shuffle').hide();
 		$('#reset').show();
 		$('#players').show();
 		$('#ready').show();
@@ -105,6 +106,11 @@ $('#reset_confirm').on('click', () => {
 		$('#reset').show();
 		$('#ready').hide();
 	});
+	get_notifications(player,notif_pop);
+});
+
+$('#shuffle').on('click', () => {
+	shuffle();
 	get_notifications(player,notif_pop);
 });
 

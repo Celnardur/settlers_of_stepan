@@ -481,3 +481,22 @@ var robber_steal = function(pass) {
 		err = null;
 	})
 }
+
+var shuffle = function(pass) {
+	m.request({
+		method: "PUT",
+		url: "/api/shuffle_game",
+	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+		e = null;
+	})
+	.then( () => {
+		if (err == null) {
+			pass();
+		}
+		err = null;
+	})
+}
