@@ -9,6 +9,7 @@ from print_state import get_state_string
 from logic import build
 from logic import resources
 from logic import vp
+from logic import misc
 from output import process
 from output import gpio
 from output import led_strip
@@ -92,6 +93,8 @@ def cheat(args):
         print(gpio.wait_intersection(api.state))
     elif args[0] == 'gt':
         print(gpio.wait_tile(api.state))
+    elif args[0] == 'sb':
+        misc.shuffle_board(api.state)
     
     elif args[0] == 'flrf':
         print(vp.find_longest_road_from(api.state, int(args[1]), int(args[2]), int(args[3])))
