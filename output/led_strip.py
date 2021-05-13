@@ -257,46 +257,48 @@ def set(state):
                 lightLED(strip, Color(c[0], c[1], c[2]), vals)
 
 def startupAnimation():
+    strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)    
+    strip.begin()
     for i in range(904):
         if i<504:
-            lightLED(strip, [0, 104, 132], i)
-        if i>=20 and i<524:
-            lightLED(strip, [137, 219, 236], i-20)
-        if i>=40 and i<544:
-            lightLED(strip, [250, 157, 0], i-40)
-        if i>=60 and i<564:
-            lightLED(strip, [50, 100, 0], i-60)
-        if i>=80 and i<584:
-            lightLED(strip, [110, 0, 108], i-80)
-        if i>=100 and i<604:
-            lightLED(strip, [246, 131, 112], i-100)
-        if i>=120 and i<624:
-            lightLED(strip, [115, 235, 174], i-120)
-        if i>=140 and i<644:
-            lightLED(strip, [140, 101, 211], i-140)
-        if i>=160 and i<664:
-            lightLED(strip, [243, 135, 47], i-160)
-        if i>=180 and i<684:
-            lightLED(strip, [76, 146, 177], i-180)
-        if i>=200 and i<704:
-            lightLED(strip, [168, 200, 121], i-200)
-        if i>=220 and i<724:
-            lightLED(strip, [173, 167, 89], i-220)
-        if i>=240 and i<744:
-            lightLED(strip, [255, 0, 51], i-240)
-        if i>=260 and i<764:
-            lightLED(strip, [84, 39, 143], i-260)
-        if i>=280 and i<784:
-            lightLED(strip, [247, 25, 1], i-280)
-        if i>=300 and i<804:
-            lightLED(strip, [235, 225, 223], i-300)
-        if i>=320 and i<824:
-            lightLED(strip, [108, 79, 60], i-320)
-        if i>=340 and i<844:
-            lightLED(strip, [108, 160, 220], i-340)
-        if i>=360 and i<864:
-            lightLED(strip, [236, 219, 83], i-360)
-        if i>=380 and i<884:
-            lightLED(strip, [227, 65, 50], i-380)
-        if i>=400 and i<904:
-            lightLED(strip, [0, 0, 0], i-400)
+            lightLED(strip, Color(255, 0, 0), i)
+#        if i>=20 and i<524:
+#            lightLED(strip, Color(137, 219, 236), i-20)
+#        if i>=40 and i<544:
+#            lightLED(strip, Color(250, 157, 0), i-40)
+#        if i>=60 and i<564:
+#            lightLED(strip, Color(50, 100, 0), i-60)
+#        if i>=80 and i<584:
+#            lightLED(strip, Color(110, 0, 108), i-80)
+#        if i>=100 and i<604:
+#            lightLED(strip, Color(246, 131, 112), i-100)
+#        if i>=120 and i<624:
+#            lightLED(strip, Color(115, 235, 174), i-120)
+#        if i>=140 and i<644:
+#            lightLED(strip, Color(140, 101, 211), i-140)
+#        if i>=160 and i<664:
+#            lightLED(strip, Color(243, 135, 47), i-160)
+#        if i>=180 and i<684:
+#            lightLED(strip, Color(76, 146, 177), i-180)
+#        if i>=200 and i<704:
+#            lightLED(strip, Color(168, 200, 121), i-200)
+#        if i>=220 and i<724:
+#            lightLED(strip, Color(173, 167, 89), i-220)
+#        if i>=240 and i<744:
+#            lightLED(strip, Color(255, 0, 51), i-240)
+#        if i>=260 and i<764:
+#            lightLED(strip, Color(84, 39, 143), i-260)
+#        if i>=280 and i<784:
+#            lightLED(strip, Color(247, 25, 1), i-280)
+#        if i>=300 and i<804:
+#            lightLED(strip, Color(235, 225, 223), i-300)
+#        if i>=320 and i<824:
+#            lightLED(strip, Color(108, 79, 60), i-320)
+#        if i>=340 and i<844:
+#            lightLED(strip, Color(108, 160, 220), i-340)
+#        if i>=360 and i<864:
+#            lightLED(strip, Color(236, 219, 83), i-360)
+#        if i>=380 and i<884:
+#            lightLED(strip, Color(227, 65, 50), i-380)
+#        if i>=400 and i<904:
+#            lightLED(strip, Color(0, 0, 0), i-400)
