@@ -2,7 +2,7 @@
 var player = '';
 var order;
 var test;
-var err;
+var err = null;
 var test_server = function() {
     m.request({
         method: "PUT",
@@ -28,7 +28,7 @@ var get_notifications = function(player, pass) {
 		err = e;
 	})
 	.then(function(data) {
-		if (!err) {
+		if (err == null) {
 			notif = data;
 			if (notif.length != 0) {
 				console.log("Got some mail!");
@@ -82,7 +82,7 @@ var new_game = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -99,7 +99,7 @@ var randomize_players = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -117,7 +117,7 @@ var remove_player = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -135,7 +135,7 @@ var player_ready = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -153,7 +153,7 @@ var add_player = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -171,7 +171,7 @@ var change_player_color = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -189,7 +189,7 @@ var build_settlement = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -207,7 +207,7 @@ var build_road = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -225,7 +225,7 @@ var build_city = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -242,7 +242,7 @@ var draw_dev = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -260,7 +260,7 @@ var end_turn = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -279,7 +279,7 @@ var pay_taxes = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -297,7 +297,7 @@ var maritime_trade = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -315,7 +315,7 @@ var get_state = function(pass) {
 		err = e;
 	})
 	.then(function(data) {
-		if (!err) {
+		if (err == null) {
 			state = data;
 			pass();
 		}
@@ -334,7 +334,7 @@ var play_knight = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -352,7 +352,7 @@ var play_monopoly = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -370,7 +370,7 @@ var play_year_of_plenty = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -388,7 +388,7 @@ var play_build_road = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
@@ -406,7 +406,7 @@ var propose_trade = function(pass) {
 		err = e;
 	})
 	.then( () => {
-		if (!err) {
+		if (err == null) {
 			pass();
 		}
 	})
