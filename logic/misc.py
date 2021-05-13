@@ -29,11 +29,17 @@ def shuffle_board(state):
 
     shuffle_numbers(state)
 
+    for i, tile in enumerate(state['hexes']):
+        if tile['tile_type'] == 'Desert':
+            state['robber'] = i
+
 
 def shuffle_numbers(state):
     # generate roll numbers
     rolls = []
     for i in range(2, 13):
+        if i == 7:
+            continue
         if i != 2 and i != 12:
             rolls.append(i)
         rolls.append(i)
