@@ -26,6 +26,7 @@ var get_notifications = function(player, pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then(function(data) {
 		if (err == null) {
@@ -80,6 +81,7 @@ var new_game = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -97,6 +99,7 @@ var randomize_players = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -115,6 +118,7 @@ var remove_player = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -133,6 +137,7 @@ var player_ready = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -151,6 +156,7 @@ var add_player = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -169,6 +175,7 @@ var change_player_color = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -187,6 +194,7 @@ var build_settlement = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -205,6 +213,7 @@ var build_road = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -223,6 +232,7 @@ var build_city = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -240,6 +250,7 @@ var draw_dev = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -258,6 +269,7 @@ var end_turn = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -277,6 +289,7 @@ var pay_taxes = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -295,6 +308,7 @@ var maritime_trade = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -313,6 +327,7 @@ var get_state = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then(function(data) {
 		if (err == null) {
@@ -332,6 +347,7 @@ var play_knight = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -350,6 +366,7 @@ var play_monopoly = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -368,6 +385,7 @@ var play_year_of_plenty = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -386,6 +404,7 @@ var play_build_road = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
@@ -404,6 +423,7 @@ var propose_trade = function(pass) {
 		$('#error_pop').show();
 		$('#error_message').text(e.message);
 		err = e;
+		e = null;
 	})
 	.then( () => {
 		if (err == null) {
