@@ -302,8 +302,6 @@ var end_turn = function(pass) {
 	})
 }
 
-// /api/move_robber--not activated by GUI!
-
 var pay_taxes = function(pass) {
 	m.request({
 		method: "PUT",
