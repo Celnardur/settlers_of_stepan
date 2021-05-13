@@ -3,6 +3,7 @@ var player = '';
 var order;
 var test;
 var err = null;
+var e = null;
 var test_server = function() {
     m.request({
         method: "PUT",
