@@ -223,7 +223,7 @@ var rob = function() {
 		var opt = '<option>' + others[p] + '</option>';
 		rob_sel_text = rob_sel_text.concat(opt);
 	}
-	var rob_sel = '<br/><select id=\'robber_sel\'>' + robber_sel_text + '</select>';
+	var rob_sel = '<br/><select id=\'robber_sel\'>' + rob_sel_text + '</select>';
 	$("#pre_robber_sel").after(robber_sel);
 	rob_victim = $('#robber_sel').val();
 	robber_steal();
