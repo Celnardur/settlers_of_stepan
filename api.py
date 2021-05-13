@@ -10,7 +10,7 @@ from logic import vp
 from output import led_strip
 from output import gpio
 from output import seven_segment
-from output import process
+import output
 
 state = {}
 save_path = './state.json'
@@ -69,8 +69,8 @@ def process(path, args):
         set_state('./defaults/default_state.json')
         random.shuffle(state['developments'])
         save_state(save_path)
-        process.update_led_strip(state)
-        process.update_hexes(state)
+        output.process.update_led_strip(state)
+        output.process.update_hexes(state)
         return (200, "New game created")
     
     elif path == '/add_player':
@@ -116,7 +116,7 @@ def process(path, args):
             args['pos'] = inter
         (code, message) = build.build_settlement(state, args['name'], args['pos'])
         save_state(save_path)
-        process.update_led_strip(state)
+        output.process.update_led_strip(state)
 
     elif path == '/build_road':
         if not 'name' in args:
@@ -128,7 +128,7 @@ def process(path, args):
             args['pos'] = road
         (code, message) = build.build_road(state, args['name'], args['pos'])
         save_state(save_path)
-        process.update_led_strip(state)
+        output.process.update_led_strip(state)
 
     elif path == '/build_city':
         if not 'name' in args:
@@ -140,7 +140,7 @@ def process(path, args):
             args['pos'] = inter
         (code, message) = build.build_city(state, args['name'], args['pos'])
         save_state(save_path)
-        process.update_led_strip(state)
+        output.process.update_led_strip(state)
 
     elif path == '/draw_dev':
         if not 'name' in args:
@@ -170,7 +170,7 @@ def process(path, args):
         victim = args['victim']
         (code, message) = resources.move_robber(state, notifications, mover, to, victim)
         save_state(save_path)
-        process.update_hexes(state)
+        output.process.update_hexes(state)
 
     elif path == '/pay_taxes':
         if not 'name' in args:
@@ -229,7 +229,7 @@ def process(path, args):
         victim = args['victim']
         (code, message) = development.play_knight(state, notifications, name, to, victim)
         save_state(save_path)
-        process.update_hexes(state)
+        output.process.update_hexes(state)
 
     elif path == '/play_build_road':
         if not 'name' in args:
@@ -238,7 +238,7 @@ def process(path, args):
             return (400, "Need two positions to build roads")
         (code, message) = development.play_build_road(state, args['name'], args['one'], args['two'])
         save_state(save_path)
-        process.update_led_strip(state)
+        output.process.update_led_strip(state)
 
     elif path == '/play_year_of_plenty':
         if not 'name' in args:
