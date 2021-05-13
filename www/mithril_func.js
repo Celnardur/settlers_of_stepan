@@ -468,7 +468,7 @@ var robber_steal = function(pass) {
 	m.request({
 		method: "PUT",
 		url: "/api/move_robber",
-		body: {name: player, victim: rob_victim},
+		body: {mover: player, victim: rob_victim},
 	})
 	.catch(function(e) {
 		$('#error_pop').show();
