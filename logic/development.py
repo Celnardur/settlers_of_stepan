@@ -1,6 +1,7 @@
 from logic import player
 from logic import resources
 from logic import build
+from logic import vp
 
 def play_knight(state, notifications, name, to, victim):
     if state['move_robber'] != -1:
@@ -30,7 +31,9 @@ def play_knight(state, notifications, name, to, victim):
         return (400, message)
 
     actor['developments'].remove('knight')
+    actor['army'] += 1
     state['card_played'] = True
+    vp.update_largest_army(state)
     return (200, message)
 
 def play_build_road(state, name, one, two):

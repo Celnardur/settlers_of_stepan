@@ -1,4 +1,5 @@
 from logic import player
+from logic import vp
 
 def build_settlement(state, name, pos):
     if pos < 0 or pos >= len(state['settlements']):
@@ -51,6 +52,7 @@ def build_settlement(state, name, pos):
     state['settlements'][pos]['owner'] = order
     state['settlements'][pos]['type'] = 'settlement'
     state['players'][order]['settlements'].append(pos)
+    vp.update_longest_roads(state)
 
     return (200, "Settlement AddeSettlement Addedd")
 
@@ -126,6 +128,7 @@ def build_road(state, name, pos):
 
     state['roads'][pos]['owner'] = order
     state['players'][order]['roads'].append(pos)
+    vp.update_longest_roads(state)
 
     return (200, "Road built")
 

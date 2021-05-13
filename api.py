@@ -6,6 +6,7 @@ from logic import build
 from logic import resources
 from logic import trade
 from logic import development
+from logic import vp
 from output import led_strip
 from output import gpio
 from output import seven_segment
@@ -270,6 +271,7 @@ def process(path, args):
         seven_segment.test(args['address'])
         (code, message) = (200, "Testing 7seg")
 
+    vp.calculate_vp(state, notifications)
     return (code, message)
 
 # only gets called if process returns 200 code
