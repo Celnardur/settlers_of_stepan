@@ -311,8 +311,9 @@ $('#robber_discard').on('click', () => {
 });
 
 $('#robber_steal').on('click', () => {
-	$('#rob_steal_pop').hide();
-	robber_steal();
+	robber_steal( () => {
+		$('#rob_steal_pop').hide();
+	});
 	get_state(static_refresh);
 	get_notifications(player,notif_pop);
 });
