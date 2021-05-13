@@ -7,6 +7,7 @@ from logic import resources
 from logic import trade
 from logic import development
 from logic import vp
+from logic import misc
 from output import led_strip
 from output import gpio
 from output import seven_segment
@@ -72,6 +73,12 @@ def process(path, args):
         output.process.update_led_strip(state)
         output.process.update_hexes(state)
         return (200, "New game created")
+
+    elif path == '/shuffle_game':
+        misc.shuffle_board(state)
+        save_state(save_path)
+        output.process.update_hexes(state)
+        return (200, "Board Shuffled")
     
     elif path == '/add_player':
         if not 'name' in args:
