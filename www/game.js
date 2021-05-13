@@ -70,6 +70,7 @@ var get_turn = function() {
 		$('#roll_br').show();
 		$('#dev_br').show();
 		$('#to_trade').show();
+		$('#cost_text').show();
 		if (round < 2) {
 			$('#dice').hide();
 			$('#roll_br').hide();
@@ -93,6 +94,7 @@ var get_turn = function() {
 			$('#sett_br').show();
 			$('#buy_card').show();
 			$('#buy_br').show();
+			$('#cost_text').hide();
 			window.scrollTo(0,0);
 		}
 	}
@@ -384,6 +386,7 @@ $('#to_trade').on('click', () => {
 	$('#to_build').show();
 	$('#p1_text').hide();
 	$('#p2_text').show();
+	$('#cost_text').hide();
 	get_state(static_refresh);
 	get_notifications(player,notif_pop);
 	window.scrollTo(0,0);
