@@ -82,6 +82,11 @@ class server(BaseHTTPRequestHandler):
             except:
                 self.code_response(500, b'Internal Server Error')
                 return
+
+            try:
+                process.process(api.state)
+            except:
+                pass
                 
             self.send_response(code)
             self.send_header('Content-Type', 'application/json')
