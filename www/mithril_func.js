@@ -4,6 +4,7 @@ var order;
 var test;
 var err = null;
 var e = null;
+var rob = function();
 var test_server = function() {
     m.request({
         method: "PUT",
@@ -39,7 +40,8 @@ var get_notifications = function(player, pass) {
 				for (n in notif) {
 					if (notif[n]["move_robber"]) {
 						if (notif[n]["move_robber"] == true) {
-							
+							rob();
+							$('#rob_steal_pop').show();
 						}
 					}
 				}

@@ -312,7 +312,7 @@ $('#robber_discard').on('click', () => {
 
 $('#robber_steal').on('click', () => {
 	$('#rob_steal_pop').hide();
-	rob();
+	robber_steal();
 	get_state(static_refresh);
 	get_notifications(player,notif_pop);
 });
