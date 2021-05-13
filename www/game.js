@@ -20,6 +20,7 @@ var mari_give_qty;
 var mari_rec_qty;
 var mari_give_res;
 var mari_rec_res;
+var rob_victim;
 var longest_rd_ck = function() {
 	var long_player = 'Nobody';
 	var length = 0;
@@ -216,6 +217,17 @@ var get_others = function() {
 		}
 	}
 }
+var rob = function() {
+	var rob_sel_text = '';
+	for (p in others) {
+		var opt = '<option>' + others[p] + '</option>';
+		rob_sel_text = rob_sel_text.concat(opt);
+	}
+	var rob_sel = '<br/><select id=\'robber_sel\'>' + robber_sel_text + '</select>';
+	$("#pre_robber_sel").after(robber_sel);
+	rob_victim = $('#robber_sel').val();
+	robber_steal();
+}
 //*****************************
 //DOCUMENT
 $(document).ready( () => {
@@ -300,6 +312,7 @@ $('#robber_discard').on('click', () => {
 
 $('#robber_steal').on('click', () => {
 	$('#rob_steal_pop').hide();
+	rob();
 	get_state(static_refresh);
 	get_notifications(player,notif_pop);
 });

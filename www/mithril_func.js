@@ -36,6 +36,13 @@ var get_notifications = function(player, pass) {
 				console.log("Got some mail!");
 				console.log(notif);
 				pass();
+				for (n in notif) {
+					if (notif[n]["move_robber"]) {
+						if (notif[n]["move_robber"] == true) {
+							
+						}
+					}
+				}
 			}
 			else {
 				console.log("No mail.");
@@ -440,6 +447,26 @@ var propose_trade = function(pass) {
 		method: "PUT",
 		url: "/api/propose_trade",
 		body: {name: player, trade: {proposer: {name: player, give: {give_res: give_qty}}, approver: {name: dom_to, give: {rec_res: rec_qty}}}},
+	})
+	.catch(function(e) {
+		$('#error_pop').show();
+		$('#error_message').text(e.message);
+		err = e;
+		e = null;
+	})
+	.then( () => {
+		if (err == null) {
+			pass();
+		}
+		err = null;
+	})
+}
+
+var robber_steal = function(pass) {
+	m.request({
+		method: "PUT",
+		url: "/api/move_robber",
+		body: {name: player, victim: rob_victim},
 	})
 	.catch(function(e) {
 		$('#error_pop').show();
