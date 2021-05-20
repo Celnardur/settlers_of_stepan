@@ -73,6 +73,10 @@ def cheat(args):
         build.force_road(api.state, args[1], int(args[2]))
     elif args[0] == 'if':
         resources.infinte_resources(api.state)
+    elif args[0] == 'ci':
+        api.state['players'][int(args[1])]['resources'][args[2]] += int(args[3])
+    elif args[0] == 'co':
+        api.state['players'][int(args[1])]['resources'][args[2]] -= int(args[3])
     elif args[0] == 'sr':
         resources.strip_resources(api.state)
     elif args[0] == 'ft':

@@ -242,7 +242,14 @@ def process(path, args):
         if not 'name' in args:
             return (400, "Player needs a name")
         if not 'one' in args or not 'two' in args:
-            return (400, "Need two positions to build roads")
+            (code, road) = gpio.wait_road(state)
+            if code != 200:
+                return (code, road)
+            args ['one'] = road
+            (code, road) = gpio.wait_road(state)
+            if code != 200:
+                return (code, road)
+            args ['two'] = road
         (code, message) = development.play_build_road(state, args['name'], args['one'], args['two'])
         save_state(save_path)
         output.process.update_led_strip(state)
